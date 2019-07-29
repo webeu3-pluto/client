@@ -1,4 +1,4 @@
-export const heading_1 = "48px";
+export const heading_1 = "40px";
 export const heading_2 = "32px";
 export const heading_3 = "24px";
 export const heading_4 = "20px";
