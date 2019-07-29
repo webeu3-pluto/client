@@ -39,7 +39,6 @@ const Header = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  border: 1px solid red;
   height: 10vh;
   min-height: 60px;
 

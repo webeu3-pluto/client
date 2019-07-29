@@ -35,7 +35,6 @@ export default MarketingFooter;
 const StyledFooter = styled.footer`
   height: 10vh;
   min-height: 60px;
-  border: 1px solid green;
 
   div {
     display: flex;
