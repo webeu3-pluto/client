@@ -1,28 +1,52 @@
 // modules
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // components/functions
 import { WhiteInput } from "../../../~reusables/atoms/Inputs";
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { logIn } from "../../../store/actions/authActions";
 
 // styles
 import { white } from "../../../~reusables/variables/colors";
 import { heading_2 } from "../../../~reusables/variables/font-sizes";
-import { medium_space_2, small_space } from "../../../~reusables/variables/spacing";
+import {
+  medium_space_2,
+  small_space
+} from "../../../~reusables/variables/spacing";
 import { tablet_max_width } from "../../../~reusables/variables/media-queries";
 
-const LoginForm = () => {
+const LoginForm = props => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { logIn, history } = props;
+
+  const onFormSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      email,
+      password
+    };
+
+    logIn(user, history);
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={onFormSubmit}>
       <div className="form-wrapper">
         <h2>Log In</h2>
         <WhiteInput
+          onChange={e => setEmail(e.target.value)}
           required
           margin={medium_space_2}
           placeholder="Your email address"
         />
         <WhiteInput
+          onChange={e => setPassword(e.target.value)}
           required
           margin={medium_space_2}
           placeholder="Your password"
@@ -59,4 +83,7 @@ const StyledForm = styled.form`
   }
 `;
 
-export default LoginForm;
+export default connect(
+  null,
+  { logIn }
+)(withRouter(LoginForm));

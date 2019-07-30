@@ -2,6 +2,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 // components/functions
 import Dashboard from "./Dashboard/Dashboard";
@@ -14,7 +15,10 @@ import AppFooter from "../../~reusables/layout/AppFooter";
 
 // styles
 
-const App = () => {
+const App = (props) => {
+  const { user } = props;
+  console.log(user);
+
   if (true) {
     return (
       <StyledApp>
@@ -39,4 +43,13 @@ const StyledApp = styled.section`
   }
 `;
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    user: state.auth.user
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(App);
