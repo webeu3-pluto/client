@@ -1,6 +1,7 @@
 // modules
 import React from "react";
 import { Route } from "react-router-dom";
+import styled from "styled-components";
 
 // components/functions
 import Dashboard from "./Dashboard/Dashboard";
@@ -14,19 +15,22 @@ import Sidebar from "../../~reusables/layout/Sidebar";
 const App = () => {
   if (true) {
     return (
-      <div>
+      <StyledApp>
         <Sidebar />
-        <Route
-          exact
-          path="/app"
-          render={routeProps => <Dashboard />}
-        />
-        <Route exact path="/app/quizzes" render={routeProps => <Quizzes />} />
-        <Route exact path="/app/people" render={routeProps => <People />} />
-        <Route exact path="/app/profile" render={routeProps => <Profile />} />
-      </div>
+        <div>
+          Header
+          <Route exact path="/app" render={routeProps => <Dashboard />} />
+          <Route exact path="/app/quizzes" render={routeProps => <Quizzes />} />
+          <Route exact path="/app/people" render={routeProps => <People />} />
+          <Route exact path="/app/profile" render={routeProps => <Profile />} />
+        </div>
+      </StyledApp>
     );
   }
 };
+
+const StyledApp = styled.section`
+  display: flex;
+`;
 
 export default App;
