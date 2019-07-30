@@ -5,11 +5,12 @@ import styled from "styled-components";
 
 // components/functions
 import logoWhite from "../assets/logo-white.png";
-import { medium_space_1 } from "../variables/spacing";
-import { primary, white } from "../variables/colors";
-import { body_2 } from "../variables/font-sizes";
 
 // styles
+import { medium_space_1, small_space } from "../variables/spacing";
+import { primary, white } from "../variables/colors";
+import { body_2 } from "../variables/font-sizes";
+import { tablet_max_width } from "../variables/media-queries";
 
 const Header = ({path, linkText}) => {
   return (
@@ -68,6 +69,12 @@ const StyledHeader = styled.header`
 
     li {
       font-size: ${body_2};
+    }
+  }
+
+  @media only screen and (max-width: ${tablet_max_width}) {
+    nav {
+      padding: 0 ${small_space};
     }
   }
 `;

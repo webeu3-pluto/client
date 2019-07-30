@@ -5,12 +5,17 @@ import styled from "styled-components";
 
 // components/functions
 import logo from "../assets/logo.png";
-import { medium_space_1, medium_space_2 } from "../variables/spacing";
+
+// styles
+import {
+  medium_space_1,
+  medium_space_2,
+  small_space
+} from "../variables/spacing";
 import { headings, primary } from "../variables/colors";
 import { ButtonPrimary } from "../atoms/Buttons";
 import { body_2 } from "../variables/font-sizes";
-
-// styles
+import { tablet_max_width } from "../variables/media-queries";
 
 const Header = () => {
   return (
@@ -25,10 +30,13 @@ const Header = () => {
           <li>
             <Link to="/login">Log in</Link>
           </li>
-          <li>
+          <li className="desktop">
             <Link to="/signup">
               <ButtonPrimary>Sign Up</ButtonPrimary>
             </Link>
+          </li>
+          <li className="mobile">
+            <Link to="/signup">Sign Up</Link>
           </li>
         </ul>
       </nav>
@@ -71,6 +79,11 @@ const StyledHeader = styled.header`
     display: flex;
     align-items: center;
 
+    .mobile {
+      display: none;
+    }
+
+    li:last-child,
     button {
       margin-left: ${medium_space_2};
     }
@@ -82,5 +95,25 @@ const StyledHeader = styled.header`
 
   ul li a:hover {
     color: ${primary};
+  }
+
+  @media only screen and (max-width: ${tablet_max_width}) {
+    nav {
+      padding: 0 ${small_space};
+    }
+
+    ul {
+      li:last-child {
+        margin-left: ${small_space};
+      }
+
+      .mobile {
+        display: block;
+      }
+
+      .desktop {
+        display: none;
+      }
+    }
   }
 `;

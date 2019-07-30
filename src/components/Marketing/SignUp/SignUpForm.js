@@ -1,16 +1,17 @@
 // modules
-import React from 'react';
-import styled from 'styled-components';
-import { WhiteInput } from "../../../~reusables/atoms/Inputs";
-import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
-import { white } from "../../../~reusables/variables/colors";
-import { heading_2 } from "../../../~reusables/variables/font-sizes";
-import { medium_space_2 } from "../../../~reusables/variables/spacing";
-import { WhiteSelect } from "../../../~reusables/atoms/Select";
+import React from "react";
+import styled from "styled-components";
 
 // components/functions
+import { WhiteInput } from "../../../~reusables/atoms/Inputs";
+import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
+import { WhiteSelect } from "../../../~reusables/atoms/Select";
 
 // styles
+import { white } from "../../../~reusables/variables/colors";
+import { heading_2 } from "../../../~reusables/variables/font-sizes";
+import { medium_space_2, small_space } from "../../../~reusables/variables/spacing";
+import { tablet_max_width } from "../../../~reusables/variables/media-queries";
 
 const SignUpForm = () => {
   return (
@@ -90,6 +91,11 @@ const StyledForm = styled.form`
 
   button {
     float: right;
+  }
+
+  @media only screen and (max-width: ${tablet_max_width}) {
+    padding: 0 ${small_space};
+    height: 80%;
   }
 `;
 
