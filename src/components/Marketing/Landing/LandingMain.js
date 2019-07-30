@@ -1,32 +1,32 @@
 // modules
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 // components/functions
-import {
-  light_grey,
-  white,
-  headings,
-  text,
-  primary
-} from "../../../~reusables/variables/colors";
-import {
-  medium_space_3,
-  xl_space,
-  small_space,
-  medium_space_1,
-  medium_space_2
-} from "../../../~reusables/variables/spacing";
-import {
-  heading_3,
-  heading_4,
-  body_1,
-  body_2
-} from "../../../~reusables/variables/font-sizes";
 import lambdaSchool from "../../../~reusables/assets/lambdaschool.jpg";
 import lambdaLogo from "../../../~reusables/assets/lambda-logo.png";
 
 // styles
+  import {
+    light_grey,
+    white,
+    headings,
+    text,
+    primary
+  } from "../../../~reusables/variables/colors";
+  import {
+    medium_space_3,
+    xl_space,
+    small_space,
+    medium_space_1,
+    medium_space_2
+  } from "../../../~reusables/variables/spacing";
+  import {
+    heading_3,
+    heading_4,
+    body_1,
+    body_2
+  } from "../../../~reusables/variables/font-sizes";
 
 const LandingMain = () => {
   return (
@@ -39,7 +39,7 @@ const LandingMain = () => {
             Lorem ipsum dolor sit amet, consectetur.
           </p>
           <div className="benefit">
-            <i class="material-icons">collections_bookmark</i>
+            <i className="material-icons">collections_bookmark</i>
             <div>
               <h4>Lorem ipsum dolor sit amet</h4>
               <p>
@@ -49,7 +49,7 @@ const LandingMain = () => {
             </div>
           </div>
           <div className="benefit">
-            <i class="material-icons">collections_bookmark</i>
+            <i className="material-icons">collections_bookmark</i>
             <div>
               <h4>Lorem ipsum dolor sit amet</h4>
               <p>
@@ -59,7 +59,7 @@ const LandingMain = () => {
             </div>
           </div>
           <div className="benefit">
-            <i class="material-icons">collections_bookmark</i>
+            <i className="material-icons">collections_bookmark</i>
             <div>
               <h4>Lorem ipsum dolor sit amet</h4>
               <p>
@@ -107,7 +107,6 @@ const StyledMain = styled.section`
 
   .testimonial {
     background: ${white};
-    height: 540px;
     flex-basis: 420px;
     border-radius: 12px;
 
@@ -174,6 +173,12 @@ const StyledMain = styled.section`
     font-size: ${heading_4};
     margin-top: 0;
     margin-bottom: ${small_space};
+  }
+
+  @media only screen and (max-width: 900px) {
+    .wrapper {
+      flex-direction: column;
+    }
   }
 `;
 
