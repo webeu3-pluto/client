@@ -7,11 +7,13 @@ import AuthHeader from '../../../~reusables/layout/AuthHeader'
 
 // styles
 import { primary } from '../../../~reusables/variables/colors';
+import LoginForm from './LoginForm';
 
 const LogIn = () => {
   return (
     <StyledLogin>
       <AuthHeader path="/signup" linkText="Sign up" />
+      <LoginForm />
     </StyledLogin>
   )
 }

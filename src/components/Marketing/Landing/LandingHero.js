@@ -1,6 +1,7 @@
 // modules
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 // components/functions
 import { ButtonPrimary } from "../../../~reusables/atoms/Buttons";
@@ -11,7 +12,6 @@ import {
 } from "../../../~reusables/variables/spacing";
 import { heading_1, body_1 } from "../../../~reusables/variables/font-sizes";
 import { headings, text } from "../../../~reusables/variables/colors";
-import { Link } from "react-router-dom";
 
 // styles
 

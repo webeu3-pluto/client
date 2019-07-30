@@ -1,6 +1,6 @@
 // styles
 import styled from "styled-components";
-import { small_space, medium_space_1 } from "../variables/spacing";
+import { medium_space_1 } from "../variables/spacing";
 import { white, text, support } from "../variables/colors";
 import { body_2 } from "../variables/font-sizes";
 

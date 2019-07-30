@@ -1,6 +1,6 @@
 // modules
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import { WhiteInput } from "../../../~reusables/atoms/Inputs";
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import { white } from "../../../~reusables/variables/colors";

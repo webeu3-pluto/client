@@ -1,6 +1,6 @@
 // modules
-import React from "react";
-import { Route } from "react-router-dom";
+import React from "./node_modules/react";
+import { Route } from "./node_modules/react-router-dom";
 
 // components/functions
 import Dashboard from "./Dashboard/Dashboard";
