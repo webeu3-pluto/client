@@ -10,6 +10,7 @@ import logo from '../../~reusables/assets/logo.png'
 import { light_grey, headings, white, primary } from '../variables/colors';
 import { medium_space_2 } from '../variables/spacing';
 import { heading_4 } from '../variables/font-sizes';
+import { tablet_max_width } from '../variables/media-queries';
 
 const Sidebar = () => {
   return (
@@ -19,7 +20,7 @@ const Sidebar = () => {
       </div>
       <NavLink activeClassName="active" exact to="/app">Dashboard</NavLink>
       <NavLink activeClassName="active" exact to="/app/quizzes">Quizzes</NavLink>
-      <NavLink activeClassName="active" exact to="/app/people">Students</NavLink>
+      <NavLink activeClassName="active" exact to="/app/people">People</NavLink>
     </StyledSidebar>
   )
 }
@@ -60,6 +61,10 @@ const StyledSidebar = styled.aside`
     img {
       width: 100%;
     }
+  }
+
+  @media only screen and (max-width: ${tablet_max_width}) {
+    display: none;
   }
 `
 

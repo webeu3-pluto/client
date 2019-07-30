@@ -9,6 +9,7 @@ import Quizzes from "./Quizzes/Quizzes";
 import People from "./People/People";
 import Profile from "./Profile/Profile";
 import Sidebar from "../../~reusables/layout/Sidebar";
+import AppHeader from "../../~reusables/layout/AppHeader";
 
 // styles
 
@@ -18,7 +19,7 @@ const App = () => {
       <StyledApp>
         <Sidebar />
         <div>
-          Header
+          <AppHeader />
           <Route exact path="/app" render={routeProps => <Dashboard />} />
           <Route exact path="/app/quizzes" render={routeProps => <Quizzes />} />
           <Route exact path="/app/people" render={routeProps => <People />} />
@@ -31,6 +32,9 @@ const App = () => {
 
 const StyledApp = styled.section`
   display: flex;
+  & > div {
+    width: 100%;
+  }
 `;
 
 export default App;
