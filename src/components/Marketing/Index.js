@@ -4,7 +4,7 @@ import React from 'react';
 // components/functions
 import { Route } from 'react-router-dom';
 import Landing from './Landing/Landing';
-import SignUp from './Signup/SignUp';
+import SignUp from './SignUp/SignUp';
 import Login from './Login/Login';
 
 const App = () => {
