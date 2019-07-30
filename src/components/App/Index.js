@@ -10,6 +10,7 @@ import People from "./People/People";
 import Profile from "./Profile/Profile";
 import Sidebar from "../../~reusables/layout/Sidebar";
 import AppHeader from "../../~reusables/layout/AppHeader";
+import AppFooter from "../../~reusables/layout/AppFooter";
 
 // styles
 
@@ -24,6 +25,7 @@ const App = () => {
           <Route exact path="/app/quizzes" render={routeProps => <Quizzes />} />
           <Route exact path="/app/people" render={routeProps => <People />} />
           <Route exact path="/app/profile" render={routeProps => <Profile />} />
+          <AppFooter />
         </div>
       </StyledApp>
     );
