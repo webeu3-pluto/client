@@ -7,6 +7,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import Quizzes from "./Quizzes/Quizzes";
 import People from "./People/People";
 import Profile from "./Profile/Profile";
+import Sidebar from "../../~reusables/layout/Sidebar";
 
 // styles
 
@@ -14,10 +15,10 @@ const App = () => {
   if (true) {
     return (
       <div>
-        Sidebar
+        <Sidebar />
         <Route
           exact
-          path="/app/dashboard"
+          path="/app"
           render={routeProps => <Dashboard />}
         />
         <Route exact path="/app/quizzes" render={routeProps => <Quizzes />} />
