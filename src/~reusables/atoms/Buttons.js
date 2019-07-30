@@ -1,29 +1,28 @@
-import styled from 'styled-components';
-import { small_space } from '../variables/spacing';
-import { white, primary, secondary } from '../variables/colors';
-import { body_2 } from '../variables/font-sizes'
-
+import styled from "styled-components";
+import { small_space } from "../variables/spacing";
+import { white, primary, secondary } from "../variables/colors";
+import { body_2 } from "../variables/font-sizes";
 
 export const Button = styled.button`
   font-size: ${body_2};
   padding: 6px ${small_space};
   font-weight: 500;
-  min-width: ${props => (props.width ? props.width : '160px')};
+  min-width: ${props => (props.width ? props.width : "160px")};
   height: 40px;
   border: none;
   outline: none;
   border-radius: 20px;
-  box-shadow: 0 .8rem 2.5rem 0 rgba(40, 51, 63, .11);
+  box-shadow: 0 0.8rem 2.5rem 0 rgba(40, 51, 63, 0.11);
   transition: all 100ms ease-in-out;
   cursor: pointer;
 
   &:hover {
-    opacity: .9;
+    opacity: 0.9;
   }
-  
+
   &:active {
-    opacity: .8;
-    box-shadow: 0 6px 10px 0 rgba(40, 51, 63, .11);
+    opacity: 0.8;
+    box-shadow: 0 6px 10px 0 rgba(40, 51, 63, 0.11);
   }
 `;
 
