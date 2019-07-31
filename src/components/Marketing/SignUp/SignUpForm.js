@@ -9,10 +9,11 @@ import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import { WhiteSelect } from "../../../~reusables/atoms/Select";
 import { signUp } from "../../../store/actions/authActions";
 import { withRouter } from 'react-router-dom'
+import ComponentLoader from "../../../~reusables/molecules/ComponentLoader";
 
 // styles
 import { white } from "../../../~reusables/variables/colors";
-import { heading_2 } from "../../../~reusables/variables/font-sizes";
+import { heading_2, body_2 } from "../../../~reusables/variables/font-sizes";
 import {
   medium_space_2,
   small_space
@@ -27,7 +28,8 @@ const SignUpForm = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signUp, history } = props;
+  const { signUp, history, signupError, authLoader } = props;
+  console.log(signupError, authLoader)
 
   const onFormSubmit = event => {
     event.preventDefault();
@@ -101,6 +103,8 @@ const SignUpForm = props => {
           type="password"
         />
         <ButtonTertiary>Sign Up</ButtonTertiary>
+        {authLoader && <ComponentLoader height="50px" color={white} />}
+        {signupError && <p className="error">{signupError}</p>}
       </div>
     </StyledForm>
   );
@@ -112,6 +116,11 @@ const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .error {
+    color: ${white};
+    font-size: ${body_2};
+  }
 
   .two-column {
     display: flex;
@@ -144,7 +153,14 @@ const StyledForm = styled.form`
   }
 `;
 
+function mapStateToProps(state) {
+  return {
+    signupError: state.auth.signupError,
+    authLoader: state.auth.authLoader
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { signUp }
 )(withRouter(SignUpForm));

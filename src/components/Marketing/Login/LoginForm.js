@@ -9,10 +9,11 @@ import { compose } from 'redux';
 import { WhiteInput } from "../../../~reusables/atoms/Inputs";
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import { logIn } from "../../../store/actions/authActions";
+import ComponentLoader from "../../../~reusables/molecules/ComponentLoader";
 
 // styles
 import { white } from "../../../~reusables/variables/colors";
-import { heading_2 } from "../../../~reusables/variables/font-sizes";
+import { heading_2, body_2 } from "../../../~reusables/variables/font-sizes";
 import {
   medium_space_2,
   small_space
@@ -24,7 +25,7 @@ const LoginForm = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { logIn, history } = props;
+  const { logIn, history, loginError, authLoader } = props;
 
   const onFormSubmit = event => {
     event.preventDefault();
@@ -55,6 +56,8 @@ const LoginForm = props => {
           type="password"
         />
         <ButtonTertiary>Log In</ButtonTertiary>
+        {authLoader && <ComponentLoader height="50px" color={white} />}
+        {loginError && <p className="error">{loginError}</p>}
       </div>
     </StyledForm>
   );
@@ -66,6 +69,11 @@ const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .error {
+    color: ${white};
+    font-size: ${body_2};
+  }
 
   input {
     width: 98%;
@@ -86,7 +94,14 @@ const StyledForm = styled.form`
   }
 `;
 
+function mapStateToProps(state) {
+  return {
+    loginError: state.auth.loginError,
+    authLoader: state.auth.authLoader
+  }
+}
+
 export default compose(connect(
-  null,
+  mapStateToProps,
   { logIn }
 ), HasLoggedIn)(withRouter(LoginForm));

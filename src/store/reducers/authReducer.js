@@ -3,7 +3,8 @@ import * as types from "../actions/authActions";
 const initState = {
   isSignedIn: null,
   authLoader: null,
-  authError: null
+  loginError: null,
+  signupError: null,
 };
 
 export default function(state = initState, action) {
@@ -18,13 +19,13 @@ export default function(state = initState, action) {
       return {
         ...state,
         authLoader: true,
-        authError: null
+        signupError: null
       };
     case types.LOG_IN:
       return {
         ...state,
         authLoader: true,
-        authError: null
+        loginError: null
       };
     case types.SIGN_UP_SUCCESS:
       return {
@@ -32,7 +33,7 @@ export default function(state = initState, action) {
         isSignedIn: true,
         user: action.payload,
         authLoader: false,
-        authError: null
+        signupError: null
       };
     case types.LOG_IN_SUCCESS:
       return {
@@ -40,21 +41,21 @@ export default function(state = initState, action) {
         isSignedIn: true,
         user: action.payload,
         authLoader: false,
-        authError: null
+        loginError: null
       };
     case types.SIGN_UP_FAILURE:
       return {
         ...state,
         isSignedIn: false,
         authLoader: false,
-        authError: action.payload
+        signupError: action.payload
       };
     case types.LOG_IN_FAILURE:
       return {
         ...state,
         isSignedIn: false,
         authLoader: false,
-        authError: action.payload
+        loginError: action.payload
       };
     default:
       return state;

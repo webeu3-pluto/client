@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { primary, white } from "../variables/colors";
+import { primary } from "../variables/colors";
 
-const ComponentLoader = ({height}) => (
-  <StyledLoader height={height}>
+const ComponentLoader = ({height, color}) => (
+  <StyledLoader height={height} color={color}>
     <div className="lds-dual-ring" />
   </StyledLoader>
 );
@@ -11,7 +11,7 @@ const ComponentLoader = ({height}) => (
 const StyledLoader = styled.div`
   height: ${props => props.height ? props.height: '100vh'};
   width: 100%;
-  background-color: ${white};
+  background-color: transparent;
   display: flex;
 
   justify-content: center;
@@ -31,8 +31,8 @@ const StyledLoader = styled.div`
     height: 46px;
     margin: 1px;
     border-radius: 50%;
-    border: 5px solid ${primary};
-    border-color: ${primary} transparent ${primary} transparent;
+    border: 5px solid ${props => props.color ? props.color: {primary}};
+    border-color: ${props => props.color ? props.color: {primary}} transparent ${props => props.color ? props.color: {primary}} transparent;
     animation: lds-dual-ring 1.2s linear infinite;
   }
 
