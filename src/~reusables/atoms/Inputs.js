@@ -1,7 +1,7 @@
 // styles
 import styled from "styled-components";
 import { medium_space_1 } from "../variables/spacing";
-import { white, text, support } from "../variables/colors";
+import { white, text, support, light_support, primary } from "../variables/colors";
 import { body_2 } from "../variables/font-sizes";
 
 export const WhiteInput = styled.input`
@@ -20,6 +20,36 @@ export const WhiteInput = styled.input`
 
   &:focus {
     border-color: ${text};
+    outline: 0 none;
+  }
+
+  ::placeholder {
+    color: ${support};
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: ${support};
+  }
+
+  ::-ms-input-placeholder {
+    color: ${support};
+  }
+`;
+
+export const LineInput = styled.input`
+  font-size: ${body_2};
+  transition: all 100ms ease-in-out;
+  height: 40px;
+  background-color: ${white};
+  border: none;
+  border-bottom: 1px solid ${light_support};
+  margin-bottom: ${props => (props.margin ? props.margin : medium_space_1)};
+  color: ${text};
+  font-weight: 500;
+
+  &:focus {
+    border-color: ${primary};
     outline: 0 none;
   }
 

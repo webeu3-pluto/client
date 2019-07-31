@@ -12,7 +12,7 @@ export const Button = styled.button`
   border: none;
   outline: none;
   border-radius: 20px;
-  box-shadow: 0 0.8rem 2.5rem 0 rgba(40, 51, 63, 0.11);
+  ${'' /* box-shadow: 0 0.8rem 2.5rem 0 rgba(40, 51, 63, 0.11); */}
   transition: all 100ms ease-in-out;
   cursor: pointer;
 
@@ -38,7 +38,7 @@ export const ButtonSecondary = styled(Button)`
 
 export const TextButton = styled(Button)`
   background-color: transparent;
-  color: ${primary};
+  color: ${props => (props.color ? props.color : primary )};
   padding: 0;
   min-width: auto;
   box-shadow: none;

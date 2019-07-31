@@ -7,26 +7,26 @@ import lambdaSchool from "../../../~reusables/assets/lambdaschool.jpg";
 import lambdaLogo from "../../../~reusables/assets/lambda-logo.png";
 
 // styles
-  import {
-    light_grey,
-    white,
-    headings,
-    text,
-    primary
-  } from "../../../~reusables/variables/colors";
-  import {
-    medium_space_3,
-    xl_space,
-    small_space,
-    medium_space_1,
-    medium_space_2
-  } from "../../../~reusables/variables/spacing";
-  import {
-    heading_3,
-    heading_4,
-    body_1,
-    body_2
-  } from "../../../~reusables/variables/font-sizes";
+import {
+  light_grey,
+  white,
+  headings,
+  text,
+  primary
+} from "../../../~reusables/variables/colors";
+import {
+  medium_space_3,
+  xl_space,
+  small_space,
+  medium_space_1,
+  medium_space_2
+} from "../../../~reusables/variables/spacing";
+import {
+  heading_3,
+  heading_4,
+  body_1,
+  body_2
+} from "../../../~reusables/variables/font-sizes";
 
 const LandingMain = () => {
   return (
@@ -109,6 +109,9 @@ const StyledMain = styled.section`
     background: ${white};
     flex-basis: 420px;
     border-radius: 12px;
+    box-shadow: 0px 1px 5px rgba(151, 162, 185, 0.2),
+      0px 3px 4px rgba(151, 162, 185, 0.12),
+      0px 2px 4px rgba(151, 162, 185, 0.14);
 
     .photo {
       border-top-right-radius: 12px;
