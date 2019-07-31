@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosWithAuth } from "../../~reusables/helpers/axiosAuth";
 
 export const SIGN_UP = "SIGN_UP";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
@@ -8,7 +9,7 @@ export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
 export const VALIDATE_USER = "VALIDATE_USER";
 export const UPDATE_USER = "UPDATE_USER";
-// export const DELETE_USER = "DELETE_USER";
+export const DELETE_USER = "DELETE_USER";
 
 const server = "https://plutoserver.herokuapp.com";
 
@@ -75,6 +76,17 @@ export const validateUser = () => dispatch => {
   }
 };
 
-export const updateUser = (user) => dispatch => {
-  dispatch({ type: UPDATE_USER, payload: user })
-}
+export const updateUser = user => async dispatch => {
+  try {
+    await axiosWithAuth().put(`${server}/api/restricted/user`, user);
+    dispatch({ type: UPDATE_USER, payload: user });
+    localStorage.setItem("user", JSON.stringify(user));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteUser = () => dispatch => {
+  localStorage.clear();
+  dispatch({ type: DELETE_USER });
+};

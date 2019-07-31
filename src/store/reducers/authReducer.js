@@ -20,7 +20,17 @@ export default function(state = initState, action) {
       return {
         ...state,
         user: action.payload
-      }
+      };
+    case types.DELETE_USER:
+      return {
+        ...state,
+        isSignedIn: null,
+        authLoader: null,
+        loginError: null,
+        signupError: null,
+        user: null
+      };
+
     case types.SIGN_UP:
       return {
         ...state,

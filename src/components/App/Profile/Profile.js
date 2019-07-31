@@ -5,7 +5,8 @@ import styled from "styled-components";
 // components/functions
 import { LineInput } from "../../../~reusables/atoms/Inputs";
 import { connect } from "react-redux";
-import { validateUser, updateUser } from "../../../store/actions/authActions";
+import { validateUser, updateUser, deleteUser } from "../../../store/actions/authActions";
+import DeleteModal from "../../../~reusables/molecules/DeleteModal";
 
 // styles
 import {
@@ -23,10 +24,11 @@ import {
 import { support } from "../../../~reusables/variables/colors";
 import { tablet_max_width } from "../../../~reusables/variables/media-queries";
 
-const Profile = ({ user, validateUser, updateUser }) => {
+const Profile = ({ user, validateUser, updateUser, deleteUser }) => {
   const { id, role, cohort, email, password } = user;
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
+  const [modal, setModal] = useState(false);
 
   const onButtonSubmit = event => {
     event.preventDefault();
@@ -50,6 +52,14 @@ const Profile = ({ user, validateUser, updateUser }) => {
 
   return (
     <StyledProfile>
+      {modal && (
+        <DeleteModal
+          functionCb={deleteUser}
+          closeModal={setModal}
+          heading="Lorem ipsum lorem ipsum"
+          paragraph="Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum."
+        />
+      )}
       <div className="wrapper">
         <p className="label">First name</p>
         <LineInput
@@ -64,7 +74,9 @@ const Profile = ({ user, validateUser, updateUser }) => {
           onChange={e => setLastName(e.target.value)}
         />
         <div className="buttons">
-          <TextButton color="#DA2640">Delete Account</TextButton>
+          <TextButton color="#DA2640" onClick={() => setModal(true)}>
+            Delete Account
+          </TextButton>
           <ButtonTertiary onClick={logout}>Logout</ButtonTertiary>
           <ButtonPrimary onClick={onButtonSubmit}>Save</ButtonPrimary>
         </div>
@@ -116,5 +128,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { validateUser, updateUser }
+  { validateUser, updateUser, deleteUser }
 )(Profile);
