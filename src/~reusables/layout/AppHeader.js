@@ -1,26 +1,78 @@
 // modules
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 // components/functions
+import { validateUser } from "../../store/actions/authActions";
 
 // styles
-import { large_space, medium_space_2 } from "../variables/spacing";
-import { support, secondary, white, text, headings } from "../variables/colors";
+import {
+  large_space,
+  medium_space_2,
+  medium_space_3
+} from "../variables/spacing";
+import {
+  support,
+  secondary,
+  white,
+  text,
+  headings,
+  primary,
+  light_grey
+} from "../variables/colors";
 import { heading_4 } from "../variables/font-sizes";
 import { tablet_max_width } from "../variables/media-queries";
 
-const AppHeader = () => {
+const AppHeader = props => {
+  const { user, validateUser } = props;
+
+  const logout = () => {
+    localStorage.clear();
+    validateUser();
+  };
+
+  const toggleDropdown = () => {
+    document
+      .querySelector(".dropdown-content")
+      .classList.toggle("show-dropdown");
+  };
+
+  window.onclick = function(e) {
+    if (!e.target.matches(".arrow-down")) {
+      const myDropdown = document.querySelector(".dropdown-content");
+      if (myDropdown && myDropdown.classList.contains("show-dropdown")) {
+        myDropdown.classList.remove("show-dropdown");
+      }
+    }
+  };
+
   return (
     <StyledHeader>
-      <div>
+      <nav>
         <div className="info">
-          <h4>Isaac Aderogba</h4>
-          <p>Team Lead</p>
+          <h4>
+            {user.firstName} {user.lastName}
+          </h4>
+          <p>
+            {user.role} - {user.cohort}
+          </p>
         </div>
-        <div className="initials">IA</div>
-        <div className="arrow-down" />
-      </div>
+        <div className="initials">
+          {user.firstName.charAt(0)}
+          {user.lastName.charAt(0)}
+        </div>
+        <div className="dropdown">
+          <div onClick={toggleDropdown} className="arrow-down" />
+          <div className="dropdown-content">
+            <Link to="/app/profile">Profile</Link>
+            <Link onClick={logout} to="/">
+              Logout
+            </Link>
+          </div>
+        </div>
+      </nav>
     </StyledHeader>
   );
 };
@@ -30,13 +82,42 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  & > div {
+  & > nav {
     margin-right: ${large_space};
     display: flex;
     align-items: center;
   }
 
-  h4, p {
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: ${medium_space_3};
+    background-color: ${light_grey};
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(151, 162, 185, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: ${white};
+    color: ${primary};
+  }
+
+  .show-dropdown {
+    display: block;
+  }
+
+  h4,
+  p {
     margin: 0;
   }
 
@@ -82,4 +163,13 @@ const StyledHeader = styled.header`
   }
 `;
 
-export default AppHeader;
+function mapStateToProps(state) {
+  return {
+    user: state.auth.user
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { validateUser }
+)(AppHeader);

@@ -5,6 +5,7 @@ const initState = {
   authLoader: null,
   loginError: null,
   signupError: null,
+  user: null
 };
 
 export default function(state = initState, action) {

@@ -14,7 +14,6 @@ export const signUp = (user, history) => async dispatch => {
   try {
     dispatch({ type: SIGN_UP });
     const res = await axios.post(`${server}/api/auth/register`, user);
-    debugger;
 
     if (res.status === 201) {
       const user = {
@@ -44,7 +43,7 @@ export const validateUser = () => dispatch => {
     let user = JSON.parse(localStorage.getItem("user"));
     dispatch({ type: VALIDATE_USER, payload: { user, status: true } });
   } else {
-    dispatch({ type: VALIDATE_USER, payload: { status: false } });
+    dispatch({ type: VALIDATE_USER, payload: { user: null, status: false } });
   }
 };
 

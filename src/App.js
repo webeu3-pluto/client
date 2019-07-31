@@ -10,6 +10,7 @@ import { validateUser } from "./store/actions/authActions";
 import ComponentLoader from "./~reusables/molecules/ComponentLoader";
 
 // styles
+import { primary } from "./~reusables/variables/colors";
 
 function App(props) {
   const { isSignedIn, validateUser } = props;
@@ -20,7 +21,7 @@ function App(props) {
   }, [])
 
   if (isSignedIn === null) {
-    return <ComponentLoader />;
+    return <ComponentLoader color={primary} />;
   } else {
     return (
       <div>
