@@ -1,11 +1,26 @@
-import React from 'react';
+// modules
+import React from "react";
+import { connect } from "react-redux";
 
-const Students = () => {
-  return (
-    <div>
-      Students
-    </div>
-  )
+// components/functions
+import StudentsPPL from "./StudentsPPL";
+import TeamLeadsPPL from "./TeamLeadsPPL";
+
+// styles
+
+const Students = props => {
+  const { user } = props;
+  if (user.role === "Student") {
+    return <StudentsPPL />;
+  } else {
+    return <TeamLeadsPPL />;
+  }
+};
+
+function mapStateToProps(state) {
+  return {
+    user: state.auth.user
+  };
 }
 
-export default Students;
+export default connect(mapStateToProps)(Students);
