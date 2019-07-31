@@ -14,14 +14,16 @@ export const signUp = (user, history) => async dispatch => {
   try {
     dispatch({ type: SIGN_UP });
     const res = await axios.post(`${server}/api/auth/register`, user);
+    debugger;
 
     if (res.status === 201) {
       const user = {
-        firstName: "Isaac",
-        lastName: "Aderogba",
-        role: "Team Lead",
-        cohort: "WEBEU3",
-        email: "isaacaderogba1@gmail.com"
+        id: res.data.id,
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        role: res.data.role,
+        cohort: res.data.cohort,
+        email: res.data.email
       };
 
       dispatch({ type: SIGN_UP_SUCCESS, payload: user });
@@ -32,7 +34,7 @@ export const signUp = (user, history) => async dispatch => {
       history.push("/app");
     }
   } catch (err) {
-    dispatch({ type: SIGN_UP_FAILURE, payload: err.response.data.message  });
+    dispatch({ type: SIGN_UP_FAILURE, payload: err.response.data.message });
   }
 };
 
@@ -52,11 +54,12 @@ export const logIn = (user, history) => async dispatch => {
     const res = await axios.post(`${server}/api/auth/login`, user);
     if (res.status === 200) {
       const user = {
-        firstName: "Isaac",
-        lastName: "Aderogba",
-        role: "Team Lead",
-        cohort: "WEBEU3",
-        email: "isaacaderogba1@gmail.com"
+        id: res.data.id,
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        role: res.data.role,
+        cohort: res.data.cohort,
+        email: res.data.email
       };
 
       dispatch({ type: LOG_IN_SUCCESS, payload: user });

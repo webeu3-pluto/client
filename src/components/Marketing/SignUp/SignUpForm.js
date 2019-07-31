@@ -85,8 +85,8 @@ const SignUpForm = props => {
               Select cohort
             </option>
             <option value="WEBEU1">WEBEU1</option>
-            <option value="WEBEU1">WEBEU2</option>
-            <option value="WEBEU1">WEBEU3</option>
+            <option value="WEBEU2">WEBEU2</option>
+            <option value="WEBEU3">WEBEU3</option>
           </WhiteSelect>
         </div>
         <WhiteInput
