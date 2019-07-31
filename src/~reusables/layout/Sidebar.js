@@ -26,7 +26,7 @@ const Sidebar = () => {
 }
 
 const StyledSidebar = styled.aside`
-  height: 100vh;
+  min-height: 100vh;
   width: 180px;
   background: ${light_grey};
   display: flex;

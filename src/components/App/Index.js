@@ -14,6 +14,7 @@ import Sidebar from "../../~reusables/layout/Sidebar";
 import AppHeader from "../../~reusables/layout/AppHeader";
 import AppFooter from "../../~reusables/layout/AppFooter";
 import IsAuthUser from "../../~reusables/hoc/IsAuthUser";
+import { tablet_max_width } from "../../~reusables/variables/media-queries";
 
 // styles
 
@@ -31,8 +32,8 @@ const App = props => {
           <Route exact path="/app/quizzes" render={routeProps => <Quizzes />} />
           <Route exact path="/app/people" render={routeProps => <People />} />
           <Route exact path="/app/profile" render={routeProps => <Profile />} />
-          <AppFooter />
         </div>
+        <AppFooter />
       </StyledApp>
     );
   }
@@ -42,6 +43,12 @@ const StyledApp = styled.section`
   display: flex;
   & > div {
     width: 100%;
+  }
+
+  @media only screen and (max-width: ${tablet_max_width}) {
+    & > div {
+    margin-bottom: 80px;
+  }
   }
 `;
 

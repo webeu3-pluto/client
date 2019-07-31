@@ -19,6 +19,7 @@ import {
 } from "../../../~reusables/atoms/Buttons";
 import { LineInput } from "../../../~reusables/atoms/Inputs";
 import { text } from "../../../~reusables/variables/colors";
+import { tablet_max_width } from "../../../~reusables/variables/media-queries";
 
 const Profile = () => {
   return (
@@ -66,6 +67,10 @@ const StyledProfile = styled.main`
     button {
       margin: ${small_space} ${xs_space} 0 ${xs_space};
     }
+  }
+
+  @media only screen and (max-width: ${tablet_max_width}) {
+    margin: ${small_space};
   }
 `;
 
