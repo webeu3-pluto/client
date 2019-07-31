@@ -1,19 +1,27 @@
 // modules
-import React from "react";
+import React, { useEffect } from "react";
 
 // components/functions
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Marketing from './components/Marketing/Index';
 import Application from './components/App/Index';
+import { validateUser } from "./store/actions/authActions";
+import ComponentLoader from "./~reusables/molecules/ComponentLoader";
 
 // styles
+import { primary } from "./~reusables/variables/colors";
 
 function App(props) {
-  const { isSignedIn } = props;
+  const { isSignedIn, validateUser } = props;
+  console.log(isSignedIn);
+
+  useEffect(() => {
+    validateUser();
+  }, [])
 
   if (isSignedIn === null) {
-    return <div>loader</div>;
+    return <ComponentLoader color={primary} />;
   } else {
     return (
       <div>
@@ -32,5 +40,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { validateUser }
 )(App);
