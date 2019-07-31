@@ -86,7 +86,12 @@ export const updateUser = user => async dispatch => {
   }
 };
 
-export const deleteUser = () => dispatch => {
-  localStorage.clear();
-  dispatch({ type: DELETE_USER });
+export const deleteUser = () => async dispatch => {
+  try {
+    await axiosWithAuth().delete(`${server}/api/restricted/user`);
+    localStorage.clear();
+    dispatch({ type: DELETE_USER });
+  } catch (err) {
+    console.log(err);
+  }
 };

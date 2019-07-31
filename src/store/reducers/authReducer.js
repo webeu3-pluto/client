@@ -24,7 +24,7 @@ export default function(state = initState, action) {
     case types.DELETE_USER:
       return {
         ...state,
-        isSignedIn: null,
+        isSignedIn: false,
         authLoader: null,
         loginError: null,
         signupError: null,
