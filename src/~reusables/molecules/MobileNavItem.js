@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { small_space, xs_space } from "../variables/spacing";
 import { primary, text } from "../variables/colors";
-import { body_2, body_3 } from "../variables/font-sizes";
+import { body_3 } from "../variables/font-sizes";
 
 const MobileNavItem = ({ icon, text, path }) => {
   return (

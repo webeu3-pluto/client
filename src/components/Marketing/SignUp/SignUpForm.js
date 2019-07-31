@@ -29,7 +29,6 @@ const SignUpForm = props => {
   const [password, setPassword] = useState("");
 
   const { signUp, history, signupError, authLoader } = props;
-  console.log(signupError, authLoader)
 
   const onFormSubmit = event => {
     event.preventDefault();

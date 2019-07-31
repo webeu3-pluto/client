@@ -7,6 +7,8 @@ export const LOG_IN = "LOG_IN";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
 export const VALIDATE_USER = "VALIDATE_USER";
+export const UPDATE_USER = "UPDATE_USER";
+// export const DELETE_USER = "DELETE_USER";
 
 const server = "https://plutoserver.herokuapp.com";
 
@@ -37,16 +39,6 @@ export const signUp = (user, history) => async dispatch => {
   }
 };
 
-export const validateUser = () => dispatch => {
-  let token = localStorage.getItem("token");
-  if (token) {
-    let user = JSON.parse(localStorage.getItem("user"));
-    dispatch({ type: VALIDATE_USER, payload: { user, status: true } });
-  } else {
-    dispatch({ type: VALIDATE_USER, payload: { user: null, status: false } });
-  }
-};
-
 export const logIn = (user, history) => async dispatch => {
   try {
     dispatch({ type: LOG_IN });
@@ -72,3 +64,17 @@ export const logIn = (user, history) => async dispatch => {
     dispatch({ type: LOG_IN_FAILURE, payload: err.response.data.message });
   }
 };
+
+export const validateUser = () => dispatch => {
+  let token = localStorage.getItem("token");
+  if (token) {
+    let user = JSON.parse(localStorage.getItem("user"));
+    dispatch({ type: VALIDATE_USER, payload: { user, status: true } });
+  } else {
+    dispatch({ type: VALIDATE_USER, payload: { user: null, status: false } });
+  }
+};
+
+export const updateUser = (user) => dispatch => {
+  dispatch({ type: UPDATE_USER, payload: user })
+}

@@ -1,8 +1,11 @@
 // modules
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // components/functions
+import { LineInput } from "../../../~reusables/atoms/Inputs";
+import { connect } from "react-redux";
+import { validateUser, updateUser } from "../../../store/actions/authActions";
 
 // styles
 import {
@@ -17,22 +20,53 @@ import {
   ButtonTertiary,
   ButtonPrimary
 } from "../../../~reusables/atoms/Buttons";
-import { LineInput } from "../../../~reusables/atoms/Inputs";
-import { text } from "../../../~reusables/variables/colors";
+import { support } from "../../../~reusables/variables/colors";
 import { tablet_max_width } from "../../../~reusables/variables/media-queries";
 
-const Profile = () => {
+const Profile = ({ user, validateUser, updateUser }) => {
+  const { id, role, cohort, email, password } = user;
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+
+  const onButtonSubmit = event => {
+    event.preventDefault();
+    const userToUpdate = {
+      id,
+      firstName,
+      lastName,
+      role: role,
+      cohort: cohort,
+      email: email,
+      password: password
+    };
+
+    updateUser(userToUpdate);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    validateUser();
+  };
+
   return (
     <StyledProfile>
       <div className="wrapper">
         <p className="label">First name</p>
-        <LineInput placeholder="Your first name" />
+        <LineInput
+          value={firstName}
+          placeholder="Your first name"
+          onChange={e => setFirstName(e.target.value)}
+        />
         <p className="label">Last name</p>
-        <LineInput placeholder="Your last name" />
+        <LineInput
+          value={lastName}
+          placeholder="Your last name"
+          onChange={e => setLastName(e.target.value)}
+        />
         <div className="buttons">
           <TextButton color="#DA2640">Delete Account</TextButton>
-          <ButtonTertiary>Logout</ButtonTertiary>
-          <ButtonPrimary>Save</ButtonPrimary>
+          <ButtonTertiary onClick={logout}>Logout</ButtonTertiary>
+          <ButtonPrimary onClick={onButtonSubmit}>Save</ButtonPrimary>
         </div>
       </div>
     </StyledProfile>
@@ -47,10 +81,10 @@ const StyledProfile = styled.main`
   box-shadow: 0px 3px 8px rgba(56, 105, 160, 0.25);
   border-radius: 8px;
 
-  p {
+  .label {
     margin-bottom: ${small_space};
     font-weight: 500;
-    color: ${text};
+    color: ${support};
   }
 
   .wrapper {
@@ -74,4 +108,13 @@ const StyledProfile = styled.main`
   }
 `;
 
-export default Profile;
+function mapStateToProps(state) {
+  return {
+    user: state.auth.user
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { validateUser, updateUser }
+)(Profile);

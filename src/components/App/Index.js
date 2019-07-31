@@ -19,9 +19,6 @@ import { tablet_max_width } from "../../~reusables/variables/media-queries";
 // styles
 
 const App = props => {
-  const { user } = props;
-  console.log(user);
-
   if (true) {
     return (
       <StyledApp>

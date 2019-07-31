@@ -1,7 +1,7 @@
 // styles
 import styled from "styled-components";
 import { medium_space_1 } from "../variables/spacing";
-import { white, text, support, light_support, primary } from "../variables/colors";
+import { white, text, support, primary } from "../variables/colors";
 import { body_2 } from "../variables/font-sizes";
 
 export const WhiteInput = styled.input`
@@ -43,7 +43,7 @@ export const LineInput = styled.input`
   height: 40px;
   background-color: ${white};
   border: none;
-  border-bottom: 1px solid ${light_support};
+  border-bottom: 1px solid rgba(74, 85, 104, 0.2);
   margin-bottom: ${props => (props.margin ? props.margin : medium_space_1)};
   color: ${text};
   font-weight: 500;

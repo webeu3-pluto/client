@@ -16,6 +16,11 @@ export default function(state = initState, action) {
         user: action.payload.user,
         isSignedIn: action.payload.status
       };
+    case types.UPDATE_USER:
+      return {
+        ...state,
+        user: action.payload
+      }
     case types.SIGN_UP:
       return {
         ...state,
