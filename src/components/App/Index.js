@@ -3,6 +3,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { compose } from "redux";
 
 // components/functions
 import Dashboard from "./Dashboard/Dashboard";
@@ -12,10 +13,11 @@ import Profile from "./Profile/Profile";
 import Sidebar from "../../~reusables/layout/Sidebar";
 import AppHeader from "../../~reusables/layout/AppHeader";
 import AppFooter from "../../~reusables/layout/AppFooter";
+import IsAuthUser from "../../~reusables/hoc/IsAuthUser";
 
 // styles
 
-const App = (props) => {
+const App = props => {
   const { user } = props;
   console.log(user);
 
@@ -49,7 +51,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  null
+export default compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+  IsAuthUser
 )(App);

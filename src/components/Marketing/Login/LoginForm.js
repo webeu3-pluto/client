@@ -1,12 +1,13 @@
 // modules
 import React, { useState } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { compose } from 'redux';
 
 // components/functions
 import { WhiteInput } from "../../../~reusables/atoms/Inputs";
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { logIn } from "../../../store/actions/authActions";
 
 // styles
@@ -17,6 +18,7 @@ import {
   small_space
 } from "../../../~reusables/variables/spacing";
 import { tablet_max_width } from "../../../~reusables/variables/media-queries";
+import HasLoggedIn from "../../../~reusables/hoc/HasLoggedIn";
 
 const LoginForm = props => {
   const [email, setEmail] = useState("");
@@ -50,6 +52,7 @@ const LoginForm = props => {
           required
           margin={medium_space_2}
           placeholder="Your password"
+          type="password"
         />
         <ButtonTertiary>Log In</ButtonTertiary>
       </div>
@@ -83,7 +86,7 @@ const StyledForm = styled.form`
   }
 `;
 
-export default connect(
+export default compose(connect(
   null,
   { logIn }
-)(withRouter(LoginForm));
+), HasLoggedIn)(withRouter(LoginForm));

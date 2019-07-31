@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import Marketing from './components/Marketing/Index';
 import Application from './components/App/Index';
 import { validateUser } from "./store/actions/authActions";
+import ComponentLoader from "./~reusables/molecules/ComponentLoader";
 
 // styles
 
@@ -19,7 +20,7 @@ function App(props) {
   }, [])
 
   if (isSignedIn === null) {
-    return <div>loader</div>;
+    return <ComponentLoader />;
   } else {
     return (
       <div>

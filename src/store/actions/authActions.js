@@ -18,9 +18,10 @@ export const signUp = (user, history) => async dispatch => {
 export const validateUser = () => dispatch => {
   let token = localStorage.getItem('token');
   if(token) {
-    dispatch({ type: VALIDATE_USER, payload: true })
+    let user = JSON.parse(localStorage.getItem('user'));
+    dispatch({ type: VALIDATE_USER, payload: {user, status: true} })
   } else {
-    dispatch({ type: VALIDATE_USER, payload: false })
+    dispatch({ type: VALIDATE_USER, payload: {status: false} })
   }
 }
 
