@@ -14,7 +14,6 @@ import { primary } from "./~reusables/variables/colors";
 
 function App(props) {
   const { isSignedIn, validateUser } = props;
-  console.log(isSignedIn);
 
   useEffect(() => {
     validateUser();

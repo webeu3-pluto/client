@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { small_space } from "../variables/spacing";
+import { small_space, xs_space } from "../variables/spacing";
 import { primary, text } from "../variables/colors";
-import { body_2 } from "../variables/font-sizes";
+import { body_3 } from "../variables/font-sizes";
 
 const MobileNavItem = ({ icon, text, path }) => {
   return (
@@ -19,8 +19,8 @@ const MobileNavItem = ({ icon, text, path }) => {
 };
 
 const StyledNavItem = styled.div`
-  font-size: ${body_2};
-  padding: 0 ${small_space};
+  font-size: ${body_3};
+  padding: 0 ${xs_space};
 
   a {
     color: ${text};
@@ -34,7 +34,7 @@ const StyledNavItem = styled.div`
 
   i {
     vertical-align: middle;
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .active-nav {
