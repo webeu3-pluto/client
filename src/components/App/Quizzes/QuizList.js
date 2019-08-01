@@ -73,6 +73,7 @@ const StyledList = styled.div`
 
   .blue-link, .red-link {
     text-decoration: underline;
+    cursor: pointer;
   }
 
   .blue-link {
