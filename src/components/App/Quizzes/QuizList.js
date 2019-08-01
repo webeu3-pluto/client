@@ -7,7 +7,11 @@ import Tabs from "../../../~reusables/molecules/Tabs";
 
 // styles
 import { heading_5, body_2 } from "../../../~reusables/variables/font-sizes";
-import { support, primary, secondary } from "../../../~reusables/variables/colors";
+import {
+  support,
+  primary,
+  secondary
+} from "../../../~reusables/variables/colors";
 import { xs_space } from "../../../~reusables/variables/spacing";
 
 const QuizList = props => {
@@ -16,7 +20,8 @@ const QuizList = props => {
     secondHeading,
     thirdHeading,
     fourthHeading,
-    listOfQuizzes
+    listOfQuizzes,
+    limit
   } = props;
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -25,8 +30,11 @@ const QuizList = props => {
   }, [listOfQuizzes]);
 
   const renderQuizzes = () => {
-    return listOfQuizzes.slice(tabIndex * 8, 8 * (tabIndex + 1)).map(quiz => {
-      let quizStatus = quiz.status === "Active" || quiz.status === "Complete" ? 'blue-link' : 'red-link'
+    return listOfQuizzes.slice(tabIndex * 8, limit || 8 * (tabIndex + 1)).map(quiz => {
+      let quizStatus =
+        quiz.status === "Active" || quiz.status === "Complete"
+          ? "blue-link"
+          : "red-link";
       return (
         <div key={quiz.quiz} className="body">
           <p>{quiz.quiz}</p>
@@ -48,11 +56,11 @@ const QuizList = props => {
       </div>
       {renderQuizzes()}
       <div className="footer">
-        <Tabs
+        {limit ? null : <Tabs
           tabIndex={tabIndex}
           setTabIndex={setTabIndex}
           arrayList={listOfQuizzes}
-        />
+        /> }
       </div>
     </StyledList>
   );
@@ -71,7 +79,8 @@ const StyledList = styled.div`
     }
   }
 
-  .blue-link, .red-link {
+  .blue-link,
+  .red-link {
     text-decoration: underline;
     cursor: pointer;
   }
