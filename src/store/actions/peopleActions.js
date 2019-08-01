@@ -15,7 +15,7 @@ export const getStudentsByCohort = () => async dispatch => {
 
 export const addStudentToPeople = (id) => async dispatch => {
   try {
-    const res = await axiosWithAuth().post(`${server}/api/teamlead/students`, { id });
+    await axiosWithAuth().post(`${server}/api/teamlead/students`, { id });
     dispatch({ type: ADD_STUDENT_TO_PEOPLE })
   } catch (err) {
     console.log(err);

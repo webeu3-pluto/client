@@ -24,13 +24,25 @@ import { support } from "../../../~reusables/variables/colors";
 
 const TeamLeadsPPL = props => {
   const [modal, setModal] = useState(false);
-
   const { getStudentsByCohort, addStudentToPeople } = props;
 
   const onAddStudent = () => {
     getStudentsByCohort();
     setModal(true);
   };
+
+  const people = [
+    { name: "Isaac A", quizzes: "2", score: 85 },
+    { name: "Isaac Ad ", quizzes: "2", score: 85 },
+    { name: "Isaac Ade", quizzes: "2", score: 85 },
+    { name: "Isaac Ader ", quizzes: "2", score: 85 },
+    { name: "Isaac Adero", quizzes: "2", score: 85 },
+    { name: "Isaac Aderog ", quizzes: "2", score: 85 },
+    { name: "Isaac Aderogb", quizzes: "2", score: 85 },
+    { name: "Isaac Aderogba ", quizzes: "2", score: 85 },
+    { name: "Isaa Aderogba", quizzes: "2", score: 85 },
+    { name: "Isa Aderogba ", quizzes: "2", score: 85 }
+  ];
 
   return (
     <StyledProfile>
@@ -52,10 +64,7 @@ const TeamLeadsPPL = props => {
             firstHeading="Name"
             secondHeading="Quizzes Complete"
             thirdHeading="Avg. Score"
-            listOfPeople={[
-              { name: "Isaac Aderogba", quizzes: "2", score: 85 },
-              { name: "Isaac Aderogba ", quizzes: "2", score: 85 }
-            ]}
+            listOfPeople={people}
           />
         </div>
       </div>

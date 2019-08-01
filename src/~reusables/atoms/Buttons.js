@@ -51,7 +51,7 @@ export const ButtonTertiary = styled(Button)`
   font-size: ${body_2};
 `;
 
-export const DeleteActionBtn = styled.button`
+export const BasicActionBtn = styled.button`
   width: 24px;
   height: 24px;
   background: ${support};
@@ -60,4 +60,13 @@ export const DeleteActionBtn = styled.button`
   outline: none;
   border-radius: 3px;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.8;
+    box-shadow: 0 6px 10px 0 rgba(40, 51, 63, 0.11);
+  }
 `;
