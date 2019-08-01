@@ -3,16 +3,16 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // components/functions
-import Tabs from "../../../~reusables/molecules/Tabs";
+import Tabs from "./Tabs";
 
 // styles
-import { heading_5, body_2 } from "../../../~reusables/variables/font-sizes";
+import { heading_5, body_2 } from "../variables/font-sizes";
 import {
   support,
   primary,
   secondary
-} from "../../../~reusables/variables/colors";
-import { xs_space } from "../../../~reusables/variables/spacing";
+} from "../variables/colors";
+import { xs_space } from "../variables/spacing";
 
 const QuizList = props => {
   const {

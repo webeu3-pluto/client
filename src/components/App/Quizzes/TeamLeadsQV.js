@@ -7,7 +7,7 @@ import uuid from "uuid";
 
 // components/functions
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
-import QuizList from "./QuizList";
+import QuizList from "../../../~reusables/molecules/QuizList";
 
 // styles
 import {

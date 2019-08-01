@@ -7,7 +7,8 @@ import uuid from "uuid";
 
 // components/functions
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
-import QuizList from "../Quizzes/QuizList";
+import QuizList from "../../../~reusables/molecules/QuizList";
+import OverviewBlock from "../../../~reusables/molecules/OverviewBlock";
 
 // styles
 import {
@@ -20,7 +21,7 @@ import {
 import { support, text, headings } from "../../../~reusables/variables/colors";
 import { heading_1, body_1 } from "../../../~reusables/variables/font-sizes";
 
-const TeamLeadsDB = ({user}) => {
+const TeamLeadsDB = ({ user }) => {
   const quizzes = [
     { quiz: "Isaac A", completionRate: 70, score: 85, status: "Draft" },
     { quiz: "Isaac Ad ", completionRate: 70, score: 85, status: "Active" },
@@ -73,10 +74,16 @@ const TeamLeadsDB = ({user}) => {
           />
         </div>
         <div className="footer">
-        <Link to={`app/quizzes/create/${uuid()}`}>
+          <Link to={`app/quizzes/create/${uuid()}`}>
             <ButtonTertiary>Create Quiz</ButtonTertiary>
           </Link>
         </div>
+      </div>
+      <div className="kpi-wrapper">
+        <OverviewBlock heading="Students" stat="7" />
+        <OverviewBlock heading="Quizzes" stat="13" />
+        <OverviewBlock heading="Completions" stat="80/91" />
+        <OverviewBlock heading="Avg. Score" stat="85%" />
       </div>
     </StyledQuizView>
   );
@@ -85,16 +92,26 @@ const TeamLeadsDB = ({user}) => {
 const StyledQuizView = styled.main`
   margin: ${medium_space_2} ${large_space};
 
-  background: #ffffff;
-  box-shadow: 0px 3px 8px rgba(56, 105, 160, 0.25);
-  border-radius: 8px;
+  .kpi-wrapper {
+    margin-top: ${medium_space_3};
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    div {
+      flex: 1 1 100px;
+      margin: ${small_space};
+    }
+  }
 
   .wrapper {
     padding: ${medium_space_3} ${medium_space_2} ${medium_space_1}
       ${medium_space_2};
+    background: #ffffff;
+    box-shadow: 0px 3px 8px rgba(56, 105, 160, 0.25);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
-
     & > p {
       font-size: ${body_1};
       color: ${text};
@@ -127,6 +144,10 @@ const StyledQuizView = styled.main`
 
   @media only screen and (max-width: 767px) {
     margin: ${small_space};
+
+    .kpi-wrapper {
+      margin-top: 0;
+    }
 
     .wrapper {
       padding: ${medium_space_1} ${small_space};

@@ -3,16 +3,16 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // components/functions
-import { BasicActionBtn } from "../../../~reusables/atoms/Buttons";
+import { BasicActionBtn } from "../atoms/Buttons";
 
 // styles
-import { heading_5, body_2 } from "../../../~reusables/variables/font-sizes";
+import { heading_5, body_2 } from "../variables/font-sizes";
 import {
   support
-} from "../../../~reusables/variables/colors";
-import { xs_space } from "../../../~reusables/variables/spacing";
-import { tablet_max_width } from "../../../~reusables/variables/media-queries";
-import Tabs from "../../../~reusables/molecules/Tabs";
+} from "../variables/colors";
+import { xs_space } from "../variables/spacing";
+import { tablet_max_width } from "../variables/media-queries";
+import Tabs from "./Tabs";
 
 const PeopleList = props => {
   const { firstHeading, secondHeading, thirdHeading, listOfPeople } = props;

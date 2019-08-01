@@ -10,7 +10,7 @@ import {
   getStudentsByCohort,
   addStudentToPeople
 } from "../../../store/actions/peopleActions";
-import PeopleList from "./PeopleList";
+import PeopleList from "../../../~reusables/molecules/PeopleList";
 
 // styles
 import {

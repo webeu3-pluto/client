@@ -10,7 +10,6 @@ import TeamLeadsDB from "./TeamLeadsDB";
 
 const Dashboards = props => {
   const { user } = props;
-  console.log(user);
   if (user.role === "Student") {
     return <StudentsDB user={user} />;
   } else {
