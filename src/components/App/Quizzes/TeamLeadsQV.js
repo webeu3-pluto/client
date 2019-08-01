@@ -1,7 +1,9 @@
 // modules
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import uuid from "uuid";
 
 // components/functions
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
@@ -18,7 +20,6 @@ import {
 import { support } from "../../../~reusables/variables/colors";
 
 const TeamLeadsQV = props => {
-
   const quizzes = [
     { quiz: "Isaac A", completionRate: 70, score: 85, status: "Draft" },
     { quiz: "Isaac Ad ", completionRate: 70, score: 85, status: "Active" },
@@ -27,7 +28,12 @@ const TeamLeadsQV = props => {
     { quiz: "Isaac Adero", completionRate: 70, score: 85, status: "Active" },
     { quiz: "Isaac Aderog ", completionRate: 70, score: 85, status: "Active" },
     { quiz: "Isaac Aderogb", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Aderogba ", completionRate: 70, score: 85, status: "Active" },
+    {
+      quiz: "Isaac Aderogba ",
+      completionRate: 70,
+      score: 85,
+      status: "Active"
+    },
     { quiz: "Isaa Aderogba", completionRate: 70, score: 85, status: "Draft" },
     { quiz: "Isa Aderogba ", completionRate: 70, score: 85, status: "Active" },
     { quiz: "Isaac A", completionRate: 70, score: 85, status: "Active" },
@@ -37,7 +43,12 @@ const TeamLeadsQV = props => {
     { quiz: "Isaac Adero", completionRate: 70, score: 85, status: "Draft" },
     { quiz: "Isaac Aderog ", completionRate: 70, score: 85, status: "Active" },
     { quiz: "Isaac Aderogb", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Aderogba ", completionRate: 70, score: 85, status: "Active" },
+    {
+      quiz: "Isaac Aderogba ",
+      completionRate: 70,
+      score: 85,
+      status: "Active"
+    },
     { quiz: "Isaa Aderogba", completionRate: 70, score: 85, status: "Active" },
     { quiz: "Isa Aderogba ", completionRate: 70, score: 85, status: "Active" }
   ];
@@ -45,10 +56,11 @@ const TeamLeadsQV = props => {
   return (
     <StyledQuizView>
       <div className="wrapper">
-
         <div className="header">
           <h4>QUIZZES</h4>
-          <ButtonTertiary>Create Quiz</ButtonTertiary>
+          <Link to={`quizzes/create/${uuid()}`}>
+            <ButtonTertiary>Create Quiz</ButtonTertiary>
+          </Link>
         </div>
         <div className="body">
           <QuizList

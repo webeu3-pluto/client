@@ -14,9 +14,11 @@ import Sidebar from "../../~reusables/layout/Sidebar";
 import AppHeader from "../../~reusables/layout/AppHeader";
 import AppFooter from "../../~reusables/layout/AppFooter";
 import IsAuthUser from "../../~reusables/hoc/IsAuthUser";
-import { tablet_max_width } from "../../~reusables/variables/media-queries";
+import CreateQuiz from "./CreateQuiz/CreateQuiz";
+import CompleteQuiz from "./CompleteQuiz/CompleteQuiz";
 
 // styles
+import { tablet_max_width } from "../../~reusables/variables/media-queries";
 
 const App = props => {
   if (true) {
@@ -27,6 +29,8 @@ const App = props => {
           <AppHeader />
           <Route exact path="/app" render={routeProps => <Dashboard />} />
           <Route exact path="/app/quizzes" render={routeProps => <Quizzes />} />
+          <Route exact path="/app/quizzes/create/:id" render={routeProps => <CreateQuiz />} />
+          <Route exact path="/app/quizzes/complete/:id" render={routeProps => <CompleteQuiz />} />
           <Route exact path="/app/people" render={routeProps => <People />} />
           <Route exact path="/app/profile" render={routeProps => <Profile />} />
         </div>
