@@ -12,7 +12,8 @@ import {
   large_space,
   medium_space_3,
   medium_space_1,
-  small_space
+  small_space,
+  xs_space
 } from "../../../~reusables/variables/spacing";
 import {
   heading_1,
@@ -28,10 +29,11 @@ const LandingHero = () => {
     <StyledHero>
       <div className="wrapper">
         <div className="left-hero">
-          <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+          <h1>The quiz platform you'll enjoy using</h1>
           <div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
+              Built for Team Leads and Students, Pluto helps you create and
+              complete quizzes for different modules.
             </p>
             <Link to="/signup">
               <ButtonPrimary>Sign up</ButtonPrimary>
@@ -57,11 +59,13 @@ const StyledHero = styled.section`
     h1 {
       font-size: ${heading_1};
       color: ${headings};
+      font-weight: 600;
     }
 
     p {
       font-size: ${body_1};
       color: ${text};
+      margin-right: ${xs_space};
     }
 
     .left-hero {
@@ -83,15 +87,11 @@ const StyledHero = styled.section`
     }
   }
 
-  @media only screen and (max-width: ${tablet_max_width}) {
+  @media only screen and (max-width: 999px) {
     .wrapper {
       padding: 0 ${medium_space_1};
       flex-direction: column;
       margin-top: ${small_space};
-
-      p {
-        font-size: ${body_2};
-      }
 
       .left-hero,
       .right-hero {
@@ -103,7 +103,6 @@ const StyledHero = styled.section`
         h1 {
           margin-top: 0;
           margin-bottom: 0;
-          font-size: ${heading_3};
           text-align: center;
         }
 
@@ -117,6 +116,18 @@ const StyledHero = styled.section`
         p {
           text-align: center;
         }
+      }
+    }
+  }
+
+  @media only screen and (max-width: ${tablet_max_width}) {
+    .wrapper {
+      p {
+        font-size: ${body_2};
+      }
+
+      h1 {
+        font-size: ${heading_3};
       }
     }
   }

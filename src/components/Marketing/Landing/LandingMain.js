@@ -33,38 +33,38 @@ const LandingMain = () => {
     <StyledMain>
       <div className="wrapper">
         <div className="benefits">
-          <h3>Lorem ipsum dolor sit amet</h3>
+          <h3>Quizzes Made Simple</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
-            Lorem ipsum dolor sit amet, consectetur.
+            Pluto was built for Team Leads who are invested in the success of
+            their students.
           </p>
           <div className="benefit">
-            <i className="material-icons">collections_bookmark</i>
+            <i className="material-icons">assessment</i>
             <div>
-              <h4>Lorem ipsum dolor sit amet</h4>
+              <h4>Performance at a Glance</h4>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
-                Lorem ipsum dolor sit amet, consectetur.
+                Quickly see quiz scores and completion rates from a unified
+                dashboard
               </p>
             </div>
           </div>
           <div className="benefit">
-            <i className="material-icons">collections_bookmark</i>
+            <i className="material-icons">blur_on</i>
             <div>
-              <h4>Lorem ipsum dolor sit amet</h4>
+              <h4>Generate Quizzes</h4>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
-                Lorem ipsum dolor sit amet, consectetur.
+                Leverage the work of prior Team Leads by generating
+                previously-created quizzes
               </p>
             </div>
           </div>
           <div className="benefit">
-            <i className="material-icons">collections_bookmark</i>
+            <i className="material-icons">cached</i>
             <div>
-              <h4>Lorem ipsum dolor sit amet</h4>
+              <h4>Real-Time Updates</h4>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
-                Lorem ipsum dolor sit amet, consectetur.
+                With each quiz published, Students get automatic and immediate
+                access.
               </p>
             </div>
           </div>
@@ -181,6 +181,10 @@ const StyledMain = styled.section`
   @media only screen and (max-width: 900px) {
     .wrapper {
       flex-direction: column;
+    }
+
+    .benefits > p {
+      font-size: ${body_2};
     }
   }
 `;

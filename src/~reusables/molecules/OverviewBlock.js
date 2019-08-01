@@ -1,13 +1,13 @@
 // modules
 import React from "react";
 import styled from "styled-components";
-import { support, headings } from "../variables/colors";
-import { heading_1, heading_2 } from "../variables/font-sizes";
-import { medium_space_1, small_space, xs_space } from "../variables/spacing";
 
 // components/functions
 
 // styles
+import { support, headings } from "../variables/colors";
+import {  heading_2 } from "../variables/font-sizes";
+import { medium_space_1, small_space, xs_space } from "../variables/spacing";
 
 const OverviewBlock = ({ heading, stat }) => {
   return (
