@@ -8,7 +8,6 @@ import Select from "react-select";
 // components/functions
 import {
   ButtonPrimary,
-  ButtonSecondary,
   ButtonTertiary
 } from "../../../~reusables/atoms/Buttons";
 
@@ -27,20 +26,14 @@ import {
 } from "../../../~reusables/variables/spacing";
 
 const AddPeopleModal = props => {
-  const {
-    closeModal,
-    functionCb,
-    functionArg,
-    heading,
-    paragraph,
-    people
-  } = props;
+  const { closeModal, functionCb, heading, paragraph, people } = props;
 
   const [personToAdd, setPersonToAdd] = useState("");
+  const [error, setError] = useState('');
 
   let peopleOptions = people.map(person => {
     return {
-      value: person.id,
+      id: person.id,
       label: `${person.firstName} ${person.lastName}`
     };
   });
@@ -57,8 +50,15 @@ const AddPeopleModal = props => {
 
   const onClickAdd = e => {
     e.preventDefault();
-    // functionCb(functionArg);
-    // closeModal(false);
+    if (personToAdd) {
+      functionCb(personToAdd.id);
+      closeModal(false);
+    } else {
+      setError('Please select a person');
+      setTimeout(() => {
+        setError('');
+      }, 2000)
+    }
   };
 
   return (
@@ -83,6 +83,7 @@ const AddPeopleModal = props => {
               <ButtonTertiary onClick={onClickBack}>Go Back</ButtonTertiary>
               <ButtonPrimary onClick={onClickAdd}>Add Student</ButtonPrimary>
             </div>
+            {error && <p className="error">{error}</p>}
           </section>
         </div>
       </animated.div>
@@ -96,6 +97,10 @@ const StyledModal = styled.div`
   .buttons {
     display: flex;
     justify-content: space-between;
+  }
+
+  .error {
+    color: #bb0000;
   }
 
   .select {
