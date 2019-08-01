@@ -14,7 +14,8 @@ import {
   large_space,
   medium_space_3,
   small_space,
-  xs_space
+  xs_space,
+  medium_space_1
 } from "../../../~reusables/variables/spacing";
 import {
   TextButton,
@@ -22,7 +23,6 @@ import {
   ButtonPrimary
 } from "../../../~reusables/atoms/Buttons";
 import { support } from "../../../~reusables/variables/colors";
-import { tablet_max_width } from "../../../~reusables/variables/media-queries";
 
 const Profile = ({ user, validateUser, updateUser, deleteUser }) => {
   const { id, role, cohort, email, password } = user;
@@ -115,8 +115,12 @@ const StyledProfile = styled.main`
     }
   }
 
-  @media only screen and (max-width: ${tablet_max_width}) {
+  @media only screen and (max-width: 767px) {
     margin: ${small_space};
+
+    .wrapper {
+      padding: ${medium_space_1} ${small_space};
+    }
   }
 `;
 

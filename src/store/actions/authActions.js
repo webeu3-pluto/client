@@ -79,7 +79,6 @@ export const validateUser = () => dispatch => {
 export const updateUser = user => async dispatch => {
   try {
     const res = await axiosWithAuth().put(`${server}/api/profile/user`, user);
-    console.log(res.config)
     dispatch({ type: UPDATE_USER, payload: JSON.parse(res.config.data) });
     localStorage.setItem("user", res.config.data);
   } catch (err) {

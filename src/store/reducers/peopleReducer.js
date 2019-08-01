@@ -5,9 +5,11 @@ const initState = {
 };
 
 export default function(state = initState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case types.GET_STUDENTS_BY_COHORT:
-      return {...state, peopleByCohort: action.payload}
+      return { ...state, peopleByCohort: action.payload };
+    case types.ADD_STUDENT_TO_PEOPLE:
+      return state;
     default:
       return state;
   }
