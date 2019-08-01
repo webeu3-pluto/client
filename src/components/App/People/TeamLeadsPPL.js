@@ -41,6 +41,16 @@ const TeamLeadsPPL = props => {
     { name: "Isaac Aderogb", quizzes: "2", score: 85 },
     { name: "Isaac Aderogba ", quizzes: "2", score: 85 },
     { name: "Isaa Aderogba", quizzes: "2", score: 85 },
+    { name: "Isa Aderogba ", quizzes: "2", score: 85 },
+    { name: "Isaac A", quizzes: "2", score: 85 },
+    { name: "Isaac Ad ", quizzes: "2", score: 85 },
+    { name: "Isaac Ade", quizzes: "2", score: 85 },
+    { name: "Isaac Ader ", quizzes: "2", score: 85 },
+    { name: "Isaac Adero", quizzes: "2", score: 85 },
+    { name: "Isaac Aderog ", quizzes: "2", score: 85 },
+    { name: "Isaac Aderogb", quizzes: "2", score: 85 },
+    { name: "Isaac Aderogba ", quizzes: "2", score: 85 },
+    { name: "Isaa Aderogba", quizzes: "2", score: 85 },
     { name: "Isa Aderogba ", quizzes: "2", score: 85 }
   ];
 
@@ -80,7 +90,8 @@ const StyledProfile = styled.main`
   border-radius: 8px;
 
   .wrapper {
-    padding: ${medium_space_3} ${medium_space_2};
+    padding: ${medium_space_3} ${medium_space_2} ${medium_space_1}
+      ${medium_space_2};
     display: flex;
     flex-direction: column;
   }

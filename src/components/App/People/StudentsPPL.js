@@ -1,13 +1,17 @@
 // modules
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 // components/functions
+import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 
 // styles
-import { medium_space_2, large_space, medium_space_3 } from '../../../~reusables/variables/spacing';
-import { ButtonTertiary } from '../../../~reusables/atoms/Buttons';
-import { support } from '../../../~reusables/variables/colors';
+import {
+  medium_space_2,
+  large_space,
+  medium_space_3
+} from "../../../~reusables/variables/spacing";
+import { support } from "../../../~reusables/variables/colors";
 
 const Students = () => {
   return (
@@ -17,13 +21,11 @@ const Students = () => {
           <h4>TEAM LEADS</h4>
           <ButtonTertiary>Add Team Lead</ButtonTertiary>
         </div>
-        <div className="body">
-          
-        </div>
+        <div className="body" />
       </div>
     </StyledStudent>
-  )
-}
+  );
+};
 
 const StyledStudent = styled.main`
   margin: ${medium_space_2} ${large_space};
@@ -48,6 +50,6 @@ const StyledStudent = styled.main`
       letter-spacing: 0.25rem;
     }
   }
-`
+`;
 
 export default Students;
