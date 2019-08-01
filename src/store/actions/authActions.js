@@ -78,9 +78,11 @@ export const validateUser = () => dispatch => {
 
 export const updateUser = user => async dispatch => {
   try {
-    await axiosWithAuth().put(`${server}/api/restricted/user`, user);
-    dispatch({ type: UPDATE_USER, payload: user });
-    localStorage.setItem("user", JSON.stringify(user));
+    const res = await axiosWithAuth().put(`${server}/api/profile/user`, user);
+    console.log(res.config)
+    debugger
+    dispatch({ type: UPDATE_USER, payload: JSON.parse(res.config.data) });
+    localStorage.setItem("user", res.config.data);
   } catch (err) {
     console.log(err);
   }
@@ -88,7 +90,7 @@ export const updateUser = user => async dispatch => {
 
 export const deleteUser = () => async dispatch => {
   try {
-    await axiosWithAuth().delete(`${server}/api/restricted/user`);
+    await axiosWithAuth().delete(`${server}/api/profile/user`);
     localStorage.clear();
     dispatch({ type: DELETE_USER });
   } catch (err) {
