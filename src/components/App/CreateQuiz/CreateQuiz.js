@@ -3,17 +3,19 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
+
+// components/functions
+import QuizDetails from "./QuizDetails";
+import QuizStatus from "./QuizStatus";
+import QuizBody from "./QuizBody";
+
+// styles
 import {
   medium_space_2,
   large_space,
-  small_space
+  small_space,
+  xs_space
 } from "../../../~reusables/variables/spacing";
-import QuizDetails from "./QuizDetails";
-import QuizStatus from "./QuizStatus";
-
-// components/functions
-
-// styles
 
 const CreateQuiz = props => {
   const { user } = props;
@@ -30,7 +32,9 @@ const CreateQuiz = props => {
             <QuizStatus />
           </div>
         </div>
-        <div className="quiz-body" />
+        <div className="quiz-body">
+          <QuizBody />
+        </div>
       </StyledCreateQuiz>
     );
   }
@@ -38,9 +42,12 @@ const CreateQuiz = props => {
 
 const StyledCreateQuiz = styled.div`
   margin: ${medium_space_2} ${large_space};
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
+
+  .quiz-body {
+    margin-top: ${medium_space_2};
+  }
 
   .quiz-header {
     display: flex;
@@ -60,8 +67,35 @@ const StyledCreateQuiz = styled.div`
     }
   }
 
+  @media only screen and (max-width: 999px) {
+    .quiz-header {
+      flex-direction: column;
+      justify-content: center;
+
+      .quiz-details,
+      .quiz-status {
+        margin: 0;
+      }
+      .quiz-status {
+        order: 0;
+        margin-bottom: ${medium_space_2};
+      }
+      .quiz-details {
+        order: 1;
+      }
+    }
+  }
+
   @media only screen and (max-width: 767px) {
     margin: ${small_space};
+
+    .quiz-body {
+      margin-top: ${small_space};
+    }
+
+    .quiz-header .quiz-status {
+      margin-bottom: ${small_space};
+    }
   }
 `;
 

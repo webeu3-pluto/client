@@ -17,6 +17,7 @@ import {
   small_space,
   xs_space
 } from "../../../~reusables/variables/spacing";
+import { headings } from "../../../~reusables/variables/colors";
 
 const QuizStatus = () => {
   const [modal, setModal] = useState(false);
@@ -31,7 +32,7 @@ const QuizStatus = () => {
           paragraph="Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum."
         />
       )}
-      <p className="label">Status: Draft</p>
+      <h4 className="label">Status: Draft</h4>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem
         ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet,
@@ -49,8 +50,7 @@ const QuizStatus = () => {
 };
 
 const StyledQuizStatus = styled.div`
-.quiz-status
-  background: #ffffff;
+  .quiz-statusbackground: #ffffff;
   box-shadow: 0px 3px 8px rgba(56, 105, 160, 0.25);
   padding: ${medium_space_2} ${medium_space_1};
   border-radius: 8px;
@@ -58,6 +58,10 @@ const StyledQuizStatus = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 80%;
+
+  h4 {
+    color: ${headings};
+  }
 
   .buttons {
     display: flex;

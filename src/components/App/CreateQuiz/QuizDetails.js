@@ -10,18 +10,19 @@ import {
   medium_space_2,
   medium_space_1
 } from "../../../~reusables/variables/spacing";
+import { headings } from "../../../~reusables/variables/colors";
 
 const QuizDetails = () => {
   return (
     <StyledQuizDetails>
-      <p className="label">Choose category</p>
+      <h4 className="label">Choose category</h4>
 
       <LineInput
         // value={firstName}
         placeholder="Your first name"
         // onChange={e => setFirstName(e.target.value)}
       />
-      <p className="label">Choose sub-category</p>
+      <h4 className="label">Choose sub-category</h4>
       <LineInput
         // value={lastName}
         placeholder="Your last name"
@@ -39,6 +40,10 @@ const StyledQuizDetails = styled.div`
   display: flex;
   flex-direction: column;
   height: 80%;
+
+  h4 {
+    color: ${headings}
+  }
 `;
 
 export default QuizDetails;
