@@ -2,11 +2,8 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import uuid from "uuid";
 
 // components/functions
-import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import QuizList from "../../../~reusables/molecules/QuizList";
 
 // styles

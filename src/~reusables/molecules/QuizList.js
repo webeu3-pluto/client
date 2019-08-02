@@ -40,7 +40,7 @@ const QuizList = props => {
         <div key={quiz.quiz} className="body">
           <p>{quiz.quiz}</p>
           <p className="center-align hide-item">{isStudent ? quiz.teamLead : quiz.completionRate}</p>
-          <p className="center-align hide-item">{quiz.score}%</p>
+          <p className="center-align hide-item">{quiz.score}</p>
           <p className={`right-align ${quizStatus}`}>{quiz.status} ></p>
         </div>
       );
