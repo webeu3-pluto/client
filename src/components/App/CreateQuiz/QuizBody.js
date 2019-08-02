@@ -21,8 +21,9 @@ import {
 } from "../../../~reusables/atoms/Buttons";
 import DeleteModal from "../../../~reusables/molecules/DeleteModal";
 
-const QuizBody = () => {
+const QuizBody = (props) => {
   const [modal, setModal] = useState(false);
+  const { selectedQuiz, selectedQuestion } = props;
 
   return (
     <StyledQuizBody>

@@ -27,12 +27,36 @@ const App = props => {
         <Sidebar />
         <div>
           <AppHeader />
-          <Route exact path="/app" render={routeProps => <Dashboard />} />
-          <Route exact path="/app/quizzes" render={routeProps => <Quizzes />} />
-          <Route exact path="/app/quizzes/create/:id" render={routeProps => <CreateQuiz />} />
-          <Route exact path="/app/quizzes/complete/:id" render={routeProps => <CompleteQuiz />} />
-          <Route exact path="/app/people" render={routeProps => <People />} />
-          <Route exact path="/app/profile" render={routeProps => <Profile />} />
+          <Route
+            exact
+            path="/app"
+            render={routeProps => <Dashboard {...routeProps} />}
+          />
+          <Route
+            exact
+            path="/app/quizzes"
+            render={routeProps => <Quizzes {...routeProps} />}
+          />
+          <Route
+            exact
+            path="/app/quizzes/create/:id"
+            render={routeProps => <CreateQuiz {...routeProps} />}
+          />
+          <Route
+            exact
+            path="/app/quizzes/complete/:id"
+            render={routeProps => <CompleteQuiz {...routeProps} />}
+          />
+          <Route
+            exact
+            path="/app/people"
+            render={routeProps => <People {...routeProps} />}
+          />
+          <Route
+            exact
+            path="/app/profile"
+            render={routeProps => <Profile {...routeProps} />}
+          />
         </div>
         <AppFooter />
       </StyledApp>
@@ -48,8 +72,8 @@ const StyledApp = styled.section`
 
   @media only screen and (max-width: ${tablet_max_width}) {
     & > div {
-    margin-bottom: 80px;
-  }
+      margin-bottom: 80px;
+    }
   }
 `;
 

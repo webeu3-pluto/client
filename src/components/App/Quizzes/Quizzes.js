@@ -11,9 +11,9 @@ import TeamLeadsQV from "./TeamLeadsQV";
 const Quizzes = props => {
   const { user } = props;
   if (user.role === "Student") {
-    return <StudentsQV />;
+    return <StudentsQV user={user} />;
   } else {
-    return <TeamLeadsQV />;
+    return <TeamLeadsQV user={user} />;
   }
 };
 

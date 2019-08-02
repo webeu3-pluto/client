@@ -9,7 +9,6 @@ const initState = {
 export default function(state = initState, action) {
   switch (action.type) {
     case types.CREATE_QUIZ_WITH_QS:
-      console.log(action.payload)
       return {
         ...state,
         selectedQuiz: action.payload,

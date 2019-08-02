@@ -1,5 +1,5 @@
 // modules
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // components/functions
@@ -12,16 +12,24 @@ import {
 } from "../../../~reusables/variables/spacing";
 import { headings } from "../../../~reusables/variables/colors";
 
-const QuizDetails = () => {
+const QuizDetails = props => {
+  const { selectedQuiz } = props;
+  const [category, setCategory] = useState(selectedQuiz.category);
+  const [categoryId, setCategoryId] = useState(selectedQuiz.categoryId);
+  const [subCategory, setSubCategory] = useState(selectedQuiz.subCategory);
+  const [subCategoryId, setSubCategoryId] = useState(
+    selectedQuiz.subCategoryId
+  );
+
   return (
     <StyledQuizDetails>
       <h4 className="label">Choose category</h4>
       <LineSelect>
-        <option value="WEBEU1">Web Development</option>
+        <option value={categoryId}>{category}</option>
       </LineSelect>
       <h4 className="label">Choose sub-category</h4>
       <LineSelect>
-        <option value="WEBEU1">User Interface and Git</option>
+        <option value={subCategoryId}>{subCategory}</option>
       </LineSelect>
     </StyledQuizDetails>
   );

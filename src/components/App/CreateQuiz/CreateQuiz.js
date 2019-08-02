@@ -17,7 +17,9 @@ import {
 } from "../../../~reusables/variables/spacing";
 
 const CreateQuiz = props => {
-  const { user } = props;
+  const { user, selectedQuiz, selectedQuestion } = props;
+  console.log(props);
+
   if (user.role === "Student") {
     return <Redirect to="/app" />;
   } else {
@@ -25,14 +27,24 @@ const CreateQuiz = props => {
       <StyledCreateQuiz>
         <div className="quiz-header">
           <div className="quiz-details">
-            <QuizDetails />
+            <QuizDetails
+              user={user}
+              selectedQuiz={selectedQuiz}
+            />
           </div>
           <div className="quiz-status">
-            <QuizStatus />
+            <QuizStatus
+              user={user}
+              selectedQuiz={selectedQuiz}
+            />
           </div>
         </div>
         <div className="quiz-body">
-          <QuizBody />
+          <QuizBody
+            user={user}
+            selectedQuiz={selectedQuiz}
+            selectedQuestion={selectedQuestion}
+          />
         </div>
       </StyledCreateQuiz>
     );
@@ -100,7 +112,9 @@ const StyledCreateQuiz = styled.div`
 
 function mapStateToProps(state) {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    selectedQuiz: state.quiz.selectedQuiz,
+    selectedQuestion: state.quiz.selectedQuestion
   };
 }
 

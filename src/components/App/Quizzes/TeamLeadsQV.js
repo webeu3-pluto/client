@@ -2,12 +2,13 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import uuid from "uuid";
 
 // components/functions
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import QuizList from "../../../~reusables/molecules/QuizList";
+import { createQuizWithQuestion } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -20,6 +21,8 @@ import {
 import { support } from "../../../~reusables/variables/colors";
 
 const TeamLeadsQV = props => {
+  const { history, createQuizWithQuestion, user } = props;
+
   const quizzes = [
     { quiz: "Isaac A", completionRate: 70, score: 85, status: "Draft" },
     { quiz: "Isaac Ad ", completionRate: 70, score: 85, status: "Active" },
@@ -58,9 +61,11 @@ const TeamLeadsQV = props => {
       <div className="wrapper">
         <div className="header">
           <h4>QUIZZES</h4>
-          <Link to={`quizzes/create/${uuid()}`}>
-            <ButtonTertiary>Create Quiz</ButtonTertiary>
-          </Link>
+          <ButtonTertiary
+            onClick={() => createQuizWithQuestion(uuid(), user.id, history)}
+          >
+            Create Quiz
+          </ButtonTertiary>
         </div>
         <div className="body">
           <QuizList
@@ -117,4 +122,7 @@ const StyledQuizView = styled.main`
   }
 `;
 
-export default connect()(TeamLeadsQV);
+export default connect(
+  null,
+  { createQuizWithQuestion }
+)(withRouter(TeamLeadsQV));
