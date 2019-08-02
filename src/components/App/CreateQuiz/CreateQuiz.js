@@ -9,6 +9,7 @@ import {
   small_space
 } from "../../../~reusables/variables/spacing";
 import QuizDetails from "./QuizDetails";
+import QuizStatus from "./QuizStatus";
 
 // components/functions
 
@@ -26,7 +27,7 @@ const CreateQuiz = props => {
             <QuizDetails />
           </div>
           <div className="quiz-status">
-            <QuizDetails />
+            <QuizStatus />
           </div>
         </div>
         <div className="quiz-body" />
@@ -44,8 +45,9 @@ const StyledCreateQuiz = styled.div`
   .quiz-header {
     display: flex;
     justify-content: space-between;
+    align-items: stretch;
 
-    div {
+    & > div {
       flex: 1 1 200px;
     }
 
