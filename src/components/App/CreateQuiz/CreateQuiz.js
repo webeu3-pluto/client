@@ -13,8 +13,7 @@ import QuizBody from "./QuizBody";
 import {
   medium_space_2,
   large_space,
-  small_space,
-  xs_space
+  small_space
 } from "../../../~reusables/variables/spacing";
 
 const CreateQuiz = props => {
