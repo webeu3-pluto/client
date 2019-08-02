@@ -3,7 +3,10 @@ import * as types from "../actions/quizActions";
 const initState = {
   quizzes: [],
   selectedQuiz: null,
-  selectedQuestion: null
+  selectedQuestion: null,
+  categories: [],
+  subCategories: []
+
 };
 
 export default function(state = initState, action) {

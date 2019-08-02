@@ -49,7 +49,7 @@ const QuizStatus = props => {
           Delete Quiz
         </TextButton>
         <ButtonTertiary>Generate Quiz</ButtonTertiary>
-        <ButtonPrimary>Publish Quiz</ButtonPrimary>
+        <ButtonPrimary>{quizStatus ? 'Return to Draft' : 'Publish Quiz'}</ButtonPrimary>
       </section>
     </StyledQuizStatus>
   );
