@@ -9,12 +9,14 @@ const initState = {
 export default function(state = initState, action) {
   switch (action.type) {
     case types.CREATE_QUIZ_WITH_QS:
+      console.log(action.payload)
       return {
         ...state,
         selectedQuiz: action.payload,
         selectedQuestion: action.payload.questions[0]
       };
     case types.GET_QUIZ_AND_QS_UUID:
+        console.log(action.payload)
       return {
         ...state,
         selectedQuiz: action.payload,
