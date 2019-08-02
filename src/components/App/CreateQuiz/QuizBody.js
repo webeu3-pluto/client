@@ -21,9 +21,24 @@ import {
 } from "../../../~reusables/atoms/Buttons";
 import DeleteModal from "../../../~reusables/molecules/DeleteModal";
 
-const QuizBody = (props) => {
-  const [modal, setModal] = useState(false);
+const QuizBody = props => {
   const { selectedQuiz, selectedQuestion } = props;
+  const [modal, setModal] = useState(false);
+  const [question, setQuestion] = useState(
+    selectedQuestion ? selectedQuestion.question : ""
+  );
+  const [answer, setAnswer] = useState(
+    selectedQuestion ? selectedQuestion.answer : ""
+  );
+  const [possAnswer1, setpossAnswer1] = useState(
+    selectedQuestion ? selectedQuestion.p_answer1 : ""
+  );
+  const [possAnswer2, setpossAnswer2] = useState(
+    selectedQuestion ? selectedQuestion.p_answer2 : ""
+  );
+  const [possAnswer3, setpossAnswer3] = useState(
+    selectedQuestion ? selectedQuestion.p_answer3 : ""
+  );
 
   return (
     <StyledQuizBody>
@@ -38,23 +53,43 @@ const QuizBody = (props) => {
       <div className="create">
         <h4 className="label">Questions</h4>
 
-        <LineInput placeholder="Start typing your question..." />
+        <LineInput
+          placeholder="Start typing your question..."
+          value={question}
+          onChange={e => setQuestion(e.target.value)}
+        />
         <h4 className="label">Answers</h4>
         <div className="correct">
           <div className="indicator" />
-          <LineInput placeholder="Correct option" />
+          <LineInput
+            value={answer}
+            onChange={e => setAnswer(e.target.value)}
+            placeholder="Correct option"
+          />
         </div>
         <div className="incorrect">
           <div className="indicator" />
-          <LineInput placeholder="Incorrect option" />
+          <LineInput
+            value={possAnswer1}
+            onChange={e => setpossAnswer1(e.target.value)}
+            placeholder="Incorrect option"
+          />
         </div>
         <div className="incorrect">
           <div className="indicator" />
-          <LineInput placeholder="Incorrect option" />
+          <LineInput
+            value={possAnswer2}
+            onChange={e => setpossAnswer2(e.target.value)}
+            placeholder="Incorrect option"
+          />
         </div>
         <div className="incorrect">
           <div className="indicator" />
-          <LineInput placeholder="Incorrect option" />
+          <LineInput
+            value={possAnswer3}
+            onChange={e => setpossAnswer3(e.target.value)}
+            placeholder="Incorrect option"
+          />
         </div>
         <section className="buttons">
           <TextButton color="#DA2640" onClick={() => setModal(true)}>
@@ -64,16 +99,11 @@ const QuizBody = (props) => {
         </section>
       </div>
       <div className="view">
-        <h4>Questions on this survey</h4>
+        <h4>Questions on this quiz</h4>
         <ul>
-          <li>Lorem ipsum dolor sit amet Lorem ips ></li>
-          <li>Lorem ipsum dolor sit amet Lorem ips ></li>
-          <li>Lorem ipsum dolor sit amet Lorem ips ></li>
-          <li>Lorem ipsum dolor sit amet Lorem ips ></li>
-          <li>Lorem ipsum dolor sit amet Lorem ips ></li>
-          <li>Lorem ipsum dolor sit amet Lorem ips ></li>
-          <li>Lorem ipsum dolor sit amet Lorem ips ></li>
-          <li>Lorem ipsum dolor sit amet Lorem ips ></li>
+          {selectedQuiz.questions.map(question => {
+            return <li key={question.id}>{question.question}</li>;
+          })}
         </ul>
         <ButtonPrimary>New Question</ButtonPrimary>
       </div>
@@ -102,7 +132,6 @@ const StyledQuizBody = styled.div`
       border-radius: 50%;
       margin-right: ${small_space};
       margin-top: 12px;
-
     }
   }
 
@@ -138,7 +167,6 @@ const StyledQuizBody = styled.div`
     margin-left: ${medium_space_3};
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     ul li {
