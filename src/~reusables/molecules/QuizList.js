@@ -1,17 +1,14 @@
 // modules
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // components/functions
 import Tabs from "./Tabs";
 
 // styles
 import { heading_5, body_2 } from "../variables/font-sizes";
-import {
-  support,
-  primary,
-  secondary
-} from "../variables/colors";
+import { support, primary, secondary } from "../variables/colors";
 import { xs_space } from "../variables/spacing";
 
 const QuizList = props => {
@@ -31,20 +28,30 @@ const QuizList = props => {
   }, [listOfQuizzes]);
 
   const renderQuizzes = () => {
-    return listOfQuizzes.slice(tabIndex * 8, limit || 8 * (tabIndex + 1)).map(quiz => {
-      let quizStatus =
-        quiz.status === "Active" || quiz.status === "Complete"
-          ? "blue-link"
-          : "red-link";
-      return (
-        <div key={quiz.id ? quiz.id : quiz.quiz} className="body">
-          <p>{quiz.quiz}</p>
-          <p className="center-align hide-item">{isStudent ? quiz.teamLead : quiz.completionRate + '%'}</p>
-          <p className="center-align hide-item">{quiz.score + '%'}</p>
-          <p className={`right-align ${quizStatus}`}>{quiz.status} ></p>
-        </div>
-      );
-    });
+    return listOfQuizzes
+      .slice(tabIndex * 8, limit || 8 * (tabIndex + 1))
+      .map(quiz => {
+        console.log(quiz);
+        let quizStatus =
+          quiz.status === "Active" || quiz.status === "Complete"
+            ? "blue-link"
+            : "red-link";
+        return (
+          <div key={quiz.id ? quiz.id : quiz.quiz} className="body">
+            <p>{quiz.quiz}</p>
+            <p className="center-align hide-item">
+              {isStudent ? quiz.teamLead : quiz.completionRate + "%"}
+            </p>
+            <p className="center-align hide-item">{quiz.score + "%"}</p>
+
+            <p className={`right-align ${quizStatus}`}>
+              <Link to={`/app/quizzes/create/${quiz.uuid}`}>
+                {quiz.status} >
+              </Link>
+            </p>
+          </div>
+        );
+      });
   };
 
   return (
@@ -57,11 +64,13 @@ const QuizList = props => {
       </div>
       {renderQuizzes()}
       <div className="footer">
-        {limit ? null : <Tabs
-          tabIndex={tabIndex}
-          setTabIndex={setTabIndex}
-          arrayList={listOfQuizzes}
-        /> }
+        {limit ? null : (
+          <Tabs
+            tabIndex={tabIndex}
+            setTabIndex={setTabIndex}
+            arrayList={listOfQuizzes}
+          />
+        )}
       </div>
     </StyledList>
   );
@@ -86,11 +95,11 @@ const StyledList = styled.div`
     cursor: pointer;
   }
 
-  .blue-link {
+  .blue-link a {
     color: ${primary};
   }
 
-  .red-link {
+  .red-link a {
     color: ${secondary};
   }
 

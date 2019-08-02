@@ -27,39 +27,6 @@ const TeamLeadsQV = props => {
     getQuizByTeamLeadId(user.id);
   }, [])
 
-  const quizzes = [
-    { quiz: "Isaac A", completionRate: 70, score: 85, status: "Draft" },
-    { quiz: "Isaac Ad ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ade", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ader ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Adero", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Aderog ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Aderogb", completionRate: 70, score: 85, status: "Active" },
-    {
-      quiz: "Isaac Aderogba ",
-      completionRate: 70,
-      score: 85,
-      status: "Active"
-    },
-    { quiz: "Isaa Aderogba", completionRate: 70, score: 85, status: "Draft" },
-    { quiz: "Isa Aderogba ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac A", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ad ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ade", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ader ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Adero", completionRate: 70, score: 85, status: "Draft" },
-    { quiz: "Isaac Aderog ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Aderogb", completionRate: 70, score: 85, status: "Active" },
-    {
-      quiz: "Isaac Aderogba ",
-      completionRate: 70,
-      score: 85,
-      status: "Active"
-    },
-    { quiz: "Isaa Aderogba", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isa Aderogba ", completionRate: 70, score: 85, status: "Active" }
-  ];
-
   return (
     <StyledQuizView>
       <div className="wrapper">
