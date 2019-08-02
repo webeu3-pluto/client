@@ -19,7 +19,7 @@ const Sidebar = () => {
         <img src={logo} alt="Pluto logo" />
       </div>
       <NavLink activeClassName="active" exact to="/app">Dashboard</NavLink>
-      <NavLink activeClassName="active" exact to="/app/quizzes">Quizzes</NavLink>
+      <NavLink activeClassName="active" to="/app/quizzes">Quizzes</NavLink>
       <NavLink activeClassName="active" exact to="/app/people">People</NavLink>
     </StyledSidebar>
   )

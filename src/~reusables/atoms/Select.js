@@ -23,3 +23,19 @@ export const WhiteSelect = styled.select`
     color: ${support};
   }
 `;
+
+export const LineSelect = styled.select`
+  font-size: ${body_2};
+  transition: all 100ms ease-in-out;
+  height: 40px;
+  background-color: ${white};
+  border: none;
+  border-bottom: 1px solid rgba(74, 85, 104, 0.2);
+  margin-bottom: ${props => (props.margin ? props.margin : medium_space_1)};
+  color: ${text};
+  font-weight: 500;
+
+  :required:invalid {
+    color: ${support};
+  }
+`;

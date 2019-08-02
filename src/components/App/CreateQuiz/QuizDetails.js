@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 // components/functions
-import { LineInput } from "../../../~reusables/atoms/Inputs";
+import { LineSelect } from "../../../~reusables/atoms/Select";
 
 // styles
 import {
@@ -16,18 +16,13 @@ const QuizDetails = () => {
   return (
     <StyledQuizDetails>
       <h4 className="label">Choose category</h4>
-
-      <LineInput
-        // value={firstName}
-        placeholder="Your first name"
-        // onChange={e => setFirstName(e.target.value)}
-      />
+      <LineSelect>
+        <option value="WEBEU1">Web Development</option>
+      </LineSelect>
       <h4 className="label">Choose sub-category</h4>
-      <LineInput
-        // value={lastName}
-        placeholder="Your last name"
-        // onChange={e => setLastName(e.target.value)}
-      />
+      <LineSelect>
+        <option value="WEBEU1">User Interface and Git</option>
+      </LineSelect>
     </StyledQuizDetails>
   );
 };
@@ -42,7 +37,7 @@ const StyledQuizDetails = styled.div`
   height: 80%;
 
   h4 {
-    color: ${headings}
+    color: ${headings};
   }
 `;
 

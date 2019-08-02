@@ -13,7 +13,7 @@ import {
   small_space,
   medium_space_3
 } from "../../../~reusables/variables/spacing";
-import { text, headings } from "../../../~reusables/variables/colors";
+import { text, headings, primary } from "../../../~reusables/variables/colors";
 import {
   TextButton,
   ButtonTertiary,
@@ -39,10 +39,22 @@ const QuizBody = () => {
 
         <LineInput placeholder="Start typing your question..." />
         <h4 className="label">Answers</h4>
-        <LineInput className="correct" placeholder="Correct option" />
-        <LineInput className="incorrect" placeholder="Incorrect option" />
-        <LineInput className="incorrect" placeholder="Incorrect option" />
-        <LineInput className="incorrect" placeholder="Incorrect option" />
+        <div className="correct">
+          <div className="indicator" />
+          <LineInput placeholder="Correct option" />
+        </div>
+        <div className="incorrect">
+          <div className="indicator" />
+          <LineInput placeholder="Incorrect option" />
+        </div>
+        <div className="incorrect">
+          <div className="indicator" />
+          <LineInput placeholder="Incorrect option" />
+        </div>
+        <div className="incorrect">
+          <div className="indicator" />
+          <LineInput placeholder="Incorrect option" />
+        </div>
         <section className="buttons">
           <TextButton color="#DA2640" onClick={() => setModal(true)}>
             Delete Question
@@ -75,6 +87,31 @@ const StyledQuizBody = styled.div`
   box-shadow: 0px 3px 8px rgba(56, 105, 160, 0.25);
   padding: ${medium_space_2} ${medium_space_1};
   border-radius: 8px;
+
+  .correct,
+  .incorrect {
+    display: flex;
+    input {
+      width: 100%;
+    }
+
+    .indicator {
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      margin-right: ${small_space};
+      margin-top: 12px;
+
+    }
+  }
+
+  .correct .indicator {
+    background: ${primary};
+  }
+
+  .incorrect .indicator {
+    background: #bb0000;
+  }
 
   h4 {
     color: ${headings};
