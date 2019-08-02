@@ -21,7 +21,8 @@ const QuizList = props => {
     thirdHeading,
     fourthHeading,
     listOfQuizzes,
-    limit
+    limit,
+    isStudent
   } = props;
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -38,7 +39,7 @@ const QuizList = props => {
       return (
         <div key={quiz.quiz} className="body">
           <p>{quiz.quiz}</p>
-          <p className="center-align hide-item">{quiz.completionRate}%</p>
+          <p className="center-align hide-item">{isStudent ? quiz.teamLead : quiz.completionRate}</p>
           <p className="center-align hide-item">{quiz.score}%</p>
           <p className={`right-align ${quizStatus}`}>{quiz.status} ></p>
         </div>
