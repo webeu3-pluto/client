@@ -21,7 +21,6 @@ import { primary } from "../../../~reusables/variables/colors";
 
 const CreateQuiz = props => {
   const { user, selectedQuiz, selectedQuestion, getQuizAndQsByUUID, match, history } = props;
-  console.log(props);
 
   useEffect(() => {
     getQuizAndQsByUUID(match.params.id, history)

@@ -37,10 +37,10 @@ const QuizList = props => {
           ? "blue-link"
           : "red-link";
       return (
-        <div key={quiz.quiz} className="body">
+        <div key={quiz.id ? quiz.id : quiz.quiz} className="body">
           <p>{quiz.quiz}</p>
-          <p className="center-align hide-item">{isStudent ? quiz.teamLead : quiz.completionRate}</p>
-          <p className="center-align hide-item">{quiz.score}</p>
+          <p className="center-align hide-item">{isStudent ? quiz.teamLead : quiz.completionRate + '%'}</p>
+          <p className="center-align hide-item">{quiz.score + '%'}</p>
           <p className={`right-align ${quizStatus}`}>{quiz.status} ></p>
         </div>
       );

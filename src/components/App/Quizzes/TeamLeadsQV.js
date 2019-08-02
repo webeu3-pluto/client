@@ -1,5 +1,5 @@
 // modules
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -8,7 +8,7 @@ import uuid from "uuid";
 // components/functions
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import QuizList from "../../../~reusables/molecules/QuizList";
-import { createQuizWithQuestion } from "../../../store/actions/quizActions";
+import { createQuizWithQuestion, getQuizByTeamLeadId } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -21,7 +21,11 @@ import {
 import { support } from "../../../~reusables/variables/colors";
 
 const TeamLeadsQV = props => {
-  const { history, createQuizWithQuestion, user } = props;
+  const { history, createQuizWithQuestion, user, getQuizByTeamLeadId, quizzesFetched } = props;
+
+  useEffect(() => {
+    getQuizByTeamLeadId(user.id);
+  }, [])
 
   const quizzes = [
     { quiz: "Isaac A", completionRate: 70, score: 85, status: "Draft" },
@@ -73,7 +77,7 @@ const TeamLeadsQV = props => {
             secondHeading="Completion Rate"
             thirdHeading="Avg. Score"
             fourthHeading="Status"
-            listOfQuizzes={quizzes}
+            listOfQuizzes={quizzesFetched}
           />
         </div>
       </div>
@@ -122,7 +126,13 @@ const StyledQuizView = styled.main`
   }
 `;
 
+function mapStateToProps(state) {
+  return {
+    quizzesFetched: state.quiz.quizzes
+  }
+}
+
 export default connect(
-  null,
-  { createQuizWithQuestion }
+  mapStateToProps,
+  { createQuizWithQuestion, getQuizByTeamLeadId }
 )(withRouter(TeamLeadsQV));
