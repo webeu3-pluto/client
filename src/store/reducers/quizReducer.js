@@ -8,6 +8,11 @@ const initState = {
 
 export default function(state = initState, action) {
   switch (action.type) {
+    case types.SELECT_QUIZ_QUESTION:
+      return {
+        ...state,
+        selectedQuestion: action.payload
+      }
     case types.GET_QUIZ_BY_TEAMLEAD_ID:
       return {
         ...state,

@@ -1,9 +1,12 @@
 // modules
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 // components/functions
 import { LineInput } from "../../../~reusables/atoms/Inputs";
+import DeleteModal from "../../../~reusables/molecules/DeleteModal";
+import { selectQuizQuestion } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -19,10 +22,9 @@ import {
   ButtonTertiary,
   ButtonPrimary
 } from "../../../~reusables/atoms/Buttons";
-import DeleteModal from "../../../~reusables/molecules/DeleteModal";
 
 const QuizBody = props => {
-  const { selectedQuiz, selectedQuestion } = props;
+  const { selectedQuiz, selectedQuestion, selectQuizQuestion } = props;
   const [modal, setModal] = useState(false);
   const [question, setQuestion] = useState(
     selectedQuestion ? selectedQuestion.question : ""
@@ -39,6 +41,16 @@ const QuizBody = props => {
   const [possAnswer3, setpossAnswer3] = useState(
     selectedQuestion ? selectedQuestion.p_answer3 : ""
   );
+
+  useEffect(() => {
+    if (selectedQuestion) {
+      setQuestion(selectedQuestion.question);
+      setAnswer(selectedQuestion.answer);
+      setpossAnswer1(selectedQuestion.p_answer1);
+      setpossAnswer2(selectedQuestion.p_answer2);
+      setpossAnswer3(selectedQuestion.p_answer3);
+    }
+  }, [selectedQuestion]);
 
   return (
     <StyledQuizBody>
@@ -102,7 +114,14 @@ const QuizBody = props => {
         <h4>Questions on this quiz</h4>
         <ul>
           {selectedQuiz.questions.map(question => {
-            return <li key={question.id}>{question.question}</li>;
+            return (
+              <li
+                onClick={() => selectQuizQuestion(question)}
+                key={question.id}
+              >
+                {question.question}
+              </li>
+            );
           })}
         </ul>
         <ButtonPrimary>New Question</ButtonPrimary>
@@ -193,4 +212,7 @@ const StyledQuizBody = styled.div`
   }
 `;
 
-export default QuizBody;
+export default connect(
+  null,
+  { selectQuizQuestion }
+)(QuizBody);
