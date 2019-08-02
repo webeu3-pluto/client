@@ -1,5 +1,5 @@
 // modules
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
@@ -8,6 +8,8 @@ import styled from "styled-components";
 import QuizDetails from "./QuizDetails";
 import QuizStatus from "./QuizStatus";
 import QuizBody from "./QuizBody";
+import ComponentLoader from "../../../~reusables/molecules/ComponentLoader";
+import { getQuizAndQsByUUID } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -15,28 +17,27 @@ import {
   large_space,
   small_space
 } from "../../../~reusables/variables/spacing";
+import { primary } from "../../../~reusables/variables/colors";
 
 const CreateQuiz = props => {
-  const { user, selectedQuiz, selectedQuestion } = props;
+  const { user, selectedQuiz, selectedQuestion, getQuizAndQsByUUID, match, history } = props;
   console.log(props);
+
+  useEffect(() => {
+    getQuizAndQsByUUID(match.params.id, history)
+  }, [])
 
   if (user.role === "Student") {
     return <Redirect to="/app" />;
-  } else {
+  } else if (selectedQuiz) {
     return (
       <StyledCreateQuiz>
         <div className="quiz-header">
           <div className="quiz-details">
-            <QuizDetails
-              user={user}
-              selectedQuiz={selectedQuiz}
-            />
+            <QuizDetails user={user} selectedQuiz={selectedQuiz} />
           </div>
           <div className="quiz-status">
-            <QuizStatus
-              user={user}
-              selectedQuiz={selectedQuiz}
-            />
+            <QuizStatus user={user} selectedQuiz={selectedQuiz} />
           </div>
         </div>
         <div className="quiz-body">
@@ -48,6 +49,8 @@ const CreateQuiz = props => {
         </div>
       </StyledCreateQuiz>
     );
+  } else {
+    return <ComponentLoader color={primary} />;
   }
 };
 
@@ -118,4 +121,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CreateQuiz);
+export default connect(mapStateToProps, { getQuizAndQsByUUID })(CreateQuiz);
