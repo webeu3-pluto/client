@@ -96,9 +96,6 @@ export const updateQuizByCatandSubcat = (
     }
 
     dispatch({ type: UPDATE_QUIZ_BY_CAT_AND_SUBCAT, payload: change });
-
-
-    console.log(res.data);
   } catch (err) {
     console.log(err);
   }

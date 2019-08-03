@@ -37,7 +37,6 @@ const CreateQuiz = props => {
     getQuizAndQsByUUID(match.params.id, history);
     getCategories();
   }, [match.params.id]);
-  console.log("SELECTED QUIZ", selectedQuiz);
 
   if (user.role === "Student") {
     return <Redirect to="/app" />;

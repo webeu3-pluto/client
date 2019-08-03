@@ -34,22 +34,19 @@ const QuizDetails = props => {
     selectedQuiz.subCategoryId
   );
 
-  console.log(subCategory)
-
   useEffect(() => {
     getSubCategories(categoryId);
-
     return () => {
       clearQuizState();
-    }
-
+    };
   }, []);
 
   useEffect(() => {
-    if(subCategories.length !== 0) {
+    if (subCategories.length !== 0) {
+      let foundSubCat = subCategories.find(subCat => subCat.subCategoryName === subCategory);
       updateQuizByCatandSubcat(
         categoryId,
-        subCategories[0].subCategoryId,
+        foundSubCat ? subCategoryId : subCategories[0].subCategoryId,
         selectedQuiz.uuid
       );
     }
@@ -60,7 +57,7 @@ const QuizDetails = props => {
     setCategoryId(selectedQuiz.categoryId);
     setSubCategory(selectedQuiz.subCategory);
     setSubCategoryId(selectedQuiz.subCategoryId);
-  }, [selectedQuiz])
+  }, [selectedQuiz]);
 
   const onChangeCategory = e => {
     let catChanged = categories.find(
@@ -69,6 +66,10 @@ const QuizDetails = props => {
     getSubCategories(catChanged.categoryId);
     setCategory(catChanged.category);
     setCategoryId(catChanged.categoryId);
+  };
+
+  const onChangeSubCategory = e => {
+    updateQuizByCatandSubcat(categoryId, e.target.value, selectedQuiz.uuid);
   };
 
   return (
@@ -89,7 +90,7 @@ const QuizDetails = props => {
         })}
       </LineSelect>
       <h4 className="label">Choose sub-category</h4>
-      <LineSelect>
+      <LineSelect onChange={onChangeSubCategory}>
         <option value={subCategoryId}>{subCategory}</option>
         {subCategories.map(subCat => {
           if (subCat.subCategoryName !== subCategory) {
