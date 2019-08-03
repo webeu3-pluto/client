@@ -8,6 +8,7 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUBCATEGORIES = "GET_SUBCATEGORIES";
 export const UPDATE_QUIZ_BY_CAT_AND_SUBCAT = "UPDATE_QUIZ_BY_CAT_AND_SUBCAT";
 export const CLEAR_QUIZ_STATE = "CLEAR_QUIZ_STATE";
+export const UPDATE_QUIZ_STATUS = "UPDATE_QUIZ_STATUS";
 
 const server = "http://localhost:5005";
 // const server = "https://plutoserver.herokuapp.com";
@@ -93,7 +94,7 @@ export const updateQuizByCatandSubcat = (
       categoryId: res.data.categoryId,
       subCategory: res.data.subCategory,
       subCategoryId: res.data.subCategoryId
-    }
+    };
 
     dispatch({ type: UPDATE_QUIZ_BY_CAT_AND_SUBCAT, payload: change });
   } catch (err) {
@@ -101,6 +102,15 @@ export const updateQuizByCatandSubcat = (
   }
 };
 
+export const updateQuizStatus = (published, uuid) => async dispatch => {
+  const reqBody = { published, uuid };
+  const res = await axiosWithAuth().put(
+    `${server}/api/quizzes/create/${uuid}/published`,
+    reqBody
+  );
+  dispatch({ type: UPDATE_QUIZ_STATUS, payload: res.data.status });
+};
+
 export const clearQuizState = () => async dispatch => {
-  dispatch({ type: CLEAR_QUIZ_STATE })
-}
+  dispatch({ type: CLEAR_QUIZ_STATE });
+};

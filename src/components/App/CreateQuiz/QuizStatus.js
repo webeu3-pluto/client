@@ -1,14 +1,17 @@
 // modules
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 // components/functions
 import {
   TextButton,
   ButtonTertiary,
-  ButtonPrimary
+  ButtonPrimary,
+  ButtonSecondary
 } from "../../../~reusables/atoms/Buttons";
 import DeleteModal from "../../../~reusables/molecules/DeleteModal";
+import { updateQuizStatus } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -20,9 +23,13 @@ import {
 import { headings, primary } from "../../../~reusables/variables/colors";
 
 const QuizStatus = props => {
-  const { selectedQuiz } = props;
+  const { selectedQuiz, updateQuizStatus } = props;
   const [modal, setModal] = useState(false);
   const [quizStatus, setQuizStatus] = useState(selectedQuiz.status);
+
+  useEffect(() => {
+    setQuizStatus(selectedQuiz.status);
+  }, [selectedQuiz]);
 
   const renderStatus = quizStatus ? "Published" : "Draft";
 
@@ -49,7 +56,19 @@ const QuizStatus = props => {
           Delete Quiz
         </TextButton>
         <ButtonTertiary>Generate Quiz</ButtonTertiary>
-        <ButtonPrimary>{quizStatus ? 'Return to Draft' : 'Publish Quiz'}</ButtonPrimary>
+        {quizStatus ? (
+          <ButtonSecondary
+            onClick={() => updateQuizStatus(false, selectedQuiz.uuid)}
+          >
+            Return to Draft
+          </ButtonSecondary>
+        ) : (
+          <ButtonPrimary
+            onClick={() => updateQuizStatus(true, selectedQuiz.uuid)}
+          >
+            Publish Quiz
+          </ButtonPrimary>
+        )}
       </section>
     </StyledQuizStatus>
   );
@@ -88,4 +107,7 @@ const StyledQuizStatus = styled.div`
   }
 `;
 
-export default QuizStatus;
+export default connect(
+  null,
+  { updateQuizStatus }
+)(QuizStatus);

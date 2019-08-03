@@ -17,6 +17,14 @@ export default function(state = initState, action) {
         subCategories: [],
         selectedQuiz: null,
       }
+    case types.UPDATE_QUIZ_STATUS:
+      return {
+        ...state,
+        selectedQuiz: {
+          ...state.selectedQuiz,
+          status: action.payload
+        }
+      }
     case types.UPDATE_QUIZ_BY_CAT_AND_SUBCAT:
       return {
         ...state,
