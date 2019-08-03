@@ -10,6 +10,7 @@ export const UPDATE_QUIZ_BY_CAT_AND_SUBCAT = "UPDATE_QUIZ_BY_CAT_AND_SUBCAT";
 export const CLEAR_QUIZ_STATE = "CLEAR_QUIZ_STATE";
 export const UPDATE_QUIZ_STATUS = "UPDATE_QUIZ_STATUS";
 export const DELETE_QUESTION_ON_QUIZ = "DELETE_QUESTION_ON_QUIZ";
+export const DELETE_QUIZ = "DELETE_QUIZ";
 
 const server = "http://localhost:5005";
 // const server = "https://plutoserver.herokuapp.com";
@@ -119,18 +120,30 @@ export const updateQuizStatus = (published, uuid) => async dispatch => {
 export const deleteQuestionOnQuiz = ({ id, uuid }) => async dispatch => {
   try {
     const reqBody = { id, uuid };
-    console.log(reqBody);
-
     const res = await axiosWithAuth().delete(
       `${server}/api/quizzes/create/question/${id}`,
       { data: reqBody }
     );
-    console.log(res);
     dispatch({ type: DELETE_QUESTION_ON_QUIZ, payload: res.data });
   } catch (err) {
     console.log(err);
   }
 };
+
+export const deleteQuiz = ({ uuid, history }) => async dispatch => {
+  try {
+    const reqBody = { uuid };
+    console.log(uuid, history)
+    const res = await axiosWithAuth().delete(
+      `${server}/api/quizzes/create/`,
+      { data: reqBody }
+    );
+    dispatch({ type: DELETE_QUIZ, payload: res.data });
+    history.push(`/app/quizzes/`);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 export const clearQuizState = () => async dispatch => {
   dispatch({ type: CLEAR_QUIZ_STATE });

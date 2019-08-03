@@ -10,6 +10,13 @@ const initState = {
 
 export default function(state = initState, action) {
   switch (action.type) {
+    case types.DELETE_QUIZ:
+      return {
+        ...state,
+        selectedQuiz: null,
+        categories: [],
+        subCategories: []
+      };
     case types.DELETE_QUESTION_ON_QUIZ:
       return {
         ...state,

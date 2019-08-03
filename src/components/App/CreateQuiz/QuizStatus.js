@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 // components/functions
 import {
@@ -11,7 +12,7 @@ import {
   ButtonSecondary
 } from "../../../~reusables/atoms/Buttons";
 import DeleteModal from "../../../~reusables/molecules/DeleteModal";
-import { updateQuizStatus } from "../../../store/actions/quizActions";
+import { updateQuizStatus, deleteQuiz } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -23,7 +24,7 @@ import {
 import { headings, primary } from "../../../~reusables/variables/colors";
 
 const QuizStatus = props => {
-  const { selectedQuiz, updateQuizStatus } = props;
+  const { selectedQuiz, updateQuizStatus, deleteQuiz, history } = props;
   const [modal, setModal] = useState(false);
   const [quizStatus, setQuizStatus] = useState(selectedQuiz.status);
 
@@ -37,7 +38,8 @@ const QuizStatus = props => {
     <StyledQuizStatus>
       {modal && (
         <DeleteModal
-          // functionCb={deleteUser}
+          functionArg={{uuid: selectedQuiz.uuid, history }}
+          functionCb={deleteQuiz}
           closeModal={setModal}
           heading="Lorem ipsum lorem ipsum"
           paragraph="Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum."
@@ -109,5 +111,5 @@ const StyledQuizStatus = styled.div`
 
 export default connect(
   null,
-  { updateQuizStatus }
-)(QuizStatus);
+  { updateQuizStatus, deleteQuiz }
+)(withRouter(QuizStatus));
