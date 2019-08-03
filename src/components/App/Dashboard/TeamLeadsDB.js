@@ -1,14 +1,15 @@
 // modules
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import uuid from "uuid";
 
 // components/functions
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import QuizList from "../../../~reusables/molecules/QuizList";
 import OverviewBlock from "../../../~reusables/molecules/OverviewBlock";
+import { getQuizByTeamLeadId, createQuizWithQuestion } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -21,39 +22,10 @@ import {
 import { support, text, headings } from "../../../~reusables/variables/colors";
 import { heading_1, body_1 } from "../../../~reusables/variables/font-sizes";
 
-const TeamLeadsDB = ({ user }) => {
-  const quizzes = [
-    { quiz: "Isaac A", completionRate: 70, score: 85, status: "Draft" },
-    { quiz: "Isaac Ad ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ade", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ader ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Adero", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Aderog ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Aderogb", completionRate: 70, score: 85, status: "Active" },
-    {
-      quiz: "Isaac Aderogba ",
-      completionRate: 70,
-      score: 85,
-      status: "Active"
-    },
-    { quiz: "Isaa Aderogba", completionRate: 70, score: 85, status: "Draft" },
-    { quiz: "Isa Aderogba ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac A", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ad ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ade", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Ader ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Adero", completionRate: 70, score: 85, status: "Draft" },
-    { quiz: "Isaac Aderog ", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isaac Aderogb", completionRate: 70, score: 85, status: "Active" },
-    {
-      quiz: "Isaac Aderogba ",
-      completionRate: 70,
-      score: 85,
-      status: "Active"
-    },
-    { quiz: "Isaa Aderogba", completionRate: 70, score: 85, status: "Active" },
-    { quiz: "Isa Aderogba ", completionRate: 70, score: 85, status: "Active" }
-  ];
+const TeamLeadsDB = ({ user, getQuizByTeamLeadId, quizzesFetched, createQuizWithQuestion, history }) => {
+  useEffect(() => {
+    getQuizByTeamLeadId(user.id);
+  }, [])
 
   return (
     <StyledQuizView>
@@ -69,13 +41,17 @@ const TeamLeadsDB = ({ user }) => {
             secondHeading="Completion Rate"
             thirdHeading="Avg. Score"
             fourthHeading="Status"
-            listOfQuizzes={quizzes}
+            listOfQuizzes={quizzesFetched}
             limit="3"
           />
         </div>
         <div className="footer">
           <Link to={`app/quizzes/create/${uuid()}`}>
-            <ButtonTertiary>Create Quiz</ButtonTertiary>
+          <ButtonTertiary
+            onClick={() => createQuizWithQuestion(uuid(), user.id, history)}
+          >
+            Create Quiz
+          </ButtonTertiary>
           </Link>
         </div>
       </div>
@@ -162,4 +138,10 @@ const StyledQuizView = styled.main`
   }
 `;
 
-export default connect()(TeamLeadsDB);
+function mapStateToProps(state) {
+  return {
+    quizzesFetched: state.quiz.quizzes
+  }
+}
+
+export default connect(mapStateToProps, { getQuizByTeamLeadId, createQuizWithQuestion })(withRouter(TeamLeadsDB));
