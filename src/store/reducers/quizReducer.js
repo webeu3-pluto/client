@@ -10,13 +10,22 @@ const initState = {
 
 export default function(state = initState, action) {
   switch (action.type) {
+    case types.DELETE_QUESTION_ON_QUIZ:
+      return {
+        ...state,
+        selectedQuestion: action.payload.length > 0 ? action.payload[0] : null,
+        selectedQuiz: {
+          ...state.selectedQuiz,
+          questions: action.payload
+        }
+      };
     case types.CLEAR_QUIZ_STATE:
       return {
         ...state,
         categories: [],
         subCategories: [],
-        selectedQuiz: null,
-      }
+        selectedQuiz: null
+      };
     case types.UPDATE_QUIZ_STATUS:
       return {
         ...state,
@@ -24,7 +33,7 @@ export default function(state = initState, action) {
           ...state.selectedQuiz,
           status: action.payload
         }
-      }
+      };
     case types.UPDATE_QUIZ_BY_CAT_AND_SUBCAT:
       return {
         ...state,

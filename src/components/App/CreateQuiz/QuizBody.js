@@ -6,7 +6,10 @@ import { connect } from "react-redux";
 // components/functions
 import { LineInput } from "../../../~reusables/atoms/Inputs";
 import DeleteModal from "../../../~reusables/molecules/DeleteModal";
-import { selectQuizQuestion } from "../../../store/actions/quizActions";
+import {
+  selectQuizQuestion,
+  deleteQuestionOnQuiz
+} from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -24,7 +27,12 @@ import {
 } from "../../../~reusables/atoms/Buttons";
 
 const QuizBody = props => {
-  const { selectedQuiz, selectedQuestion, selectQuizQuestion } = props;
+  const {
+    selectedQuiz,
+    selectedQuestion,
+    selectQuizQuestion,
+    deleteQuestionOnQuiz
+  } = props;
   const [modal, setModal] = useState(false);
   const [question, setQuestion] = useState(
     selectedQuestion ? selectedQuestion.question : ""
@@ -49,14 +57,23 @@ const QuizBody = props => {
       setpossAnswer1(selectedQuestion.p_answer1);
       setpossAnswer2(selectedQuestion.p_answer2);
       setpossAnswer3(selectedQuestion.p_answer3);
+    } else {
+      setQuestion('');
+      setAnswer('');
+      setpossAnswer1('');
+      setpossAnswer2('');
+      setpossAnswer3('');
     }
   }, [selectedQuestion]);
+
+  console.log(selectedQuestion);
 
   return (
     <StyledQuizBody>
       {modal && (
         <DeleteModal
-          // functionCb={deleteUser}
+          functionArg={{ uuid: selectedQuiz.uuid, id: selectedQuestion.id }}
+          functionCb={deleteQuestionOnQuiz}
           closeModal={setModal}
           heading="Lorem ipsum lorem ipsum"
           paragraph="Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum."
@@ -104,9 +121,11 @@ const QuizBody = props => {
           />
         </div>
         <section className="buttons">
-          <TextButton color="#DA2640" onClick={() => setModal(true)}>
-            Delete Question
-          </TextButton>
+          {selectedQuestion ? (
+            <TextButton color="#DA2640" onClick={() => setModal(true)}>
+              Delete Question
+            </TextButton>
+          ) : null}
           <ButtonTertiary>Save Question</ButtonTertiary>
         </section>
       </div>
@@ -214,5 +233,5 @@ const StyledQuizBody = styled.div`
 
 export default connect(
   null,
-  { selectQuizQuestion }
+  { selectQuizQuestion, deleteQuestionOnQuiz }
 )(QuizBody);

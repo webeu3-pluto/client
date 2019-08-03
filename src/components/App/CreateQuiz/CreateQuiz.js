@@ -38,6 +38,8 @@ const CreateQuiz = props => {
     getCategories();
   }, [match.params.id]);
 
+  console.log(selectedQuiz);
+
   if (user.role === "Student") {
     return <Redirect to="/app" />;
   } else if (selectedQuiz) {
