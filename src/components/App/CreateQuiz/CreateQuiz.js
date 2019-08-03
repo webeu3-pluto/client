@@ -9,7 +9,10 @@ import QuizDetails from "./QuizDetails";
 import QuizStatus from "./QuizStatus";
 import QuizBody from "./QuizBody";
 import ComponentLoader from "../../../~reusables/molecules/ComponentLoader";
-import { getQuizAndQsByUUID } from "../../../store/actions/quizActions";
+import {
+  getQuizAndQsByUUID,
+  getCategories
+} from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -20,11 +23,20 @@ import {
 import { primary } from "../../../~reusables/variables/colors";
 
 const CreateQuiz = props => {
-  const { user, selectedQuiz, selectedQuestion, getQuizAndQsByUUID, match, history } = props;
+  const {
+    user,
+    selectedQuiz,
+    selectedQuestion,
+    getQuizAndQsByUUID,
+    match,
+    history,
+    getCategories
+  } = props;
 
   useEffect(() => {
-    getQuizAndQsByUUID(match.params.id, history)
-  }, [])
+    getQuizAndQsByUUID(match.params.id, history);
+    getCategories();
+  }, []);
 
   if (user.role === "Student") {
     return <Redirect to="/app" />;
@@ -120,4 +132,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getQuizAndQsByUUID })(CreateQuiz);
+export default connect(
+  mapStateToProps,
+  { getQuizAndQsByUUID, getCategories }
+)(CreateQuiz);

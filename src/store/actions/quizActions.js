@@ -7,8 +7,8 @@ export const SELECT_QUIZ_QUESTION = "SELECT_QUIZ_QUESTION";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUBCATEGORIES = "GET_SUBCATEGORIES";
 
-// const server = "http://localhost:5005";
-const server = "https://plutoserver.herokuapp.com";
+const server = "http://localhost:5005";
+// const server = "https://plutoserver.herokuapp.com";
 
 export const getQuizAndQsByUUID = (uuid, history) => async dispatch => {
   try {
@@ -68,7 +68,7 @@ export const getSubCategories = (id) => async dispatch => {
     const res = await axiosWithAuth().get(
       `${server}/api/quizzes/create/subcategories/${id}`
     );
-    dispatch({ type: GET_CATEGORIES, payload: res.data });
+    dispatch({ type: GET_SUBCATEGORIES, payload: res.data });
   } catch (err) {
     console.log(err);
   }

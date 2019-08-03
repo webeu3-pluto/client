@@ -1,9 +1,11 @@
 // modules
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 // components/functions
 import { LineSelect } from "../../../~reusables/atoms/Select";
+import { getSubCategories } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -13,7 +15,7 @@ import {
 import { headings } from "../../../~reusables/variables/colors";
 
 const QuizDetails = props => {
-  const { selectedQuiz } = props;
+  const { selectedQuiz, categories, getSubCategories, subCategories } = props;
   const [category, setCategory] = useState(selectedQuiz.category);
   const [categoryId, setCategoryId] = useState(selectedQuiz.categoryId);
   const [subCategory, setSubCategory] = useState(selectedQuiz.subCategory);
@@ -21,15 +23,48 @@ const QuizDetails = props => {
     selectedQuiz.subCategoryId
   );
 
+  useEffect(() => {
+    getSubCategories(categoryId);
+  }, []);
+
+  const onChangeCategory = e => {
+    let catChanged = categories.find(
+      cat => cat.categoryId === parseInt(e.target.value)
+    );
+    getSubCategories(catChanged.categoryId);
+  };
+
   return (
     <StyledQuizDetails>
       <h4 className="label">Choose category</h4>
-      <LineSelect>
+      <LineSelect onChange={onChangeCategory}>
         <option value={categoryId}>{category}</option>
+        {categories.map(cat => {
+          if (cat.category !== category) {
+            return (
+              <option key={cat.categoryId} value={cat.categoryId}>
+                {cat.category}
+              </option>
+            );
+          } else {
+            return null;
+          }
+        })}
       </LineSelect>
       <h4 className="label">Choose sub-category</h4>
       <LineSelect>
         <option value={subCategoryId}>{subCategory}</option>
+        {subCategories.map(subCat => {
+          if (subCat.subCategoryName !== subCategory) {
+            return (
+              <option key={subCat.subCategoryId} value={subCat.subCategoryId}>
+                {subCat.subCategoryName}
+              </option>
+            );
+          } else {
+            return null;
+          }
+        })}
       </LineSelect>
     </StyledQuizDetails>
   );
@@ -49,4 +84,14 @@ const StyledQuizDetails = styled.div`
   }
 `;
 
-export default QuizDetails;
+function mapStateToProps(state) {
+  return {
+    categories: state.quiz.categories,
+    subCategories: state.quiz.subCategories
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { getSubCategories }
+)(QuizDetails);
