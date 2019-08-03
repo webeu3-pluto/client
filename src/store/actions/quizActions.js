@@ -6,6 +6,8 @@ export const GET_QUIZ_BY_TEAMLEAD_ID = "GET_QUIZ_BY_TEAMLEAD_ID";
 export const SELECT_QUIZ_QUESTION = "SELECT_QUIZ_QUESTION";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUBCATEGORIES = "GET_SUBCATEGORIES";
+export const UPDATE_QUIZ_BY_CAT_AND_SUBCAT = "UPDATE_QUIZ_BY_CAT_AND_SUBCAT";
+export const CLEAR_QUIZ_STATE = "CLEAR_QUIZ_STATE";
 
 const server = "http://localhost:5005";
 // const server = "https://plutoserver.herokuapp.com";
@@ -63,7 +65,7 @@ export const getCategories = () => async dispatch => {
   }
 };
 
-export const getSubCategories = (id) => async dispatch => {
+export const getSubCategories = id => async dispatch => {
   try {
     const res = await axiosWithAuth().get(
       `${server}/api/quizzes/create/subcategories/${id}`
@@ -73,3 +75,35 @@ export const getSubCategories = (id) => async dispatch => {
     console.log(err);
   }
 };
+
+export const updateQuizByCatandSubcat = (
+  cat_id,
+  subcat_id,
+  uuid
+) => async dispatch => {
+  try {
+    const reqBody = { cat_id, subcat_id, uuid };
+    const res = await axiosWithAuth().put(
+      `${server}/api/quizzes/create/${uuid}/categories`,
+      reqBody
+    );
+
+    const change = {
+      category: res.data.category,
+      categoryId: res.data.categoryId,
+      subCategory: res.data.subCategory,
+      subCategoryId: res.data.subCategoryId
+    }
+
+    dispatch({ type: UPDATE_QUIZ_BY_CAT_AND_SUBCAT, payload: change });
+
+
+    console.log(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const clearQuizState = () => async dispatch => {
+  dispatch({ type: CLEAR_QUIZ_STATE })
+}

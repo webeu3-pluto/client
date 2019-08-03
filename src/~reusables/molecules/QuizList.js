@@ -31,7 +31,6 @@ const QuizList = props => {
     return listOfQuizzes
       .slice(tabIndex * 8, limit || 8 * (tabIndex + 1))
       .map(quiz => {
-        console.log(quiz);
         let quizStatus =
           quiz.status === "Active" || quiz.status === "Complete"
             ? "blue-link"

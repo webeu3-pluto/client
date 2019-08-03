@@ -5,7 +5,11 @@ import { connect } from "react-redux";
 
 // components/functions
 import { LineSelect } from "../../../~reusables/atoms/Select";
-import { getSubCategories } from "../../../store/actions/quizActions";
+import {
+  getSubCategories,
+  updateQuizByCatandSubcat,
+  clearQuizState
+} from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -15,7 +19,14 @@ import {
 import { headings } from "../../../~reusables/variables/colors";
 
 const QuizDetails = props => {
-  const { selectedQuiz, categories, getSubCategories, subCategories } = props;
+  const {
+    selectedQuiz,
+    categories,
+    getSubCategories,
+    subCategories,
+    updateQuizByCatandSubcat,
+    clearQuizState
+  } = props;
   const [category, setCategory] = useState(selectedQuiz.category);
   const [categoryId, setCategoryId] = useState(selectedQuiz.categoryId);
   const [subCategory, setSubCategory] = useState(selectedQuiz.subCategory);
@@ -23,15 +34,41 @@ const QuizDetails = props => {
     selectedQuiz.subCategoryId
   );
 
+  console.log(subCategory)
+
   useEffect(() => {
     getSubCategories(categoryId);
+
+    return () => {
+      clearQuizState();
+    }
+
   }, []);
+
+  useEffect(() => {
+    if(subCategories.length !== 0) {
+      updateQuizByCatandSubcat(
+        categoryId,
+        subCategories[0].subCategoryId,
+        selectedQuiz.uuid
+      );
+    }
+  }, [subCategories])
+
+  useEffect(() => {
+    setCategory(selectedQuiz.category);
+    setCategoryId(selectedQuiz.categoryId);
+    setSubCategory(selectedQuiz.subCategory);
+    setSubCategoryId(selectedQuiz.subCategoryId);
+  }, [selectedQuiz])
 
   const onChangeCategory = e => {
     let catChanged = categories.find(
       cat => cat.categoryId === parseInt(e.target.value)
     );
     getSubCategories(catChanged.categoryId);
+    setCategory(catChanged.category);
+    setCategoryId(catChanged.categoryId);
   };
 
   return (
@@ -93,5 +130,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getSubCategories }
+  { getSubCategories, updateQuizByCatandSubcat, clearQuizState }
 )(QuizDetails);

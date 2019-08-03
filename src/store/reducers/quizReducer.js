@@ -10,6 +10,24 @@ const initState = {
 
 export default function(state = initState, action) {
   switch (action.type) {
+    case types.CLEAR_QUIZ_STATE:
+      return {
+        ...state,
+        categories: [],
+        subCategories: [],
+        selectedQuiz: null,
+      }
+    case types.UPDATE_QUIZ_BY_CAT_AND_SUBCAT:
+      return {
+        ...state,
+        selectedQuiz: {
+          ...state.selectedQuiz,
+          category: action.payload.category,
+          categoryId: action.payload.categoryId,
+          subCategory: action.payload.subCategory,
+          subCategoryId: action.payload.subCategoryId
+        }
+      };
     case types.GET_CATEGORIES:
       return {
         ...state,
