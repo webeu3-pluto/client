@@ -11,6 +11,8 @@ export const CLEAR_QUIZ_STATE = "CLEAR_QUIZ_STATE";
 export const UPDATE_QUIZ_STATUS = "UPDATE_QUIZ_STATUS";
 export const DELETE_QUESTION_ON_QUIZ = "DELETE_QUESTION_ON_QUIZ";
 export const DELETE_QUIZ = "DELETE_QUIZ";
+export const CLICK_NEW_QUESTION = "CLICK_NEW_QUESTION";
+export const SAVE_QUESTION = "SAVE_QUESTION";
 
 const server = "http://localhost:5005";
 // const server = "https://plutoserver.herokuapp.com";
@@ -133,17 +135,32 @@ export const deleteQuestionOnQuiz = ({ id, uuid }) => async dispatch => {
 export const deleteQuiz = ({ uuid, history }) => async dispatch => {
   try {
     const reqBody = { uuid };
-    console.log(uuid, history)
-    const res = await axiosWithAuth().delete(
-      `${server}/api/quizzes/create/`,
-      { data: reqBody }
-    );
+    console.log(uuid, history);
+    const res = await axiosWithAuth().delete(`${server}/api/quizzes/create/`, {
+      data: reqBody
+    });
     dispatch({ type: DELETE_QUIZ, payload: res.data });
     history.push(`/app/quizzes/`);
   } catch (err) {
     console.log(err);
   }
-}
+};
+
+export const clickNewQuestion = () => async dispatch => {
+  dispatch({ type: CLICK_NEW_QUESTION });
+};
+
+export const saveQuestion = question => async dispatch => {
+  try {
+    const res = await axiosWithAuth().post(
+      `${server}/api/quizzes/create/question/new`,
+      question
+    );
+    dispatch({ type: SAVE_QUESTION, payload: res.data });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const clearQuizState = () => async dispatch => {
   dispatch({ type: CLEAR_QUIZ_STATE });

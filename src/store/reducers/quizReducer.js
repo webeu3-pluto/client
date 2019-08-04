@@ -10,6 +10,20 @@ const initState = {
 
 export default function(state = initState, action) {
   switch (action.type) {
+    case types.SAVE_QUESTION:
+      return {
+        ...state,
+        selectedQuiz: {
+          ...state.selectedQuiz,
+          questions: [...state.selectedQuiz.questions, ...action.payload]
+        },
+        selectedQuestion: ''
+      };
+    case types.CLICK_NEW_QUESTION:
+      return {
+        ...state,
+        selectedQuestion: null
+      };
     case types.DELETE_QUIZ:
       return {
         ...state,

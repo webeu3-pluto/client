@@ -8,7 +8,9 @@ import { LineInput } from "../../../~reusables/atoms/Inputs";
 import DeleteModal from "../../../~reusables/molecules/DeleteModal";
 import {
   selectQuizQuestion,
-  deleteQuestionOnQuiz
+  deleteQuestionOnQuiz,
+  clickNewQuestion,
+  saveQuestion
 } from "../../../store/actions/quizActions";
 
 // styles
@@ -31,7 +33,9 @@ const QuizBody = props => {
     selectedQuiz,
     selectedQuestion,
     selectQuizQuestion,
-    deleteQuestionOnQuiz
+    deleteQuestionOnQuiz,
+    clickNewQuestion,
+    saveQuestion
   } = props;
   const [modal, setModal] = useState(false);
   const [question, setQuestion] = useState(
@@ -58,15 +62,34 @@ const QuizBody = props => {
       setpossAnswer2(selectedQuestion.p_answer2);
       setpossAnswer3(selectedQuestion.p_answer3);
     } else {
-      setQuestion('');
-      setAnswer('');
-      setpossAnswer1('');
-      setpossAnswer2('');
-      setpossAnswer3('');
+      setQuestion("");
+      setAnswer("");
+      setpossAnswer1("");
+      setpossAnswer2("");
+      setpossAnswer3("");
     }
   }, [selectedQuestion]);
 
-  console.log(selectedQuestion);
+  const onClickSaveQuestion = () => {
+    if (!selectedQuestion && question && answer && possAnswer1) {
+      const questionObject = {
+        question,
+        p_answer1: possAnswer1,
+        p_answer2: possAnswer2,
+        p_answer3: possAnswer3,
+        answer,
+        quiz_id: selectedQuiz.id
+      };
+
+      saveQuestion(questionObject);
+    } else if (question && answer && possAnswer1) {
+      alert("Update existing question");
+    } else {
+      alert("Required fields missing");
+    }
+  };
+
+  console.log(selectedQuestion, selectedQuiz);
 
   return (
     <StyledQuizBody>
@@ -126,7 +149,9 @@ const QuizBody = props => {
               Delete Question
             </TextButton>
           ) : null}
-          <ButtonTertiary>Save Question</ButtonTertiary>
+          <ButtonTertiary onClick={onClickSaveQuestion}>
+            Save Question
+          </ButtonTertiary>
         </section>
       </div>
       <div className="view">
@@ -143,7 +168,7 @@ const QuizBody = props => {
             );
           })}
         </ul>
-        <ButtonPrimary>New Question</ButtonPrimary>
+        <ButtonPrimary onClick={clickNewQuestion}>New Question</ButtonPrimary>
       </div>
     </StyledQuizBody>
   );
@@ -233,5 +258,5 @@ const StyledQuizBody = styled.div`
 
 export default connect(
   null,
-  { selectQuizQuestion, deleteQuestionOnQuiz }
+  { selectQuizQuestion, deleteQuestionOnQuiz, clickNewQuestion, saveQuestion }
 )(QuizBody);
