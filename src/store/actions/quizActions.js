@@ -1,5 +1,6 @@
 import { axiosWithAuth } from "../../~reusables/helpers/axiosAuth";
 
+// team leads
 export const GET_QUIZ_AND_QS_UUID = "GET_QUIZ_AND_QS_UUID";
 export const CREATE_QUIZ_WITH_QS = "CREATE_QUIZ_WITH_QS";
 export const GET_QUIZ_BY_TEAMLEAD_ID = "GET_QUIZ_BY_TEAMLEAD_ID";
@@ -15,8 +16,11 @@ export const CLICK_NEW_QUESTION = "CLICK_NEW_QUESTION";
 export const SAVE_QUESTION = "SAVE_QUESTION";
 export const UPDATE_QUESTION = "UPDATE_QUESTION";
 
-// const server = "http://localhost:5005";
-const server = "https://plutoserver.herokuapp.com";
+// students
+export const GET_QUIZZES_FOR_STUDENT = "GET_QUIZZES_FOR_STUDENT";
+
+const server = "http://localhost:5005";
+// const server = "https://plutoserver.herokuapp.com";
 
 export const getQuizAndQsByUUID = (uuid, history) => async dispatch => {
   try {
@@ -177,4 +181,17 @@ export const updateQuestion = (question, id, uuid) => async dispatch => {
 
 export const clearQuizState = () => async dispatch => {
   dispatch({ type: CLEAR_QUIZ_STATE });
+};
+
+// students
+
+export const getQuizzesForStudent = (id) => async dispatch => {
+  try {
+    const res = await axiosWithAuth().get(
+      `${server}/api/quizzes/students/${id}`
+    );
+    dispatch({ type: GET_QUIZZES_FOR_STUDENT, payload: res.data });
+  } catch (err) {
+    console.log(err);
+  }
 };

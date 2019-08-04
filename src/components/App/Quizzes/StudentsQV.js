@@ -1,10 +1,11 @@
 // modules
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
 // components/functions
 import QuizList from "../../../~reusables/molecules/QuizList";
+import { getQuizzesForStudent } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -17,38 +18,11 @@ import {
 import { support } from "../../../~reusables/variables/colors";
 
 const StudentsQV = props => {
-  const quizzes = [
-    { quiz: "Isaac A", teamLead: "Josemaria", score: 85, status: "Incomplete" },
-    { quiz: "Isaac Ad ", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Ade", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Ader ", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Adero", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Aderog ", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Aderogb", teamLead: "Josemaria", score: 85, status: "Complete" },
-    {
-      quiz: "Isaac Aderogba ",
-      teamLead: "Josemaria",
-      score: 85,
-      status: "Complete"
-    },
-    { quiz: "Isaa Aderogba", teamLead: "Josemaria", score: 85, status: "Incomplete" },
-    { quiz: "Isa Aderogba ", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac A", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Ad ", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Ade", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Ader ", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Adero", teamLead: "Josemaria", score: 85, status: "Incomplete" },
-    { quiz: "Isaac Aderog ", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isaac Aderogb", teamLead: "Josemaria", score: 85, status: "Complete" },
-    {
-      quiz: "Isaac Aderogba ",
-      teamLead: "Josemaria",
-      score: 85,
-      status: "Complete"
-    },
-    { quiz: "Isaa Aderogba", teamLead: "Josemaria", score: 85, status: "Complete" },
-    { quiz: "Isa Aderogba ", teamLead: "Josemaria", score: 85, status: "Complete" }
-  ];
+  const { user, getQuizzesForStudent, quizzesFetched } = props;
+
+  useEffect(() => {
+    getQuizzesForStudent(user.id);
+  }, []);
 
   return (
     <StyledQuizView>
@@ -62,7 +36,7 @@ const StudentsQV = props => {
             secondHeading="Team Lead"
             thirdHeading="Quiz Score"
             fourthHeading="Status"
-            listOfQuizzes={quizzes}
+            listOfQuizzes={quizzesFetched}
             isStudent
           />
         </div>
@@ -112,4 +86,13 @@ const StyledQuizView = styled.main`
   }
 `;
 
-export default connect()(StudentsQV);
+function mapStateToProps(state) {
+  return {
+    quizzesFetched: state.quiz.quizzes
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { getQuizzesForStudent }
+)(StudentsQV);

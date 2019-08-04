@@ -119,7 +119,7 @@ const QuizBody = props => {
         />
       )}
       <div className="create">
-        <h4 className="label">Questions</h4>
+        <h4 className="label">Question</h4>
 
         <LineInput
           placeholder="Start typing your question..."

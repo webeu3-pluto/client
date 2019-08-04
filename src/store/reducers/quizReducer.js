@@ -10,6 +10,13 @@ const initState = {
 
 export default function(state = initState, action) {
   switch (action.type) {
+    // students
+    case types.GET_QUIZZES_FOR_STUDENT:
+      return {
+        ...state,
+        quizzes: action.payload
+      }
+    // team leads
     case types.UPDATE_QUESTION:
       return {
         ...state,
