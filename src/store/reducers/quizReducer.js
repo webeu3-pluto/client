@@ -96,7 +96,6 @@ export default function(state = initState, action) {
       return {
         ...state,
         selectedQuiz: action.payload,
-        selectedQuestion: action.payload.questions[0]
       };
     default:
       return state;

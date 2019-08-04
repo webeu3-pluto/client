@@ -53,6 +53,7 @@ const QuizBody = props => {
   const [possAnswer3, setpossAnswer3] = useState(
     selectedQuestion ? selectedQuestion.p_answer3 : ""
   );
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (selectedQuestion) {
@@ -71,7 +72,7 @@ const QuizBody = props => {
   }, [selectedQuestion]);
 
   const onClickSaveQuestion = () => {
-    if (!selectedQuestion && question && answer && possAnswer1) {
+    if (!selectedQuestion && question && answer && (possAnswer1 || possAnswer2 || possAnswer3)) {
       const questionObject = {
         question,
         p_answer1: possAnswer1,
@@ -82,10 +83,13 @@ const QuizBody = props => {
       };
 
       saveQuestion(questionObject);
-    } else if (question && answer && possAnswer1) {
+    } else if (question && answer && (possAnswer1 || possAnswer2 || possAnswer3)) {
       alert("Update existing question");
     } else {
-      alert("Required fields missing");
+      setError('A quiz question must have one question, one correct answer and at least one incorrect answer');
+      setTimeout(() => {
+        setError('');
+      }, 10000)
     }
   };
 
@@ -143,6 +147,7 @@ const QuizBody = props => {
             placeholder="Incorrect option"
           />
         </div>
+        {error && <p className="error">{error}</p>}
         <section className="buttons">
           {selectedQuestion ? (
             <TextButton color="#DA2640" onClick={() => setModal(true)}>
@@ -181,6 +186,11 @@ const StyledQuizBody = styled.div`
   box-shadow: 0px 3px 8px rgba(56, 105, 160, 0.25);
   padding: ${medium_space_2} ${medium_space_1};
   border-radius: 8px;
+
+  .error {
+    text-align: center;
+    color: #bb0000;
+  }
 
   .correct,
   .incorrect {
