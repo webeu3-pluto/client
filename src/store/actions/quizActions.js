@@ -13,6 +13,7 @@ export const DELETE_QUESTION_ON_QUIZ = "DELETE_QUESTION_ON_QUIZ";
 export const DELETE_QUIZ = "DELETE_QUIZ";
 export const CLICK_NEW_QUESTION = "CLICK_NEW_QUESTION";
 export const SAVE_QUESTION = "SAVE_QUESTION";
+export const UPDATE_QUESTION = "UPDATE_QUESTION";
 
 const server = "http://localhost:5005";
 // const server = "https://plutoserver.herokuapp.com";
@@ -157,6 +158,18 @@ export const saveQuestion = question => async dispatch => {
       question
     );
     dispatch({ type: SAVE_QUESTION, payload: res.data });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateQuestion = (question, id, uuid) => async dispatch => {
+  try {
+    const res = await axiosWithAuth().put(
+      `${server}/api/quizzes/create/question/${uuid}/${id}`,
+      question
+    );
+    dispatch({ type: UPDATE_QUESTION, payload: res.data });
   } catch (err) {
     console.log(err);
   }

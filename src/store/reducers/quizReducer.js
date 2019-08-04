@@ -10,6 +10,15 @@ const initState = {
 
 export default function(state = initState, action) {
   switch (action.type) {
+    case types.UPDATE_QUESTION:
+      return {
+        ...state,
+        selectedQuiz: {
+          ...state.selectedQuiz,
+          questions: action.payload
+        },
+        selectedQuestion: ''
+      }
     case types.SAVE_QUESTION:
       return {
         ...state,

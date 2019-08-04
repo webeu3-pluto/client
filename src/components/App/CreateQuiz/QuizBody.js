@@ -10,7 +10,8 @@ import {
   selectQuizQuestion,
   deleteQuestionOnQuiz,
   clickNewQuestion,
-  saveQuestion
+  saveQuestion,
+  updateQuestion
 } from "../../../store/actions/quizActions";
 
 // styles
@@ -35,7 +36,8 @@ const QuizBody = props => {
     selectQuizQuestion,
     deleteQuestionOnQuiz,
     clickNewQuestion,
-    saveQuestion
+    saveQuestion,
+    updateQuestion
   } = props;
   const [modal, setModal] = useState(false);
   const [question, setQuestion] = useState(
@@ -53,7 +55,7 @@ const QuizBody = props => {
   const [possAnswer3, setpossAnswer3] = useState(
     selectedQuestion ? selectedQuestion.p_answer3 : ""
   );
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (selectedQuestion) {
@@ -72,24 +74,34 @@ const QuizBody = props => {
   }, [selectedQuestion]);
 
   const onClickSaveQuestion = () => {
-    if (!selectedQuestion && question && answer && (possAnswer1 || possAnswer2 || possAnswer3)) {
-      const questionObject = {
-        question,
-        p_answer1: possAnswer1,
-        p_answer2: possAnswer2,
-        p_answer3: possAnswer3,
-        answer,
-        quiz_id: selectedQuiz.id
-      };
-
+    const questionObject = {
+      question,
+      p_answer1: possAnswer1,
+      p_answer2: possAnswer2,
+      p_answer3: possAnswer3,
+      answer,
+      quiz_id: selectedQuiz.id
+    };
+    if (
+      !selectedQuestion &&
+      question &&
+      answer &&
+      (possAnswer1 || possAnswer2 || possAnswer3)
+    ) {
       saveQuestion(questionObject);
-    } else if (question && answer && (possAnswer1 || possAnswer2 || possAnswer3)) {
-      alert("Update existing question");
+    } else if (
+      question &&
+      answer &&
+      (possAnswer1 || possAnswer2 || possAnswer3)
+    ) {
+      updateQuestion(questionObject, selectedQuestion.id, selectedQuiz.uuid);
     } else {
-      setError('A quiz question must have one question, one correct answer and at least one incorrect answer');
+      setError(
+        "A quiz question must have one question, one correct answer and at least one incorrect answer"
+      );
       setTimeout(() => {
-        setError('');
-      }, 10000)
+        setError("");
+      }, 10000);
     }
   };
 
@@ -155,7 +167,7 @@ const QuizBody = props => {
             </TextButton>
           ) : null}
           <ButtonTertiary onClick={onClickSaveQuestion}>
-            Save Question
+            {selectedQuestion ? "Update Question" : "Save Question"}
           </ButtonTertiary>
         </section>
       </div>
@@ -268,5 +280,11 @@ const StyledQuizBody = styled.div`
 
 export default connect(
   null,
-  { selectQuizQuestion, deleteQuestionOnQuiz, clickNewQuestion, saveQuestion }
+  {
+    selectQuizQuestion,
+    deleteQuestionOnQuiz,
+    clickNewQuestion,
+    saveQuestion,
+    updateQuestion
+  }
 )(QuizBody);
