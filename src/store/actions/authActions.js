@@ -11,8 +11,8 @@ export const VALIDATE_USER = "VALIDATE_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER = "DELETE_USER";
 
-// const server = "https://plutoserver.herokuapp.com";
-const server = "http://localhost:5005";
+const server = "https://plutoserver.herokuapp.com";
+// const server = "http://localhost:5005";
 
 export const signUp = (user, history) => async dispatch => {
   try {

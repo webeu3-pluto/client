@@ -15,8 +15,8 @@ export const CLICK_NEW_QUESTION = "CLICK_NEW_QUESTION";
 export const SAVE_QUESTION = "SAVE_QUESTION";
 export const UPDATE_QUESTION = "UPDATE_QUESTION";
 
-const server = "http://localhost:5005";
-// const server = "https://plutoserver.herokuapp.com";
+// const server = "http://localhost:5005";
+const server = "https://plutoserver.herokuapp.com";
 
 export const getQuizAndQsByUUID = (uuid, history) => async dispatch => {
   try {
