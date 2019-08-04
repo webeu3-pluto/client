@@ -28,7 +28,7 @@ export const getQuizAndQsByUUID = (uuid, history) => async dispatch => {
       `${server}/api/quizzes/create/${uuid}`
     );
     dispatch({ type: GET_QUIZ_AND_QS_UUID, payload: res.data });
-    history.push(`/app/quizzes/create/${uuid}`);
+    if(history) history.push(`/app/quizzes/create/${uuid}`);
   } catch (err) {
     console.log(err);
   }

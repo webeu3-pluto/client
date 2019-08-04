@@ -33,7 +33,7 @@ export default function(state = initState, action) {
           ...state.selectedQuiz,
           questions: [...state.selectedQuiz.questions, ...action.payload]
         },
-        selectedQuestion: ''
+        selectedQuestion: state.selectedQuestion === null ? '' : null
       };
     case types.CLICK_NEW_QUESTION:
       return {

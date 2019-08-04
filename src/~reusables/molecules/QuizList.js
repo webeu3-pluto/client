@@ -44,9 +44,17 @@ const QuizList = props => {
             <p className="center-align hide-item">{quiz.score + "%"}</p>
 
             <p className={`right-align ${quizStatus}`}>
-              <Link to={`/app/quizzes/create/${quiz.uuid}`}>
-                {quiz.status} >
-              </Link>
+              {
+                <Link
+                  to={
+                    isStudent
+                      ? `/app/quizzes/complete/${quiz.uuid}`
+                      : `/app/quizzes/create/${quiz.uuid}`
+                  }
+                >
+                  {quiz.status} >
+                </Link>
+              }
             </p>
           </div>
         );
