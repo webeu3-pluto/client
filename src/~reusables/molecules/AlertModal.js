@@ -13,11 +13,9 @@ import { heading_3, body_2, heading_5, body_1 } from "../variables/font-sizes";
 import { tablet_max_width } from "../variables/media-queries";
 import { small_space, medium_space_1 } from "../variables/spacing";
 
-const DeleteModal = props => {
+const AlertModal = props => {
   const {
     closeModal,
-    functionCb,
-    functionArg,
     heading,
     paragraph
   } = props;
@@ -27,14 +25,8 @@ const DeleteModal = props => {
     opacity: 1
   });
 
-  const onClickBack = e => {
+  const onClickButton = e => {
     e.preventDefault();
-    closeModal(false);
-  };
-
-  const onClickDelete = e => {
-    e.preventDefault();
-    functionCb(functionArg);
     closeModal(false);
   };
 
@@ -46,8 +38,7 @@ const DeleteModal = props => {
             <h4>{heading}</h4>
             <p>{paragraph}</p>
             <div className="buttons">
-              <ButtonPrimary onClick={onClickBack}>Go Back</ButtonPrimary>
-              <ButtonSecondary onClick={onClickDelete}>Delete</ButtonSecondary>
+              <ButtonPrimary onClick={onClickButton}>Okay!</ButtonPrimary>
             </div>
           </section>
         </div>
@@ -61,7 +52,7 @@ const StyledModal = styled.div`
 
   .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   h4,
@@ -144,4 +135,4 @@ const StyledModal = styled.div`
   }
 `;
 
-export default connect()(DeleteModal);
+export default connect()(AlertModal);

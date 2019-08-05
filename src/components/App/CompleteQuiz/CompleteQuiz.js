@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 // functions/components
-import { getQuizAndQsByUUID } from "../../../store/actions/quizActions";
+import { getQuizAndQsByUUID, completeQuiz } from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -17,18 +17,24 @@ import { support } from "../../../~reusables/variables/colors";
 import { body_1 } from "../../../~reusables/variables/font-sizes";
 import {
   ButtonPrimary,
-  ButtonSecondary,
   ButtonTertiary
 } from "../../../~reusables/atoms/Buttons";
+import AlertModal from "../../../~reusables/molecules/AlertModal";
 
 const CompleteQuiz = props => {
-  const { match, getQuizAndQsByUUID, user, selectedQuiz } = props;
+  const { match, getQuizAndQsByUUID, user, selectedQuiz, completeQuiz } = props;
   const [question, setQuestion] = useState("");
   const [answerArray, setAnswerArray] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState("");
   const [isNextQuestion, setIsNextQuestion] = useState(false);
+  const [modal, setModal] = useState(false);
   const [score, setScore] = useState(0);
   const [index, setIndex] = useState(1);
+
+  console.log(selectedQuiz);
+
+  let quizLength = 1;
+  if (selectedQuiz) quizLength = selectedQuiz.questions.length;
 
   useEffect(() => {
     getQuizAndQsByUUID(match.params.id);
@@ -79,14 +85,14 @@ const CompleteQuiz = props => {
 
   const onSubmitRadio = e => {
     e.preventDefault();
-    if (selectedRadio && index <= selectedQuiz.questions.length) {
+    if (selectedRadio && index <= quizLength) {
       if (selectedRadio === "answer") {
         setScore(score + 1);
-        setIsNextQuestion(true);
-        if (index + 1 > selectedQuiz.questions.length) {
+      }
+      setIsNextQuestion(true);
+        if (index + 1 > quizLength) {
           setIndex(index + 1);
         }
-      }
     } else {
       console.log("select an option");
     }
@@ -94,7 +100,7 @@ const CompleteQuiz = props => {
 
   const onClickNextQuestion = e => {
     e.preventDefault();
-    if (index !== selectedQuiz.questions.length) {
+    if (index !== quizLength) {
       setQuestion(selectedQuiz.questions[index]);
       setAnswerArray([
         { answer: selectedQuiz.questions[index].answer },
@@ -110,7 +116,16 @@ const CompleteQuiz = props => {
 
   const onSubmitQuiz = e => {
     e.preventDefault();
-    console.log((score / selectedQuiz.questions.length) * 100);
+    const result =  Math.round((score / quizLength) * 100);
+    const studentQuiz = {
+      quiz_id: selectedQuiz.id,
+      student_id: user.id,
+      result,
+      completed: true
+    }
+    
+    setModal(true);
+    completeQuiz(studentQuiz, match.params.id)
   }
 
   return (
@@ -118,23 +133,28 @@ const CompleteQuiz = props => {
       <div className="quiz-header">
         <p className="question">{question.question}</p>
         <p className="number">
-          {selectedQuiz && selectedQuiz.questions.length <= index
-            ? selectedQuiz.questions.length
+          {selectedQuiz && quizLength <= index
+            ? quizLength
             : index}
-          /{selectedQuiz ? selectedQuiz.questions.length : ""}
+          /{selectedQuiz ? quizLength: ""}
         </p>
       </div>
       <div className="quiz-body">
+            {modal && <AlertModal 
+            closeModal={setModal} 
+            heading={`You got ${Math.round(score / quizLength * 100)}%`} 
+            paragraph="Lorem ipsum"
+            />}
         <form>{renderInputs()}</form>
         {!isNextQuestion && (
           <ButtonPrimary onClick={onSubmitRadio}>Submit Question</ButtonPrimary>
         )}
-        {isNextQuestion && index < selectedQuiz.questions.length && (
+        {isNextQuestion && index < quizLength && (
           <ButtonTertiary onClick={onClickNextQuestion}>
             Next Question
           </ButtonTertiary>
         )}
-        {selectedQuiz && selectedQuiz.questions.length < index && <ButtonPrimary onClick={onSubmitQuiz}>Submit Quiz</ButtonPrimary>}
+        {selectedQuiz && quizLength < index && <ButtonPrimary onClick={onSubmitQuiz}>Submit Quiz</ButtonPrimary>}
       </div>
     </StyledCompleteQuiz>
   );
@@ -187,5 +207,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getQuizAndQsByUUID }
+  { getQuizAndQsByUUID, completeQuiz }
 )(CompleteQuiz);

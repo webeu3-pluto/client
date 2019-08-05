@@ -197,14 +197,17 @@ export const getQuizzesForStudent = id => async dispatch => {
   }
 };
 
-export const completeQuiz = (studentQuiz, history) => async dispatch => {
+export const completeQuiz = (studentQuiz, uuid) => async dispatch => {
   try {
-    const res = await axiosWithAuth().post(
-      `${server}/api/quizzes/students/${studentQuiz.quiz_id}`,
+    const quizzes = await axiosWithAuth().post(
+      `${server}/api/quizzes/complete/${studentQuiz.quiz_id}`,
       studentQuiz
     );
-    dispatch({ type: COMPLETE_QUIZ, payload: res.data });
-    history.push(`/app/quizzes/`);
+
+    console.log(quizzes);
+
+    dispatch({ type: COMPLETE_QUIZ, payload: quizzes.data });
+    await getQuizAndQsByUUID(uuid);
   } catch (err) {
     console.log(err);
   }
