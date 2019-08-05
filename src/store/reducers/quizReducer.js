@@ -11,6 +11,11 @@ const initState = {
 export default function(state = initState, action) {
   switch (action.type) {
     // students
+    case types.COMPLETE_QUIZ:
+      return {
+        ...state,
+        quizzes: action.payload
+      }
     case types.GET_QUIZZES_FOR_STUDENT:
       return {
         ...state,

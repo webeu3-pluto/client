@@ -18,6 +18,7 @@ export const UPDATE_QUESTION = "UPDATE_QUESTION";
 
 // students
 export const GET_QUIZZES_FOR_STUDENT = "GET_QUIZZES_FOR_STUDENT";
+export const COMPLETE_QUIZ = "COMPLETE_QUIZ";
 
 const server = "http://localhost:5005";
 // const server = "https://plutoserver.herokuapp.com";
@@ -28,7 +29,7 @@ export const getQuizAndQsByUUID = (uuid, history) => async dispatch => {
       `${server}/api/quizzes/create/${uuid}`
     );
     dispatch({ type: GET_QUIZ_AND_QS_UUID, payload: res.data });
-    if(history) history.push(`/app/quizzes/create/${uuid}`);
+    if (history) history.push(`/app/quizzes/create/${uuid}`);
   } catch (err) {
     console.log(err);
   }
@@ -185,12 +186,25 @@ export const clearQuizState = () => async dispatch => {
 
 // students
 
-export const getQuizzesForStudent = (id) => async dispatch => {
+export const getQuizzesForStudent = id => async dispatch => {
   try {
     const res = await axiosWithAuth().get(
       `${server}/api/quizzes/students/${id}`
     );
     dispatch({ type: GET_QUIZZES_FOR_STUDENT, payload: res.data });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const completeQuiz = (studentQuiz, history) => async dispatch => {
+  try {
+    const res = await axiosWithAuth().post(
+      `${server}/api/quizzes/students/${studentQuiz.quiz_id}`,
+      studentQuiz
+    );
+    dispatch({ type: COMPLETE_QUIZ, payload: res.data });
+    history.push(`/app/quizzes/`);
   } catch (err) {
     console.log(err);
   }
