@@ -42,6 +42,7 @@ const TeamLeadsDB = ({ user, getQuizByTeamLeadId, quizzesFetched, createQuizWith
             thirdHeading="Avg. Score"
             fourthHeading="Status"
             listOfQuizzes={quizzesFetched}
+            user={user}
             limit="3"
           />
         </div>

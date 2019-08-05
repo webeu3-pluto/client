@@ -41,6 +41,7 @@ const StudentsDB = ({ user, getQuizzesForStudent, quizzesFetched }) => {
             thirdHeading="Quiz Score"
             fourthHeading="Status"
             listOfQuizzes={quizzesFetched}
+            user={user}
             limit="3"
             isStudent
           />

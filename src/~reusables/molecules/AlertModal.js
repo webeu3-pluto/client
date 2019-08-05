@@ -17,7 +17,8 @@ const AlertModal = props => {
   const {
     closeModal,
     heading,
-    paragraph
+    paragraph,
+    history
   } = props;
 
   const fade = useSpring({
@@ -27,6 +28,7 @@ const AlertModal = props => {
 
   const onClickButton = e => {
     e.preventDefault();
+    history.push("/app/quizzes");
     closeModal(false);
   };
 
@@ -38,7 +40,7 @@ const AlertModal = props => {
             <h4>{heading}</h4>
             <p>{paragraph}</p>
             <div className="buttons">
-              <ButtonPrimary onClick={onClickButton}>Okay!</ButtonPrimary>
+              <ButtonPrimary onClick={onClickButton}>Back to Quizzes</ButtonPrimary>
             </div>
           </section>
         </div>

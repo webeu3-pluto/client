@@ -45,6 +45,7 @@ const TeamLeadsQV = props => {
             thirdHeading="Avg. Score"
             fourthHeading="Status"
             listOfQuizzes={quizzesFetched}
+            user={user}
           />
         </div>
       </div>

@@ -48,7 +48,7 @@ const QuizList = props => {
               {
                 <Link
                   to={
-                    isStudent
+                    isStudent && user
                       ? `/app/quizzes/complete/${quiz.uuid}/${quiz.id}/${user.id}`
                       : `/app/quizzes/create/${quiz.uuid}`
                   }
