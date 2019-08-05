@@ -19,7 +19,8 @@ const QuizList = props => {
     fourthHeading,
     listOfQuizzes,
     limit,
-    isStudent
+    isStudent,
+    user
   } = props;
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -48,7 +49,7 @@ const QuizList = props => {
                 <Link
                   to={
                     isStudent
-                      ? `/app/quizzes/complete/${quiz.uuid}`
+                      ? `/app/quizzes/complete/${quiz.uuid}/${quiz.id}/${user.id}`
                       : `/app/quizzes/create/${quiz.uuid}`
                   }
                 >

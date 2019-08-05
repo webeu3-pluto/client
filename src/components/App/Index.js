@@ -44,7 +44,7 @@ const App = props => {
           />
           <Route
             exact
-            path="/app/quizzes/complete/:id"
+            path="/app/quizzes/complete/:id/:quiz_id/:student_id"
             render={routeProps => <CompleteQuiz {...routeProps} />}
           />
           <Route

@@ -4,7 +4,12 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 // functions/components
-import { getQuizAndQsByUUID, completeQuiz } from "../../../store/actions/quizActions";
+import {
+  getQuizAndQsByUUID,
+  completeQuiz,
+  fetchCompletedQuiz,
+  clearQuizState
+} from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -22,7 +27,16 @@ import {
 import AlertModal from "../../../~reusables/molecules/AlertModal";
 
 const CompleteQuiz = props => {
-  const { match, getQuizAndQsByUUID, user, selectedQuiz, completeQuiz } = props;
+  const {
+    match,
+    getQuizAndQsByUUID,
+    user,
+    selectedQuiz,
+    completeQuiz,
+    completedQuiz,
+    fetchCompletedQuiz,
+    clearQuizState
+  } = props;
   const [question, setQuestion] = useState("");
   const [answerArray, setAnswerArray] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState("");
@@ -31,14 +45,19 @@ const CompleteQuiz = props => {
   const [score, setScore] = useState(0);
   const [index, setIndex] = useState(1);
 
-  console.log(selectedQuiz);
-
   let quizLength = 1;
   if (selectedQuiz) quizLength = selectedQuiz.questions.length;
 
+  console.log(completedQuiz);
+
   useEffect(() => {
     getQuizAndQsByUUID(match.params.id);
-  }, [match.params.id]);
+    fetchCompletedQuiz(match.params.quiz_id, match.params.student_id);
+    return () => {
+      clearQuizState();
+    };
+    
+  }, []);
 
   useEffect(() => {
     if (!question && selectedQuiz) {
@@ -90,9 +109,9 @@ const CompleteQuiz = props => {
         setScore(score + 1);
       }
       setIsNextQuestion(true);
-        if (index + 1 > quizLength) {
-          setIndex(index + 1);
-        }
+      if (index + 1 > quizLength) {
+        setIndex(index + 1);
+      }
     } else {
       console.log("select an option");
     }
@@ -116,37 +135,38 @@ const CompleteQuiz = props => {
 
   const onSubmitQuiz = e => {
     e.preventDefault();
-    const result =  Math.round((score / quizLength) * 100);
+    const result = Math.round((score / quizLength) * 100);
     const studentQuiz = {
       quiz_id: selectedQuiz.id,
       student_id: user.id,
       result,
       completed: true
-    }
-    
+    };
+
     setModal(true);
-    completeQuiz(studentQuiz, match.params.id)
-  }
+    completeQuiz(studentQuiz, match.params.id);
+  };
 
   return (
     <StyledCompleteQuiz>
       <div className="quiz-header">
         <p className="question">{question.question}</p>
         <p className="number">
-          {selectedQuiz && quizLength <= index
-            ? quizLength
-            : index}
-          /{selectedQuiz ? quizLength: ""}
+          {selectedQuiz && quizLength <= index ? quizLength : index}/
+          {selectedQuiz ? quizLength : ""}
         </p>
       </div>
       <div className="quiz-body">
-            {modal && <AlertModal 
-            closeModal={setModal} 
-            heading={`You got ${Math.round(score / quizLength * 100)}%`} 
+        {modal && (
+          <AlertModal
+            closeModal={setModal}
+            heading={`You got ${Math.round((score / quizLength) * 100)}%`}
             paragraph="Lorem ipsum"
-            />}
+          />
+        )}
         <form>{renderInputs()}</form>
-        {!isNextQuestion && (
+        {completedQuiz && <h3>Quiz Score: {completedQuiz.result}</h3>}
+        {!isNextQuestion && !completedQuiz && (
           <ButtonPrimary onClick={onSubmitRadio}>Submit Question</ButtonPrimary>
         )}
         {isNextQuestion && index < quizLength && (
@@ -154,7 +174,9 @@ const CompleteQuiz = props => {
             Next Question
           </ButtonTertiary>
         )}
-        {selectedQuiz && quizLength < index && <ButtonPrimary onClick={onSubmitQuiz}>Submit Quiz</ButtonPrimary>}
+        {selectedQuiz && quizLength < index && (
+          <ButtonPrimary onClick={onSubmitQuiz}>Submit Quiz</ButtonPrimary>
+        )}
       </div>
     </StyledCompleteQuiz>
   );
@@ -201,11 +223,12 @@ const StyledCompleteQuiz = styled.div`
 function mapStateToProps(state) {
   return {
     user: state.auth.user,
-    selectedQuiz: state.quiz.selectedQuiz
+    selectedQuiz: state.quiz.selectedQuiz,
+    completedQuiz: state.quiz.completedQuiz
   };
 }
 
 export default connect(
   mapStateToProps,
-  { getQuizAndQsByUUID, completeQuiz }
+  { getQuizAndQsByUUID, completeQuiz, fetchCompletedQuiz, clearQuizState }
 )(CompleteQuiz);

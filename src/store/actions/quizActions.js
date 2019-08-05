@@ -19,6 +19,7 @@ export const UPDATE_QUESTION = "UPDATE_QUESTION";
 // students
 export const GET_QUIZZES_FOR_STUDENT = "GET_QUIZZES_FOR_STUDENT";
 export const COMPLETE_QUIZ = "COMPLETE_QUIZ";
+export const FETCH_COMPLETED_QUIZ = "FETCH_COMPLETED_QUIZ";
 
 const server = "http://localhost:5005";
 // const server = "https://plutoserver.herokuapp.com";
@@ -212,3 +213,16 @@ export const completeQuiz = (studentQuiz, uuid) => async dispatch => {
     console.log(err);
   }
 };
+
+export const fetchCompletedQuiz = (quiz_id, student_id) => async dispatch => {
+  try {
+    const res = await axiosWithAuth().get(
+      `${server}/api/quizzes/complete/${quiz_id}/${student_id}`
+    );
+
+    dispatch({ type: FETCH_COMPLETED_QUIZ, payload: res.data })
+    
+  } catch (err) {
+    console.log(err);
+  }
+}

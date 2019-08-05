@@ -40,6 +40,7 @@ const StudentsQV = props => {
             fourthHeading="Status"
             listOfQuizzes={quizzesFetched}
             isStudent
+            user={user}
           />
         </div>
       </div>

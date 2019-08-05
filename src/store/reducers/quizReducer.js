@@ -4,6 +4,7 @@ const initState = {
   quizzes: [],
   selectedQuiz: null,
   selectedQuestion: null,
+  completedQuiz: null,
   categories: [],
   subCategories: []
 };
@@ -11,16 +12,23 @@ const initState = {
 export default function(state = initState, action) {
   switch (action.type) {
     // students
+    case types.FETCH_COMPLETED_QUIZ:
+      if (action.payload.length > 0)
+        return {
+          ...state,
+          completedQuiz: action.payload[0]
+        };
+      return state;
     case types.COMPLETE_QUIZ:
       return {
         ...state,
         quizzes: action.payload
-      }
+      };
     case types.GET_QUIZZES_FOR_STUDENT:
       return {
         ...state,
         quizzes: action.payload
-      }
+      };
     // team leads
     case types.UPDATE_QUESTION:
       return {
@@ -29,8 +37,8 @@ export default function(state = initState, action) {
           ...state.selectedQuiz,
           questions: action.payload
         },
-        selectedQuestion: ''
-      }
+        selectedQuestion: ""
+      };
     case types.SAVE_QUESTION:
       return {
         ...state,
@@ -38,7 +46,7 @@ export default function(state = initState, action) {
           ...state.selectedQuiz,
           questions: [...state.selectedQuiz.questions, ...action.payload]
         },
-        selectedQuestion: state.selectedQuestion === null ? '' : null
+        selectedQuestion: state.selectedQuestion === null ? "" : null
       };
     case types.CLICK_NEW_QUESTION:
       return {
@@ -66,7 +74,8 @@ export default function(state = initState, action) {
         ...state,
         categories: [],
         subCategories: [],
-        selectedQuiz: null
+        selectedQuiz: null,
+        completedQuiz: null
       };
     case types.UPDATE_QUIZ_STATUS:
       return {
@@ -116,7 +125,7 @@ export default function(state = initState, action) {
     case types.GET_QUIZ_AND_QS_UUID:
       return {
         ...state,
-        selectedQuiz: action.payload,
+        selectedQuiz: action.payload
       };
     default:
       return state;
