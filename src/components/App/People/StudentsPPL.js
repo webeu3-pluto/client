@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import AddPeopleModal from "./AddPeopleModal";
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import {
-  getStudentsByCohort,
+  getTeamLeadsByCohort,
   addStudentToPeople
 } from "../../../store/actions/peopleActions";
 import PeopleList from "../../../~reusables/molecules/PeopleList";
@@ -24,34 +24,16 @@ import { support } from "../../../~reusables/variables/colors";
 
 const StudentsPPL = props => {
   const [modal, setModal] = useState(false);
-  const { getStudentsByCohort, addStudentToPeople } = props;
+  const { getTeamLeadsByCohort, addStudentToPeople } = props;
 
   const onAddStudent = () => {
-    getStudentsByCohort();
+    getTeamLeadsByCohort();
     setModal(true);
   };
 
   const people = [
-    { name: "Isaac A", quizzes: "2", score: 85 },
-    { name: "Isaac Ad ", quizzes: "2", score: 85 },
-    { name: "Isaac Ade", quizzes: "2", score: 85 },
-    { name: "Isaac Ader ", quizzes: "2", score: 85 },
-    { name: "Isaac Adero", quizzes: "2", score: 85 },
-    { name: "Isaac Aderog ", quizzes: "2", score: 85 },
-    { name: "Isaac Aderogb", quizzes: "2", score: 85 },
-    { name: "Isaac Aderogba ", quizzes: "2", score: 85 },
-    { name: "Isaa Aderogba", quizzes: "2", score: 85 },
-    { name: "Isa Aderogba ", quizzes: "2", score: 85 },
-    { name: "Isaac A", quizzes: "2", score: 85 },
-    { name: "Isaac Ad ", quizzes: "2", score: 85 },
-    { name: "Isaac Ade", quizzes: "2", score: 85 },
-    { name: "Isaac Ader ", quizzes: "2", score: 85 },
-    { name: "Isaac Adero", quizzes: "2", score: 85 },
-    { name: "Isaac Aderog ", quizzes: "2", score: 85 },
-    { name: "Isaac Aderogb", quizzes: "2", score: 85 },
-    { name: "Isaac Aderogba ", quizzes: "2", score: 85 },
-    { name: "Isaa Aderogba", quizzes: "2", score: 85 },
-    { name: "Isa Aderogba ", quizzes: "2", score: 85 }
+    { fullName: "Isaac A", quizzes: "2", score: 85 },
+    { fullName: "Isaac Ad ", quizzes: "2", score: 85 }
   ];
 
   return (
@@ -125,5 +107,5 @@ const StyledProfile = styled.main`
 
 export default connect(
   null,
-  { getStudentsByCohort, addStudentToPeople }
+  { getTeamLeadsByCohort, addStudentToPeople }
 )(StudentsPPL);

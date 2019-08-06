@@ -6,9 +6,17 @@ export const ADD_STUDENT_TO_PEOPLE = "ADD_STUDENT_TO_PEOPLE";
 export const GET_TEAMLEADS_STUDENTS = "GET_TEAMLEADS_STUDENTS";
 export const REMOVE_STUDENT = "REMOVE_STUDENT";
 
+// student specific
+export const GET_TEAMLEADS_BY_COHORT = "GET_TEAMLEADS_BY_COHORT";
+export const ADD_TEAMLEAD_TO_PEOPLE = "ADD_TEAMLEAD_TO_PEOPLE";
+export const GET_STUDENTS_TEAMLEADS = "GET_STUDENTS_TEAMLEADS";
+export const REMOVE_TEAMLEAD = "REMOVE_TEAMLEAD"
+
 // const server = "https://plutoserver.herokuapp.com";
 const server = "http://localhost:5005";
 
+
+// Team Leads
 export const getStudentsByCohort = () => async dispatch => {
   try {
     const res = await axiosWithAuth().get(`${server}/api/cohort/students`);
@@ -42,6 +50,16 @@ export const removeStudent = (id) => async dispatch => {
       data: { id }
     });
     dispatch({ type: REMOVE_STUDENT, payload: res.data.students })
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Students
+export const getTeamLeadsByCohort = () => async dispatch => {
+  try {
+    const res = await axiosWithAuth().get(`${server}/api/cohort/teamleads`);
+    dispatch({ type: GET_TEAMLEADS_BY_COHORT, payload: res.data })
   } catch (err) {
     console.log(err);
   }
