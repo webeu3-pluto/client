@@ -47,13 +47,13 @@ const TeamLeadsDB = ({ user, getQuizByTeamLeadId, quizzesFetched, createQuizWith
           />
         </div>
         <div className="footer">
-          <Link to={`app/quizzes/create/${uuid()}`}>
+          {/* <Link to={`app/quizzes/create/${uuid()}`}> */}
           <ButtonTertiary
             onClick={() => createQuizWithQuestion(uuid(), user.id, history)}
           >
             Create Quiz
           </ButtonTertiary>
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
       <div className="kpi-wrapper">

@@ -56,8 +56,8 @@ const Profile = ({ user, validateUser, updateUser, deleteUser }) => {
         <DeleteModal
           functionCb={deleteUser}
           closeModal={setModal}
-          heading="Lorem ipsum lorem ipsum"
-          paragraph="Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum."
+          heading="Delete User Account"
+          paragraph="Are you sure you wish to delete your user account? This action cannot be undone."
         />
       )}
       <div className="wrapper">

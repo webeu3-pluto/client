@@ -1,5 +1,5 @@
 // modules
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
@@ -8,7 +8,9 @@ import AddPeopleModal from "./AddPeopleModal";
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import {
   getStudentsByCohort,
-  addStudentToPeople
+  addStudentToPeople,
+  getTeamLeadStudents,
+  removeStudent
 } from "../../../store/actions/peopleActions";
 import PeopleList from "../../../~reusables/molecules/PeopleList";
 
@@ -24,35 +26,16 @@ import { support } from "../../../~reusables/variables/colors";
 
 const TeamLeadsPPL = props => {
   const [modal, setModal] = useState(false);
-  const { getStudentsByCohort, addStudentToPeople } = props;
+  const { getStudentsByCohort, addStudentToPeople, getTeamLeadStudents, people, removeStudent } = props;
+
+  useEffect(() => {
+    getTeamLeadStudents();
+  }, [])
 
   const onAddStudent = () => {
     getStudentsByCohort();
     setModal(true);
   };
-
-  const people = [
-    { name: "Isaac A", quizzes: "2", score: 85 },
-    { name: "Isaac Ad ", quizzes: "2", score: 85 },
-    { name: "Isaac Ade", quizzes: "2", score: 85 },
-    { name: "Isaac Ader ", quizzes: "2", score: 85 },
-    { name: "Isaac Adero", quizzes: "2", score: 85 },
-    { name: "Isaac Aderog ", quizzes: "2", score: 85 },
-    { name: "Isaac Aderogb", quizzes: "2", score: 85 },
-    { name: "Isaac Aderogba ", quizzes: "2", score: 85 },
-    { name: "Isaa Aderogba", quizzes: "2", score: 85 },
-    { name: "Isa Aderogba ", quizzes: "2", score: 85 },
-    { name: "Isaac A", quizzes: "2", score: 85 },
-    { name: "Isaac Ad ", quizzes: "2", score: 85 },
-    { name: "Isaac Ade", quizzes: "2", score: 85 },
-    { name: "Isaac Ader ", quizzes: "2", score: 85 },
-    { name: "Isaac Adero", quizzes: "2", score: 85 },
-    { name: "Isaac Aderog ", quizzes: "2", score: 85 },
-    { name: "Isaac Aderogb", quizzes: "2", score: 85 },
-    { name: "Isaac Aderogba ", quizzes: "2", score: 85 },
-    { name: "Isaa Aderogba", quizzes: "2", score: 85 },
-    { name: "Isa Aderogba ", quizzes: "2", score: 85 }
-  ];
 
   return (
     <StyledProfile>
@@ -75,6 +58,7 @@ const TeamLeadsPPL = props => {
             secondHeading="Quizzes Complete"
             thirdHeading="Avg. Score"
             listOfPeople={people}
+            removePerson={removeStudent}
           />
         </div>
       </div>
@@ -123,7 +107,13 @@ const StyledProfile = styled.main`
   }
 `;
 
+function mapStateToProps(state) {
+  return {
+    people: state.people.peopleByUser
+  }
+}
+
 export default connect(
-  null,
-  { getStudentsByCohort, addStudentToPeople }
+  mapStateToProps,
+  { getStudentsByCohort, addStudentToPeople, getTeamLeadStudents, removeStudent }
 )(TeamLeadsPPL);

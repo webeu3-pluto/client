@@ -7,16 +7,22 @@ import { BasicActionBtn } from "../atoms/Buttons";
 
 // styles
 import { heading_5, body_2 } from "../variables/font-sizes";
-import {
-  support
-} from "../variables/colors";
+import { support } from "../variables/colors";
 import { xs_space } from "../variables/spacing";
 import { tablet_max_width } from "../variables/media-queries";
 import Tabs from "./Tabs";
 
 const PeopleList = props => {
-  const { firstHeading, secondHeading, thirdHeading, listOfPeople } = props;
+  const {
+    firstHeading,
+    secondHeading,
+    thirdHeading,
+    listOfPeople,
+    removePerson
+  } = props;
   const [tabIndex, setTabIndex] = useState(0);
+
+  console.log(listOfPeople);
 
   useEffect(() => {
     setTabIndex(0);
@@ -25,12 +31,14 @@ const PeopleList = props => {
   const renderPeople = () => {
     return listOfPeople.slice(tabIndex * 8, 8 * (tabIndex + 1)).map(person => {
       return (
-        <div key={person.name} className="body">
-          <p>{person.name}</p>
+        <div key={person.fullName} className="body">
+          <p>{person.fullName}</p>
           <p className="center-align hide-item">{person.quizzes}</p>
-          <p className="center-align">{person.score}%</p>
+          <p className="center-align">{person.score ? person.score : 0}%</p>
           <div>
-            <BasicActionBtn>X</BasicActionBtn>
+            <BasicActionBtn onClick={() => removePerson(person.id)}>
+              X
+            </BasicActionBtn>
           </div>
         </div>
       );
