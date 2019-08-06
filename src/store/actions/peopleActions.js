@@ -12,8 +12,8 @@ export const ADD_TEAMLEAD_TO_PEOPLE = "ADD_TEAMLEAD_TO_PEOPLE";
 export const GET_STUDENTS_TEAMLEADS = "GET_STUDENTS_TEAMLEADS";
 export const REMOVE_TEAMLEAD = "REMOVE_TEAMLEAD"
 
-// const server = "https://plutoserver.herokuapp.com";
-const server = "http://localhost:5005";
+const server = "https://plutoserver.herokuapp.com";
+// const server = "http://localhost:5005";
 
 
 // Team Leads

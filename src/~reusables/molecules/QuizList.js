@@ -42,7 +42,7 @@ const QuizList = props => {
             <p className="center-align hide-item">
               {isStudent ? quiz.teamLead : quiz.completionRate + "%"}
             </p>
-            <p className="center-align hide-item">{quiz.score + "%"}</p>
+            <p className="center-align hide-item">{Math.round(quiz.score) + "%"}</p>
 
             <p className={`right-align ${quizStatus}`}>
               {

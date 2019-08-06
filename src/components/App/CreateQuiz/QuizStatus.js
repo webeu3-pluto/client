@@ -57,7 +57,7 @@ const QuizStatus = props => {
         <TextButton color="#DA2640" onClick={() => setModal(true)}>
           Delete Quiz
         </TextButton>
-        <ButtonTertiary>Generate Quiz</ButtonTertiary>
+        {/* <ButtonTertiary>Generate Quiz</ButtonTertiary> */}
         {quizStatus ? (
           <ButtonSecondary
             onClick={() => updateQuizStatus(false, selectedQuiz.uuid)}

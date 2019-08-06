@@ -10,9 +10,10 @@ export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
 export const VALIDATE_USER = "VALIDATE_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER = "DELETE_USER";
+export const GET_USER_SUMMARY = "GET_USER_SUMMARY";
 
-// const server = "https://plutoserver.herokuapp.com";
-const server = "http://localhost:5005";
+const server = "https://plutoserver.herokuapp.com";
+// const server = "http://localhost:5005";
 
 export const signUp = (user, history) => async dispatch => {
   try {
@@ -96,3 +97,21 @@ export const deleteUser = () => async dispatch => {
     console.log(err);
   }
 };
+
+export const getUserTLSummary = () => async dispatch => {
+  try {
+    const res = await axiosWithAuth().get(`${server}/api/teamlead/summary`);
+    dispatch({ type: GET_USER_SUMMARY, payload: res.data })
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getUserStSummary = () => async dispatch => {
+  try {
+    const res = await axiosWithAuth().get(`${server}/api/student/summary`);
+    dispatch({ type: GET_USER_SUMMARY, payload: res.data })
+  } catch (err) {
+    console.log(err);
+  }
+}

@@ -20,11 +20,21 @@ import {
 } from "../../../~reusables/variables/spacing";
 import { support, text, headings } from "../../../~reusables/variables/colors";
 import { heading_1, body_1 } from "../../../~reusables/variables/font-sizes";
+import { getUserStSummary } from "../../../store/actions/authActions";
 
-const StudentsDB = ({ user, getQuizzesForStudent, quizzesFetched }) => {
+const StudentsDB = ({
+  user,
+  getQuizzesForStudent,
+  quizzesFetched,
+  getUserStSummary,
+  userSummary
+}) => {
   useEffect(() => {
     getQuizzesForStudent(user.id);
+    getUserStSummary();
   }, []);
+
+  console.log(userSummary);
 
   return (
     <StyledQuizView>
@@ -53,10 +63,10 @@ const StudentsDB = ({ user, getQuizzesForStudent, quizzesFetched }) => {
         </div>
       </div>
       <div className="kpi-wrapper">
-        <OverviewBlock heading="Team Leads" stat="7" />
-        <OverviewBlock heading="Quizzes" stat="13" />
-        <OverviewBlock heading="Completions" stat="80/91" />
-        <OverviewBlock heading="Avg. Score" stat="85%" />
+        <OverviewBlock heading="Team Leads" stat={userSummary.teamleads} />
+        <OverviewBlock heading="Quizzes" stat={userSummary.quizzesCreated} />
+        <OverviewBlock heading="Completion Rate" stat={userSummary.completionRate + '%'} />
+        <OverviewBlock heading="Avg. Score" stat={userSummary.avgQuizScore + '%'} />
       </div>
     </StyledQuizView>
   );
@@ -137,11 +147,12 @@ const StyledQuizView = styled.main`
 
 function mapStateToProps(state) {
   return {
-    quizzesFetched: state.quiz.quizzes
+    quizzesFetched: state.quiz.quizzes,
+    userSummary: state.auth.userSummary
   };
 }
 
 export default connect(
   mapStateToProps,
-  { getQuizzesForStudent }
+  { getQuizzesForStudent, getUserStSummary }
 )(StudentsDB);

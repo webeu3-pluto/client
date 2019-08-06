@@ -21,8 +21,8 @@ export const GET_QUIZZES_FOR_STUDENT = "GET_QUIZZES_FOR_STUDENT";
 export const COMPLETE_QUIZ = "COMPLETE_QUIZ";
 export const FETCH_COMPLETED_QUIZ = "FETCH_COMPLETED_QUIZ";
 
-const server = "http://localhost:5005";
-// const server = "https://plutoserver.herokuapp.com";
+// const server = "http://localhost:5005";
+const server = "https://plutoserver.herokuapp.com";
 
 export const getQuizAndQsByUUID = (uuid, history) => async dispatch => {
   try {

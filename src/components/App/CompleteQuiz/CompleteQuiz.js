@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 // functions/components
 import {
@@ -27,6 +27,7 @@ import {
   ButtonTertiary
 } from "../../../~reusables/atoms/Buttons";
 import AlertModal from "../../../~reusables/molecules/AlertModal";
+import QuizHeader from "./QuizHeader";
 
 const CompleteQuiz = props => {
   const {
@@ -69,37 +70,7 @@ const CompleteQuiz = props => {
         { p_answer3: selectedQuiz.questions[0].p_answer3 }
       ]);
     }
-  }, [selectedQuiz]);
-
-  const setQuestionAndAnswer = index => {
-    setQuestion(selectedQuiz.questions[index]);
-    setAnswerArray([
-      { answer: selectedQuiz.questions[index].answer },
-      { p_answer1: selectedQuiz.questions[index].p_answer1 },
-      { p_answer2: selectedQuiz.questions[index].p_answer2 },
-      { p_answer3: selectedQuiz.questions[index].p_answer3 }
-    ]);
-  };
-
-  const onClickRightArrow = () => {
-    if (index === quizLength) {
-      // do nothing
-    } else {
-      setIndex(index + 1);
-      setSelectedRadio("");
-      setQuestionAndAnswer(selectedQuiz.questions.indexOf(question) + 1);
-    }
-  };
-
-  const onClickLeftArrow = () => {
-    if (index <= 1) {
-      // do nothing
-    } else {
-      setIndex(index - 1);
-      setSelectedRadio("");
-      setQuestionAndAnswer(selectedQuiz.questions.indexOf(question) - 1);
-    }
-  };
+  }, [question, selectedQuiz]);
 
   const onSubmitRadio = e => {
     e.preventDefault();
@@ -179,35 +150,25 @@ const CompleteQuiz = props => {
   const renderAnswer = () => {
     let answerToRender;
     answerArray.forEach(answer => {
-      if(Object.keys(answer)[0] === 'answer') answerToRender = answer.answer
-    })
+      if (Object.keys(answer)[0] === "answer") answerToRender = answer.answer;
+    });
     return <p className="answer">Answer: {answerToRender}</p>;
-  }
+  };
 
   return (
     <StyledCompleteQuiz>
       <div className="quiz-header">
-        <p className="question">{question.question}</p>
-        <div className="number">
-          {completedQuiz && (
-            <>
-              <p>
-                <i onClick={onClickLeftArrow} className={`material-icons`}>
-                  keyboard_arrow_left
-                </i>
-              </p>
-              <p>
-                <i onClick={onClickRightArrow} className={`material-icons`}>
-                  keyboard_arrow_right
-                </i>
-              </p>
-            </>
-          )}
-          <p>
-            {selectedQuiz && quizLength <= index ? quizLength : index}/
-            {selectedQuiz ? quizLength : ""}
-          </p>
-        </div>
+        <QuizHeader
+          setQuestion={setQuestion}
+          selectedQuiz={selectedQuiz}
+          setAnswerArray={setAnswerArray}
+          index={index}
+          quizLength={quizLength}
+          setIndex={setIndex}
+          setSelectedRadio={setSelectedRadio}
+          question={question}
+          completedQuiz={completedQuiz}
+        />
       </div>
       <div className="quiz-body">
         {modal && (
@@ -219,11 +180,13 @@ const CompleteQuiz = props => {
           />
         )}
         <form>{renderInputs()}</form>
-        {(isNextQuestion || completedQuiz) &&  renderAnswer()}
+        {(isNextQuestion || completedQuiz) && renderAnswer()}
         <div className="footer">
           {completedQuiz && <h3>Quiz Score: {completedQuiz.result}</h3>}
           {!isNextQuestion && !completedQuiz && (
-            <ButtonPrimary onClick={onSubmitRadio}>Submit Question</ButtonPrimary>
+            <ButtonPrimary onClick={onSubmitRadio}>
+              Submit Question
+            </ButtonPrimary>
           )}
           {isNextQuestion && index < quizLength && (
             <ButtonTertiary onClick={onClickNextQuestion}>
@@ -313,19 +276,6 @@ const StyledCompleteQuiz = styled.div`
   .material-icons {
     margin-right: ${xs_space};
     cursor: pointer;
-  }
-
-  .quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .question {
-      font-size: 18px;
-    }
-    .number {
-      color: ${support};
-      display: flex;
-    }
   }
 
   .quiz-header,

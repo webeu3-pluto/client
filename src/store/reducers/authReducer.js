@@ -5,11 +5,14 @@ const initState = {
   authLoader: null,
   loginError: null,
   signupError: null,
-  user: null
+  user: null,
+  userSummary: {}
 };
 
 export default function(state = initState, action) {
   switch (action.type) {
+    case types.GET_USER_SUMMARY:
+      return { ...state, userSummary: action.payload }
     case types.VALIDATE_USER:
       return {
         ...state,

@@ -9,7 +9,10 @@ import uuid from "uuid";
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import QuizList from "../../../~reusables/molecules/QuizList";
 import OverviewBlock from "../../../~reusables/molecules/OverviewBlock";
-import { getQuizByTeamLeadId, createQuizWithQuestion } from "../../../store/actions/quizActions";
+import {
+  getQuizByTeamLeadId,
+  createQuizWithQuestion
+} from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -21,11 +24,23 @@ import {
 } from "../../../~reusables/variables/spacing";
 import { support, text, headings } from "../../../~reusables/variables/colors";
 import { heading_1, body_1 } from "../../../~reusables/variables/font-sizes";
+import { getUserTLSummary } from "../../../store/actions/authActions";
 
-const TeamLeadsDB = ({ user, getQuizByTeamLeadId, quizzesFetched, createQuizWithQuestion, history }) => {
+const TeamLeadsDB = ({
+  user,
+  getQuizByTeamLeadId,
+  quizzesFetched,
+  createQuizWithQuestion,
+  history,
+  getUserTLSummary,
+  userSummary
+}) => {
   useEffect(() => {
     getQuizByTeamLeadId(user.id);
-  }, [])
+    getUserTLSummary();
+  }, []);
+
+  console.log(userSummary);
 
   return (
     <StyledQuizView>
@@ -47,20 +62,18 @@ const TeamLeadsDB = ({ user, getQuizByTeamLeadId, quizzesFetched, createQuizWith
           />
         </div>
         <div className="footer">
-          {/* <Link to={`app/quizzes/create/${uuid()}`}> */}
           <ButtonTertiary
             onClick={() => createQuizWithQuestion(uuid(), user.id, history)}
           >
             Create Quiz
           </ButtonTertiary>
-          {/* </Link> */}
         </div>
       </div>
       <div className="kpi-wrapper">
-        <OverviewBlock heading="Students" stat="7" />
-        <OverviewBlock heading="Quizzes" stat="13" />
-        <OverviewBlock heading="Completions" stat="80/91" />
-        <OverviewBlock heading="Avg. Score" stat="85%" />
+        <OverviewBlock heading="Students" stat={userSummary.students} />
+        <OverviewBlock heading="Quizzes Published" stat={userSummary.quizzesCreated} />
+        <OverviewBlock heading="Completion Rate" stat={userSummary.completionRate + '%'} />
+        <OverviewBlock heading="Avg. Score" stat={userSummary.avgStudentScore + '%'} />
       </div>
     </StyledQuizView>
   );
@@ -141,8 +154,12 @@ const StyledQuizView = styled.main`
 
 function mapStateToProps(state) {
   return {
-    quizzesFetched: state.quiz.quizzes
-  }
+    quizzesFetched: state.quiz.quizzes,
+    userSummary: state.auth.userSummary
+  };
 }
 
-export default connect(mapStateToProps, { getQuizByTeamLeadId, createQuizWithQuestion })(withRouter(TeamLeadsDB));
+export default connect(
+  mapStateToProps,
+  { getQuizByTeamLeadId, createQuizWithQuestion, getUserTLSummary }
+)(withRouter(TeamLeadsDB));
