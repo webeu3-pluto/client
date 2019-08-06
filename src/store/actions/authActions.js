@@ -63,7 +63,6 @@ export const logIn = (user, history) => async dispatch => {
       history.push("/app");
     }
   } catch (err) {
-    debugger
     dispatch({ type: LOG_IN_FAILURE, payload: err.response.data.message });
   }
 };

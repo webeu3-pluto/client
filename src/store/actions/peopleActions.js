@@ -29,7 +29,8 @@ export const getStudentsByCohort = () => async dispatch => {
 export const addStudentToPeople = (id) => async dispatch => {
   try {
     await axiosWithAuth().post(`${server}/api/teamlead/students`, { id });
-    dispatch({ type: ADD_STUDENT_TO_PEOPLE })
+    const res = await axiosWithAuth().get(`${server}/api/teamlead/students/data`);
+    dispatch({ type: ADD_STUDENT_TO_PEOPLE, payload: res.data })
   } catch (err) {
     console.log(err);
   }
@@ -60,6 +61,36 @@ export const getTeamLeadsByCohort = () => async dispatch => {
   try {
     const res = await axiosWithAuth().get(`${server}/api/cohort/teamleads`);
     dispatch({ type: GET_TEAMLEADS_BY_COHORT, payload: res.data })
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const addTeamLeadToPeople = (id) => async dispatch => {
+  try {
+    await axiosWithAuth().post(`${server}/api/student/teamleads`, { id });
+    const res = await axiosWithAuth().get(`${server}/api/student/teamleads/data`);
+    dispatch({ type: ADD_TEAMLEAD_TO_PEOPLE, payload: res.data })
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getStudentsTeamLeads = () => async dispatch => {
+  try {
+    const res = await axiosWithAuth().get(`${server}/api/student/teamleads/data`);
+    dispatch({ type: GET_STUDENTS_TEAMLEADS, payload: res.data })
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const removeTeamLead = (id) => async dispatch => {
+  try {
+    const res = await axiosWithAuth().delete(`${server}/api/student/teamleads`, {
+      data: { id }
+    });
+    dispatch({ type: REMOVE_TEAMLEAD, payload: res.data.teamleads })
   } catch (err) {
     console.log(err);
   }

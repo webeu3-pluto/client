@@ -1,5 +1,5 @@
 // modules
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
@@ -8,7 +8,9 @@ import AddPeopleModal from "./AddPeopleModal";
 import { ButtonTertiary } from "../../../~reusables/atoms/Buttons";
 import {
   getTeamLeadsByCohort,
-  addStudentToPeople
+  addTeamLeadToPeople,
+  getStudentsTeamLeads,
+  removeTeamLead
 } from "../../../store/actions/peopleActions";
 import PeopleList from "../../../~reusables/molecules/PeopleList";
 
@@ -24,24 +26,29 @@ import { support } from "../../../~reusables/variables/colors";
 
 const StudentsPPL = props => {
   const [modal, setModal] = useState(false);
-  const { getTeamLeadsByCohort, addStudentToPeople } = props;
+  const {
+    getTeamLeadsByCohort,
+    addTeamLeadToPeople,
+    getStudentsTeamLeads,
+    people,
+    removeTeamLead
+  } = props;
+
+  useEffect(() => {
+    getStudentsTeamLeads();
+  }, []);
 
   const onAddStudent = () => {
     getTeamLeadsByCohort();
     setModal(true);
   };
 
-  const people = [
-    { fullName: "Isaac A", quizzes: "2", score: 85 },
-    { fullName: "Isaac Ad ", quizzes: "2", score: 85 }
-  ];
-
   return (
     <StyledProfile>
       <div className="wrapper">
         {modal && (
           <AddPeopleModal
-            functionCb={addStudentToPeople}
+            functionCb={addTeamLeadToPeople}
             closeModal={setModal}
             heading="Lorem ipsum"
             paragraph="lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
@@ -54,9 +61,10 @@ const StudentsPPL = props => {
         <div className="body">
           <PeopleList
             firstHeading="Name"
-            secondHeading="Quizzes Complete"
-            thirdHeading="Avg. Score"
+            secondHeading="TL's Quizzes Complete"
+            thirdHeading="TL's Avg. Score"
             listOfPeople={people}
+            removePerson={removeTeamLead}
           />
         </div>
       </div>
@@ -105,7 +113,13 @@ const StyledProfile = styled.main`
   }
 `;
 
+function mapStateToProps(state) {
+  return {
+    people: state.people.peopleByUser
+  }
+}
+
 export default connect(
-  null,
-  { getTeamLeadsByCohort, addStudentToPeople }
+  mapStateToProps,
+  { getTeamLeadsByCohort, addTeamLeadToPeople, getStudentsTeamLeads, removeTeamLead }
 )(StudentsPPL);
