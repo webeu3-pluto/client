@@ -163,6 +163,7 @@ const CompleteQuiz = props => {
             <input
               id={Object.keys(answer)[0]}
               type="radio"
+              checked={Object.keys(answer)[0] === selectedRadio}
               value={Object.keys(answer)[0]}
               name="quiz"
               onChange={e => setSelectedRadio(e.target.value)}
