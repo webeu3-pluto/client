@@ -36,7 +36,7 @@ const StudentsQV = props => {
             secondHeading="Team Lead"
             thirdHeading="Quiz Score"
             fourthHeading="Status"
-            listOfQuizzes={quizzesFetched}
+            listOfQuizzes={quizzesFetched.reverse()}
             isStudent
             user={user}
           />
