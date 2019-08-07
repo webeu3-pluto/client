@@ -40,8 +40,6 @@ const TeamLeadsDB = ({
     getUserTLSummary();
   }, []);
 
-  console.log(userSummary);
-
   return (
     <StyledQuizView>
       <div className="wrapper">
@@ -70,10 +68,10 @@ const TeamLeadsDB = ({
         </div>
       </div>
       <div className="kpi-wrapper">
-        <OverviewBlock heading="Students" stat={userSummary.students} />
-        <OverviewBlock heading="Quizzes Published" stat={userSummary.quizzesCreated} />
-        <OverviewBlock heading="Completion Rate" stat={userSummary.completionRate + '%'} />
-        <OverviewBlock heading="Avg. Score" stat={userSummary.avgStudentScore + '%'} />
+        <OverviewBlock heading="Students" stat={userSummary.students || 0} />
+        <OverviewBlock heading="Quizzes Published" stat={userSummary.quizzesCreated || 0} />
+        <OverviewBlock heading="Completion Rate" stat={userSummary.completionRate || 0 } percentage />
+        <OverviewBlock heading="Avg. Score" stat={userSummary.avgStudentScore || 0 } percentage />
       </div>
     </StyledQuizView>
   );

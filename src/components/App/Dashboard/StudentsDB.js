@@ -65,8 +65,8 @@ const StudentsDB = ({
       <div className="kpi-wrapper">
         <OverviewBlock heading="Team Leads" stat={userSummary.teamleads} />
         <OverviewBlock heading="Quizzes" stat={userSummary.quizzesCreated} />
-        <OverviewBlock heading="Completion Rate" stat={userSummary.completionRate + '%'} />
-        <OverviewBlock heading="Avg. Score" stat={userSummary.avgQuizScore + '%'} />
+        <OverviewBlock heading="Completion Rate" stat={userSummary.completionRate || 0 } percentage />
+        <OverviewBlock heading="Avg. Score" stat={userSummary.avgQuizScore || 0 } percentage />
       </div>
     </StyledQuizView>
   );

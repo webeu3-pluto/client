@@ -9,11 +9,11 @@ import { support, headings } from "../variables/colors";
 import {  heading_2 } from "../variables/font-sizes";
 import { medium_space_1, small_space, xs_space } from "../variables/spacing";
 
-const OverviewBlock = ({ heading, stat }) => {
+const OverviewBlock = ({ heading, stat, percentage }) => {
   return (
     <StyledBlock>
           <h4>{heading}</h4>
-      <p>{stat}</p>
+      <p>{stat}{percentage ? '%' : null}</p>
     </StyledBlock>
   );
 };
