@@ -19,6 +19,7 @@ import {
   small_space
 } from "../../../~reusables/variables/spacing";
 import { tablet_max_width } from "../../../~reusables/variables/media-queries";
+import cohorts from "../../../~reusables/data/cohorts";
 
 const SignUpForm = props => {
   const [firstName, setFirstName] = useState("");
@@ -83,9 +84,7 @@ const SignUpForm = props => {
             <option value="" disabled selected hidden>
               Select cohort
             </option>
-            <option value="WEBEU1">WEBEU1</option>
-            <option value="WEBEU2">WEBEU2</option>
-            <option value="WEBEU3">WEBEU3</option>
+            {cohorts.map(cohort => <option value={cohort}>{cohort}</option>)}
           </WhiteSelect>
         </div>
         <WhiteInput

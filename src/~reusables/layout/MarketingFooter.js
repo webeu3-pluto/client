@@ -23,7 +23,7 @@ const MarketingFooter = () => {
           </span>{" "}
           by <a href="https://github.com/IsaacAderogba">Isaac,</a>{" "}
           <a href="https://github.com/josenriagu">Josemaria </a> and{" "}
-          <a href="https://github.com/OLORUNTOBI-LEVELUP">Toby </a>
+          <a href="https://github.com/OloruntobiAwoderu">Toby </a>
         </p>
       </div>
     </StyledFooter>
