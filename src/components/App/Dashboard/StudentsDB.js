@@ -34,8 +34,6 @@ const StudentsDB = ({
     getUserStSummary();
   }, []);
 
-  console.log(userSummary);
-
   return (
     <StyledQuizView>
       <div className="wrapper">

@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 // styles
 import { support } from "../../../~reusables/variables/colors";
+import { xs_space } from "../../../~reusables/variables/spacing";
 
 const QuizHeader = props => {
   const {
@@ -19,8 +20,6 @@ const QuizHeader = props => {
     question,
     completedQuiz
   } = props;
-
-  console.log(completedQuiz);
 
   const setQuestionAndAnswer = index => {
     setQuestion(selectedQuiz.questions[index]);
@@ -83,6 +82,12 @@ const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .material-icons {
+    margin-right: ${xs_space};
+    cursor: pointer;
+  }
+
   .question {
     font-size: 18px;
   }

@@ -18,13 +18,10 @@ import {
   large_space,
   small_space,
   medium_space_1,
-  xs_space
 } from "../../../~reusables/variables/spacing";
-import { primary } from "../../../~reusables/variables/colors";
-import { body_2 } from "../../../~reusables/variables/font-sizes";
-import AlertModal from "../../../~reusables/molecules/AlertModal";
 import QuizHeader from "./QuizHeader";
 import QuizFooter from "./QuizFooter";
+import QuizBody from "./QuizBody";
 
 const CompleteQuiz = props => {
   const {
@@ -69,44 +66,6 @@ const CompleteQuiz = props => {
     }
   }, [question, selectedQuiz]);
 
-  const shuffleArray = array => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  };
-
-  const renderInputs = () => {
-    if (!selectedRadio) shuffleArray(answerArray);
-    return answerArray.map(answer => {
-      if (Object.values(answer)[0]) {
-        return (
-          <label className="input-radio" key={Object.keys(answer)[0]}>
-            {Object.values(answer)[0]}
-            <input
-              id={Object.keys(answer)[0]}
-              type="radio"
-              checked={Object.keys(answer)[0] === selectedRadio}
-              value={Object.keys(answer)[0]}
-              name="quiz"
-              onChange={e => setSelectedRadio(e.target.value)}
-            />
-            <span className="checkmark" />
-          </label>
-        );
-      }
-      return null;
-    });
-  };
-
-  const renderAnswer = () => {
-    let answerToRender;
-    answerArray.forEach(answer => {
-      if (Object.keys(answer)[0] === "answer") answerToRender = answer.answer;
-    });
-    return <p className="answer">Answer: {answerToRender}</p>;
-  };
-
   return (
     <StyledCompleteQuiz>
       <div className="quiz-header">
@@ -123,16 +82,18 @@ const CompleteQuiz = props => {
         />
       </div>
       <div className="quiz-body">
-        {modal && (
-          <AlertModal
-            closeModal={setModal}
-            heading={`You got ${Math.round((score / quizLength) * 100)}%`}
-            paragraph="Lorem ipsum"
-            history={history}
-          />
-        )}
-        <form>{renderInputs()}</form>
-        {(isNextQuestion || completedQuiz) && renderAnswer()}
+        <QuizBody
+          selectedRadio={selectedRadio}
+          answerArray={answerArray}
+          setSelectedRadio={setSelectedRadio}
+          modal={modal}
+          setModal={setModal}
+          score={score}
+          quizLength={quizLength}
+          history={history}
+          isNextQuestion={isNextQuestion}
+          completedQuiz={completedQuiz}
+        />
         <div className="footer">
           <QuizFooter
             selectedRadio={selectedRadio}
@@ -164,70 +125,9 @@ const StyledCompleteQuiz = styled.div`
   display: flex;
   flex-direction: column;
 
-  .answer {
-    font-size: ${body_2};
-    color: ${primary};
-  }
-
   .footer {
     display: flex;
     justify-content: flex-end;
-  }
-
-  .input-radio {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: ${medium_space_1};
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
-  }
-
-  .input-radio input:checked ~ .checkmark {
-    background-color: ${primary};
-  }
-
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 25%;
-  }
-
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-
-  .input-radio input:checked ~ .checkmark:after {
-    display: block;
-  }
-
-  .input-radio .checkmark:after {
-    top: 9px;
-    left: 9px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
-  }
-
-  .material-icons {
-    margin-right: ${xs_space};
-    cursor: pointer;
   }
 
   .quiz-header,
