@@ -20,14 +20,11 @@ import {
   medium_space_1,
   xs_space
 } from "../../../~reusables/variables/spacing";
-import { support, primary, text } from "../../../~reusables/variables/colors";
+import { primary } from "../../../~reusables/variables/colors";
 import { body_2 } from "../../../~reusables/variables/font-sizes";
-import {
-  ButtonPrimary,
-  ButtonTertiary
-} from "../../../~reusables/atoms/Buttons";
 import AlertModal from "../../../~reusables/molecules/AlertModal";
 import QuizHeader from "./QuizHeader";
+import QuizFooter from "./QuizFooter";
 
 const CompleteQuiz = props => {
   const {
@@ -71,51 +68,6 @@ const CompleteQuiz = props => {
       ]);
     }
   }, [question, selectedQuiz]);
-
-  const onSubmitRadio = e => {
-    e.preventDefault();
-    if (selectedRadio && index <= quizLength) {
-      if (selectedRadio === "answer") {
-        setScore(score + 1);
-      }
-      setIsNextQuestion(true);
-      if (index + 1 > quizLength) {
-        setIndex(index + 1);
-      }
-    } else {
-      console.log("select an option");
-    }
-  };
-
-  const onClickNextQuestion = e => {
-    e.preventDefault();
-    if (index !== quizLength) {
-      setQuestion(selectedQuiz.questions[index]);
-      setAnswerArray([
-        { answer: selectedQuiz.questions[index].answer },
-        { p_answer1: selectedQuiz.questions[index].p_answer1 },
-        { p_answer2: selectedQuiz.questions[index].p_answer2 },
-        { p_answer3: selectedQuiz.questions[index].p_answer3 }
-      ]);
-    }
-    setIndex(index + 1);
-    setSelectedRadio("");
-    setIsNextQuestion(false);
-  };
-
-  const onSubmitQuiz = e => {
-    e.preventDefault();
-    const result = Math.round((score / quizLength) * 100);
-    const studentQuiz = {
-      quiz_id: selectedQuiz.id,
-      student_id: user.id,
-      result,
-      completed: true
-    };
-
-    setModal(true);
-    completeQuiz(studentQuiz, match.params.id, match.params.quiz_id);
-  };
 
   const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -182,20 +134,25 @@ const CompleteQuiz = props => {
         <form>{renderInputs()}</form>
         {(isNextQuestion || completedQuiz) && renderAnswer()}
         <div className="footer">
-          {completedQuiz && <h3>Quiz Score: {completedQuiz.result}</h3>}
-          {!isNextQuestion && !completedQuiz && (
-            <ButtonPrimary onClick={onSubmitRadio}>
-              Submit Question
-            </ButtonPrimary>
-          )}
-          {isNextQuestion && index < quizLength && (
-            <ButtonTertiary onClick={onClickNextQuestion}>
-              Next Question
-            </ButtonTertiary>
-          )}
-          {selectedQuiz && quizLength < index && (
-            <ButtonPrimary onClick={onSubmitQuiz}>Submit Quiz</ButtonPrimary>
-          )}
+          <QuizFooter
+            selectedRadio={selectedRadio}
+            index={index}
+            quizLength={quizLength}
+            setScore={setScore}
+            score={score}
+            setIsNextQuestion={setIsNextQuestion}
+            setIndex={setIndex}
+            selectedQuiz={selectedQuiz}
+            setQuestion={setQuestion}
+            setAnswerArray={setAnswerArray}
+            setSelectedRadio={setSelectedRadio}
+            setModal={setModal}
+            completeQuiz={completeQuiz}
+            match={match}
+            user={user}
+            completedQuiz={completedQuiz}
+            isNextQuestion={isNextQuestion}
+          />
         </div>
       </div>
     </StyledCompleteQuiz>
@@ -215,11 +172,6 @@ const StyledCompleteQuiz = styled.div`
   .footer {
     display: flex;
     justify-content: flex-end;
-
-    h3 {
-      color: ${text};
-      margin: 0;
-    }
   }
 
   .input-radio {

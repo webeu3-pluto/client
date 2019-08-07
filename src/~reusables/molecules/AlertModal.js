@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { useSpring, animated } from "react-spring";
 
 // components/functions
-import { ButtonPrimary, ButtonSecondary } from "../atoms/Buttons";
+import { ButtonPrimary } from "../atoms/Buttons";
 
 // styles
 import { text, white, headings } from "../variables/colors";

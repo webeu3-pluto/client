@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 // components/functions
 import {
   TextButton,
-  ButtonTertiary,
   ButtonPrimary,
   ButtonSecondary
 } from "../../../~reusables/atoms/Buttons";
