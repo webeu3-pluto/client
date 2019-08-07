@@ -24,8 +24,6 @@ const StudentsQV = props => {
     getQuizzesForStudent(user.id);
   }, []);
 
-  console.log(quizzesFetched);
-
   return (
     <StyledQuizView>
       <div className="wrapper">

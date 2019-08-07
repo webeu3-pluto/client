@@ -22,8 +22,6 @@ const PeopleList = props => {
   } = props;
   const [tabIndex, setTabIndex] = useState(0);
 
-  console.log(listOfPeople);
-
   useEffect(() => {
     setTabIndex(0);
   }, [listOfPeople]);

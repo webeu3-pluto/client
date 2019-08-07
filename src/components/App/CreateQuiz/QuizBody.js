@@ -105,8 +105,6 @@ const QuizBody = props => {
     }
   };
 
-  console.log(selectedQuestion, selectedQuiz);
-
   return (
     <StyledQuizBody>
       {modal && (

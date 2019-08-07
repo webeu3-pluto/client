@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 // components/functions
 import {
@@ -11,7 +11,10 @@ import {
   ButtonSecondary
 } from "../../../~reusables/atoms/Buttons";
 import DeleteModal from "../../../~reusables/molecules/DeleteModal";
-import { updateQuizStatus, deleteQuiz } from "../../../store/actions/quizActions";
+import {
+  updateQuizStatus,
+  deleteQuiz
+} from "../../../store/actions/quizActions";
 
 // styles
 import {
@@ -37,20 +40,20 @@ const QuizStatus = props => {
     <StyledQuizStatus>
       {modal && (
         <DeleteModal
-          functionArg={{uuid: selectedQuiz.uuid, history }}
+          functionArg={{ uuid: selectedQuiz.uuid, history }}
           functionCb={deleteQuiz}
           closeModal={setModal}
-          heading="Lorem ipsum lorem ipsum"
-          paragraph="Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum."
+          heading="Delete Quiz"
+          paragraph="Are you sure you wish to delete this quiz? This action cannot be undone."
         />
       )}
       <h4 className="label">
         Status: <span className={renderStatus}>{renderStatus}</span>
       </h4>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem
-        ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do. Lorem ipsum dolor si
+        Changing the status of this quiz to <strong>published</strong> will send it to your list
+        of students. Similarly, changing the status to <strong>draft</strong> will remove it from
+        their list.
       </p>
       <section className="buttons">
         <TextButton color="#DA2640" onClick={() => setModal(true)}>

@@ -68,7 +68,7 @@ const QuizBody = props => {
         <AlertModal
           closeModal={setModal}
           heading={`You got ${Math.round((score / quizLength) * 100)}%`}
-          paragraph="Lorem ipsum"
+          paragraph="Good job on successfully completing the quiz! Make sure to share any tricky questions with your TL."
           history={history}
         />
       )}

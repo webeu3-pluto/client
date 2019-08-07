@@ -50,8 +50,8 @@ const StudentsPPL = props => {
           <AddPeopleModal
             functionCb={addTeamLeadToPeople}
             closeModal={setModal}
-            heading="Lorem ipsum"
-            paragraph="lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+            heading="Add Team Lead"
+            paragraph="Add a new team lead to the list of people you receive published quizzes from."
           />
         )}
         <div className="header">

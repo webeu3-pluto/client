@@ -48,7 +48,7 @@ const StudentsDB = ({
             secondHeading="Team Lead"
             thirdHeading="Quiz Score"
             fourthHeading="Status"
-            listOfQuizzes={quizzesFetched}
+            listOfQuizzes={quizzesFetched.reverse()}
             user={user}
             limit="3"
             isStudent
