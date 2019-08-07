@@ -13,8 +13,6 @@ export const GET_STUDENTS_TEAMLEADS = "GET_STUDENTS_TEAMLEADS";
 export const REMOVE_TEAMLEAD = "REMOVE_TEAMLEAD"
 
 const server = "https://plutoserver.herokuapp.com";
-// const server = "http://localhost:5005";
-
 
 // Team Leads
 export const getStudentsByCohort = () => async dispatch => {

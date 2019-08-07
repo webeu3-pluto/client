@@ -13,7 +13,6 @@ export const DELETE_USER = "DELETE_USER";
 export const GET_USER_SUMMARY = "GET_USER_SUMMARY";
 
 const server = "https://plutoserver.herokuapp.com";
-// const server = "http://localhost:5005";
 
 export const signUp = (user, history) => async dispatch => {
   try {
