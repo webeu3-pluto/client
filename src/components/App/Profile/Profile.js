@@ -1,6 +1,7 @@
 // modules
 import React, { useState } from "react";
 import styled from "styled-components";
+import { withRouter } from 'react-router-dom'
 
 // components/functions
 import { LineInput } from "../../../~reusables/atoms/Inputs";
@@ -24,7 +25,7 @@ import {
 } from "../../../~reusables/atoms/Buttons";
 import { support } from "../../../~reusables/variables/colors";
 
-const Profile = ({ user, validateUser, updateUser, deleteUser }) => {
+const Profile = ({ user, validateUser, updateUser, deleteUser, history }) => {
   const { id, role, cohort, email, password } = user;
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
@@ -48,6 +49,7 @@ const Profile = ({ user, validateUser, updateUser, deleteUser }) => {
   const logout = () => {
     localStorage.clear();
     validateUser();
+    history.push('/');
   };
 
   return (
@@ -133,4 +135,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   { validateUser, updateUser, deleteUser }
-)(Profile);
+)(withRouter(Profile));

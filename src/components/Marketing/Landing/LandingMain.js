@@ -44,17 +44,16 @@ const LandingMain = () => {
               <h4>Performance at a Glance</h4>
               <p>
                 Quickly see quiz scores and completion rates from a unified
-                dashboard
+                dashboard.
               </p>
             </div>
           </div>
           <div className="benefit">
             <i className="material-icons">blur_on</i>
             <div>
-              <h4>Generate Quizzes</h4>
+              <h4>Publish Quizzes</h4>
               <p>
-                Leverage the work of prior Team Leads by generating
-                previously-created quizzes
+                Publish quizzes in a simple to use interface.
               </p>
             </div>
           </div>
