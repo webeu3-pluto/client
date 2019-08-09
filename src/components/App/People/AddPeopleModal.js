@@ -81,7 +81,7 @@ const AddPeopleModal = props => {
             />
             <div className="buttons">
               <ButtonTertiary onClick={onClickBack}>Go Back</ButtonTertiary>
-              <ButtonPrimary onClick={onClickAdd}>Add Student</ButtonPrimary>
+              <ButtonPrimary onClick={onClickAdd}>Add</ButtonPrimary>
             </div>
             {error && <p className="error">{error}</p>}
           </section>
